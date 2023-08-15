@@ -31,7 +31,7 @@ export default async function Home() {
           className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
-          <Balancer>What&apos;s the name of this website?</Balancer>
+          <Balancer>What's the name of this website?</Balancer>
         </h1>
         <p
           className="mt-6 animate-fade-up text-center text-gray-500 opacity-0 md:text-xl"
@@ -39,7 +39,7 @@ export default async function Home() {
         >
           <Balancer>
             This website has nothing.
-            If you&apos;re feeling generous, lend a hand and help me give it a name!
+            If you're feeling generous, lend a hand and help me give it a name!
           </Balancer>
         </p>
         <div
