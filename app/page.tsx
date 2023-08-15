@@ -9,7 +9,7 @@ import { nFormatter } from "@/lib/utils";
 
 export default async function Home() {
   const { stargazers_count: stars } = await fetch(
-    "https://api.github.com/repos/steven-tey/precedent",
+    "https://api.github.com/repos/yesmore/here",
     {
       ...(process.env.GITHUB_OAUTH_TOKEN && {
         headers: {
@@ -27,30 +27,19 @@ export default async function Home() {
   return (
     <>
       <div className="z-10 w-full max-w-xl px-5 xl:px-0">
-        <a
-          href="https://twitter.com/steventey/status/1613928948915920896"
-          target="_blank"
-          rel="noreferrer"
-          className="mx-auto mb-5 flex max-w-fit animate-fade-up items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-7 py-2 transition-colors hover:bg-blue-200"
-        >
-          <Twitter className="h-5 w-5 text-[#1d9bf0]" />
-          <p className="text-sm font-semibold text-[#1d9bf0]">
-            Introducing Precedent
-          </p>
-        </a>
         <h1
           className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
-          <Balancer>Building blocks for your Next project</Balancer>
+          <Balancer>What's the name of this website?</Balancer>
         </h1>
         <p
           className="mt-6 animate-fade-up text-center text-gray-500 opacity-0 md:text-xl"
           style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
           <Balancer>
-            An opinionated collection of components, hooks, and utilities for
-            your Next.js project.
+            This website has nothing.
+            If you're feeling generous, lend a hand and help me give it a name!
           </Balancer>
         </p>
         <div
@@ -59,29 +48,15 @@ export default async function Home() {
         >
           <a
             className="group flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors hover:bg-white hover:text-black"
-            href={DEPLOY_URL}
+            href="https://github.com/yesmore/here"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <svg
-              className="h-4 w-4 group-hover:text-black"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 4L20 20H4L12 4Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <p>Deploy to Vercel</p>
+            <p>Open Source</p>
           </a>
           <a
             className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800"
-            href="https://github.com/steven-tey/precedent"
+            href="https://github.com/yesmore/here"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -93,8 +68,9 @@ export default async function Home() {
           </a>
         </div>
       </div>
+
       <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
-        {features.map(({ title, description, demo, large }) => (
+        {/* {features.map(({ title, description, demo, large }) => (
           <Card
             key={title}
             title={title}
@@ -108,7 +84,7 @@ export default async function Home() {
             }
             large={large}
           />
-        ))}
+        ))} */}
       </div>
     </>
   );
@@ -116,7 +92,7 @@ export default async function Home() {
 
 const features = [
   {
-    title: "Beautiful, reusable components",
+    title: "Nameless",
     description:
       "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
     large: true,

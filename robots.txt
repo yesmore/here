@@ -1,4 +1,4 @@
-Sitemap: https://precedent.dev/sitemap.xml
+Sitemap: https://oh.aging.run/sitemap.xml
 
 User-agent: *
 Disallow: /api
