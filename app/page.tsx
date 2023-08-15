@@ -42,7 +42,7 @@ export default async function Home() {
           style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
           <Balancer>
-            Hi{" "+session ? session?.user?.name : ""}, this website has nothing.
+            Hi {session ? session?.user?.name : ""}, this website has nothing.
             If you're feeling generous, lend a hand and help me give it a name!
           </Balancer>
         </p>
