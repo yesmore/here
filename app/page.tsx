@@ -6,8 +6,12 @@ import WebVitals from "@/components/home/web-vitals";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import { nFormatter } from "@/lib/utils";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "app/api/auth/[...nextauth]/route";
 
 export default async function Home() {
+  const session = await getServerSession(authOptions);
+
   const { stargazers_count: stars } = await fetch(
     "https://api.github.com/repos/yesmore/here",
     {
@@ -38,7 +42,7 @@ export default async function Home() {
           style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
           <Balancer>
-            This website has nothing.
+            Hi{" "+session?.user?.name}, this website has nothing.
             If you're feeling generous, lend a hand and help me give it a name!
           </Balancer>
         </p>

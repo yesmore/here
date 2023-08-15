@@ -7,7 +7,7 @@ export const contentType = "image/png";
 
 export default async function OG() {
   const sfPro = await fetch(
-    new URL("./fonts/SF-Pro-Display-Medium.otf", import.meta.url),
+    new URL("../styles/fonts/SF-Pro-Display-Medium.otf", import.meta.url),
   ).then((res) => res.arrayBuffer());
 
   return new ImageResponse(
