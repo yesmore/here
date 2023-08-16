@@ -9,12 +9,13 @@ import { nFormatter } from "@/lib/utils";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "app/api/auth/[...nextauth]/route";
 import "@/styles/home.css";
+import Link from "next/link";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
   const { stargazers_count: stars } = await fetch(
-    "https://api.github.com/repos/yesmore/here",
+    "https://api.github.com/repos/yesmore/meetu",
     {
       ...(process.env.GITHUB_OAUTH_TOKEN && {
         headers: {
@@ -51,18 +52,18 @@ export default async function Home() {
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
           style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
         >
-          <a
-            className="nice-border flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-100 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800"
-            href="https://github.com/yesmore/here"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/about"
+            className="nice-border border text-sm hover:border-gray-800"
           >
-            <Github />
-            <p>
-              <span className="hidden sm:inline-block">Star on</span> GitHub{" "}
-              <span className="font-semibold">{nFormatter(stars)}</span>
-            </p>
-          </a>
+            About MeetU
+          </Link>
+          <Link
+            href="/stories"
+            className="nice-border border text-sm hover:border-gray-800"
+          >
+            Stories 👉
+          </Link>
         </div>
       </div>
 

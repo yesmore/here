@@ -44,7 +44,7 @@ const SignInModal = ({
             className={`${
               signInClicked
                 ? "cursor-not-allowed bg-gray-100"
-                : "border border-gray-500 text-black hover:bg-gray-50"
+                : "border text-black hover:bg-gray-50"
             } nice-border flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 hover:border-gray-800 focus:outline-none`}
             onClick={() => {
               setSignInClicked(true);

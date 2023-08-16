@@ -9,7 +9,7 @@ import { nFormatter } from "@/lib/utils";
 
 export default async function About() {
   const { stargazers_count: stars } = await fetch(
-    "https://api.github.com/repos/yesmore/here",
+    "https://api.github.com/repos/yesmore/meetu",
     {
       ...(process.env.GITHUB_OAUTH_TOKEN && {
         headers: {
@@ -37,4 +37,3 @@ export default async function About() {
     </>
   );
 }
-

@@ -1,17 +1,37 @@
+import { nFormatter } from "@/lib/utils";
+import { Github } from "../shared/icons";
+
 export default function Footer() {
   return (
-    <div className="absolute w-full border-t border-gray-200 bg-white py-5 text-center">
-      <p className="text-gray-500">
-        So...he did 👉{" "}
-        <a
-          className="font-medium text-gray-800 underline transition-colors"
-          href="https://github.com/yesmore"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          yesmore
-        </a>
-      </p>
+    <div className="absolute flex w-full items-center justify-center border-t border-gray-200 bg-white py-5">
+      <a
+        className="max-w-fit hover:border-gray-800"
+        href="https://github.com/yesmore/meetu"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Github />
+      </a>
+      <a
+        className="ml-3 font-medium text-gray-800 underline transition-colors"
+        href="https://github.com/yesmore"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        yesmore
+      </a>
+
+      {/* <a
+        className="nice-border flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-100 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800"
+        href="https://github.com/yesmore/meetu"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Github />
+        <p>
+          <span className="hidden sm:inline-block">Star on</span> GitHub{" "}
+        </p>
+      </a> */}
     </div>
   );
 }
