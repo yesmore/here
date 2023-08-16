@@ -15,33 +15,39 @@ export default function NavBar({ session }: { session: Session | null }) {
     <>
       <SignInModal />
       <div
-        className={`fixed top-0 w-full flex justify-center ${
+        className={`fixed top-0 flex w-full justify-center ${
           scrolled
             ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl"
             : "bg-white/0"
         } z-30 transition-all`}
       >
-        <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between w-full">
+        <div className="mx-5 flex h-16 w-full max-w-screen-xl items-center justify-between">
           <Link href="/" className="flex items-center font-display text-2xl">
-            <Image
+            {/* <Image
               src="/logo.png"
               alt="logo"
               width="30"
               height="30"
               className="mr-2 rounded-sm"
-            ></Image>
-            <p>Meetu</p>
+            ></Image> */}
+            <p>Meet U</p>
           </Link>
           <div>
             {session ? (
               <UserDropdown session={session} />
             ) : (
               <button
-                className="rounded-full border border-[#229beccb] bg-[#229beccb] p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-[#229beccb]"
+                className="nice-border rounded-full border border-gray-100 text-sm hover:border-gray-800"
                 onClick={() => setShowSignInModal(true)}
               >
-                Sign In
+                Sign in
               </button>
+              // <button
+              //   className="rounded-full border border-[#229beccb] bg-[#229beccb] p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-[#229beccb]"
+              //   onClick={() => setShowSignInModal(true)}
+              // >
+              //   Sign in
+              // </button>
             )}
           </div>
         </div>

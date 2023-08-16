@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.nice-border {
+  padding: 5px 10px;
+  border-radius: 10px;
+  /* border: 2px solid; */
+  border-width: 2px;
+  box-shadow: 3px 3px #00000094;
+  cursor: pointer;
+}
+
+.nice-border:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}

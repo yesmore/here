@@ -1,4 +1,4 @@
-Sitemap: https://oh.aging.run/sitemap.xml
+Sitemap: https://meetu.dev/sitemap.xml
 
 User-agent: *
 Disallow: /api

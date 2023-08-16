@@ -23,7 +23,7 @@ const SignInModal = ({
     <Modal showModal={showSignInModal} setShowModal={setShowSignInModal}>
       <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
         <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
-          <a href="https://oh.aging.run">
+          <a href="https://meetu.dev">
             <Image
               src="/logo.png"
               alt="Logo"
@@ -32,7 +32,7 @@ const SignInModal = ({
               height={20}
             />
           </a>
-          <h3 className="font-display text-2xl font-bold">Sign In</h3>
+          <h3 className="font-display text-2xl font-bold">Nice to meet you</h3>
           <p className="text-sm text-gray-500">
             Only your email and profile picture will be stored.
           </p>
@@ -43,9 +43,9 @@ const SignInModal = ({
             disabled={signInClicked}
             className={`${
               signInClicked
-                ? "cursor-not-allowed border-gray-200 bg-gray-100"
-                : "border border-gray-200 bg-white text-black hover:bg-gray-50"
-            } flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}
+                ? "cursor-not-allowed bg-gray-100"
+                : "border border-gray-500 text-black hover:bg-gray-50"
+            } nice-border flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 hover:border-gray-800 focus:outline-none`}
             onClick={() => {
               setSignInClicked(true);
               signIn("google");
