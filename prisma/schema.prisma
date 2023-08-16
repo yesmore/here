@@ -60,3 +60,10 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model TestStories {
+  id            String    @id @default(cuid())
+  userId        String
+  email         String?   @unique
+  expires    DateTime
+}
