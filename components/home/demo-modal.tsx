@@ -22,15 +22,15 @@ const DemoModal = ({
           <a href="https://oh.aging.run">
             <Image
               src="/logo.png"
-              alt="Nameless Logo"
+              alt="Meetu Logo"
               className="h-10 w-10 rounded-full"
               width={20}
               height={20}
             />
           </a>
-          <h3 className="font-display text-2xl font-bold">Nameless</h3>
+          <h3 className="font-display text-2xl font-bold">Meetu</h3>
           <p className="text-sm text-gray-500">
-            Nameless is an opinionated collection of components, hooks, and
+            Meetu is an opinionated collection of components, hooks, and
             utilities for your Next.js project.
           </p>
         </div>
