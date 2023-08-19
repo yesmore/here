@@ -11,6 +11,10 @@ export const metadata = {
   description: "...",
   metadataBase: new URL("https://meetu.dev"),
   themeColor: "#FFF",
+  icons: {
+    // <head><link/></head>
+    icon: "/logo.png",
+  },
 };
 
 export default async function RootLayout({
@@ -20,9 +24,6 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/logo.png" />
-      </head>
       <body className={cx(sfPro.variable, inter.variable)}>
         <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-yellow-100" />
         <Suspense fallback="...">

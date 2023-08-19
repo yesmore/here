@@ -1,7 +1,6 @@
 {
   "name": "meetu",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "prisma generate && next dev",
     "build": "prisma generate && prisma db push && next build",

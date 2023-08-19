@@ -10,6 +10,10 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "app/api/auth/[...nextauth]/route";
 import "@/styles/home.css";
 import Link from "next/link";
+import HomeInput from "../components/input/homeInput";
+import "@/styles/globals.css";
+import "@/styles/home.css";
+import "@/styles/input.css";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -34,20 +38,26 @@ export default async function Home() {
     <>
       <div className="z-10 w-full max-w-xl px-5 xl:px-0">
         <h1
-          className="title-font animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-6xl md:leading-[5rem]"
+          className="title-font flex animate-fade-up items-end justify-center bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-6xl md:leading-[5rem]"
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
-          <Balancer>Meet U</Balancer>
+          <Balancer>Meet</Balancer>
+          <Image
+            src="/u2.png"
+            alt="u2"
+            width="98"
+            height="98"
+            className="ml-4 rounded-sm"
+          />
         </h1>
-        <p
+        <div
           className="mt-6 animate-fade-up text-center text-gray-500 opacity-0 md:text-xl"
           style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
           <Balancer>
-            Hi {session ? session?.user?.name : ""}, this website has nothing.
-            If you're feeling generous, lend a hand and help me give it a name!
+            <HomeInput />
           </Balancer>
-        </p>
+        </div>
         <div
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
           style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
@@ -62,7 +72,13 @@ export default async function Home() {
             href="/stories"
             className="nice-border border text-sm hover:border-gray-800"
           >
-            Stories 👉
+            Stories
+          </Link>
+          <Link
+            href="/workspace"
+            className="nice-border border text-sm hover:border-gray-800"
+          >
+            Workspace
           </Link>
         </div>
       </div>
