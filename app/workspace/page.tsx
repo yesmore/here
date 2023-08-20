@@ -1,5 +1,3 @@
-"use client";
-
 import Card from "@/components/home/card";
 import Balancer from "react-wrap-balancer";
 import { DEPLOY_URL } from "@/lib/constants";
@@ -8,14 +6,15 @@ import WebVitals from "@/components/home/web-vitals";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import { nFormatter } from "@/lib/utils";
-import { useState } from "react";
+
+import InputArea from "./inputArea";
 
 export default function Workspace() {
-  const [link, setLink] = useState<string>("");
-
   return (
     <>
-      <div className="z-10 w-full px-5 xl:px-0"></div>
+      <div className="z-10 w-full px-5 xl:px-0">
+        <InputArea />
+      </div>
     </>
   );
 }
