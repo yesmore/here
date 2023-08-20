@@ -42,7 +42,6 @@ export default async function Stories() {
           <Balancer></Balancer>
         </h1>
         <StoryBrodar value={data} />
-        {data.length}
 
         {/* {result.map((item: any) => {
           return <>{item.name}</>;
