@@ -6,13 +6,14 @@ interface Props {
 }
 
 export const addStory = async (props: Props) => {
-  const newStory = await prisma.story.create({
+  await prisma.story.create({
     data: {
       email: props.email,
       tags: ["tag1", "tag2"],
       nickname: props.nickname,
       expires: new Date(),
-      updateAt: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   });
 };
