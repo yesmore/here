@@ -38,7 +38,7 @@ export default async function Home() {
     <>
       <div className="z-10 w-full max-w-xl px-5 xl:px-0">
         <h1
-          className="title-font flex animate-fade-up items-end justify-center bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-6xl md:leading-[5rem]"
+          className="title-font flex animate-fade-up items-end justify-center bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-5xl font-bold  tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-6xl"
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
           <Balancer>Meet</Balancer>
@@ -47,17 +47,11 @@ export default async function Home() {
             alt="u2"
             width="98"
             height="98"
-            className="ml-4 rounded-sm"
+            className="ml-4 w-16 rounded-sm md:w-24"
           />
         </h1>
-        <div
-          className="mt-6 animate-fade-up text-center text-gray-500 opacity-0 md:text-xl"
-          style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
-        >
-          <Balancer>
-            <HomeInput />
-          </Balancer>
-        </div>
+        <HomeInput session={session} />
+
         <div
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
           style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
