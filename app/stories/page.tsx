@@ -45,7 +45,7 @@ export default async function Stories() {
         {/* {result.map((item: any) => {
           return <>{item.name}</>;
         })} */}
-        注册1：{result.length}
+        注册1：{result && result.length}
         {/* 注册2：{data1.length} */}
         {/* {x && (
           <div>
