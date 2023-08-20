@@ -1,11 +1,16 @@
 import prisma from "./prisma";
 
-export const addStory = async () => {
+interface Props {
+  email: string;
+  nickname: string;
+}
+
+export const addStory = async (props: Props) => {
   const newStory = await prisma.story.create({
     data: {
-      userId: "cllbsd09o0000md08qpeo",
+      email: props.email,
       tags: ["tag1", "tag2"],
-      nickname: "this",
+      nickname: props.nickname,
       expires: new Date(),
       updateAt: new Date(),
     },

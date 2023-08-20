@@ -8,12 +8,16 @@ import Image from "next/image";
 import { nFormatter } from "@/lib/utils";
 
 import InputArea from "./inputArea";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth/next";
 
-export default function Workspace() {
+export default async function Workspace() {
+  const session = await getServerSession(authOptions);
+
   return (
     <>
       <div className="z-10 w-full px-5 xl:px-0">
-        <InputArea />
+        <InputArea session={session} />
       </div>
     </>
   );

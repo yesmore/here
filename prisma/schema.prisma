@@ -64,11 +64,11 @@ model VerificationToken {
 
 model Story {
   id       String   @id @default(cuid())
-  userId   String
+  email    String
   nickname String
   tags     String[]
   expires  DateTime
   updateAt DateTime @updatedAt
 
-  User User @relation(fields: [userId], references: [id])
+  User User @relation(fields: [email], references: [email])
 }
