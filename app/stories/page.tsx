@@ -11,14 +11,14 @@ import StoryBrodar from "./broader";
 // import { useEffect, useState } from "react";
 
 export default async function Stories() {
-  // const data = await getUsers();
+  const data = await getUsers();
   // console.log(data1);
 
-  const result = await fetch(process.env.BASE_URL + "/api/users", {
-    cache: "no-store",
-  })
-    .then((res) => res.json())
-    .catch((e) => console.log(e));
+  // const result = await fetch(process.env.BASE_URL + "/api/users", {
+  //   cache: "no-store",
+  // })
+  //   .then((res) => res.json())
+  //   .catch((e) => console.log(e));
 
   // const [x, setX] = useState();
   // console.log(data1);
@@ -26,7 +26,7 @@ export default async function Stories() {
   // useEffect(() => {
   //   setX(data1);
   // }, []);
-  const data = "";
+  // const data = "";
 
   const handleChange = (val: string) => {
     console.log(val);
@@ -41,8 +41,8 @@ export default async function Stories() {
         >
           <Balancer></Balancer>
         </h1>
-        {/* <StoryBrodar value={result} onChange={handleChange} /> */}
-        {result.length}
+        <StoryBrodar value={data} />
+        {data.length}
 
         {/* {result.map((item: any) => {
           return <>{item.name}</>;

@@ -20,7 +20,7 @@ export default function StoryBrodar({
     <>
       <div>
         <input type="text" onChange={(e) => setX(e.target.value)} />
-        {x}
+
         {value.length}
       </div>
     </>
