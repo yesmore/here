@@ -63,13 +63,14 @@ model VerificationToken {
 }
 
 model Story {
-  id        String   @id @default(cuid())
-  email     String
-  nickname  String
-  tags      String[]
-  expires   DateTime
-  createdAt DateTime
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  email       String
+  nickname    String
+  tags        String[]
+  describtion String   @default("")
+  expires     DateTime
+  createdAt   DateTime
+  updatedAt   DateTime @updatedAt
 
   User User @relation(fields: [email], references: [email])
 }

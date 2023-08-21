@@ -1,10 +1,9 @@
 import "../styles/globals.css";
-import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { sfPro, inter } from "../styles/fonts";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
-import { Suspense } from "react";
+import { Fragment, Suspense } from "react";
 
 export const metadata = {
   title: "MeetU",
@@ -24,6 +23,12 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
+      {/* <head>
+        {process.env.HEAD_SCRIPTS && (
+          <Fragment>{process.env.HEAD_SCRIPTS}</Fragment>
+        )}
+      </head> */}
+
       <body className={cx(sfPro.variable, inter.variable)}>
         <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-yellow-100" />
         <Suspense fallback="...">
@@ -34,7 +39,6 @@ export default async function RootLayout({
           {children}
         </main>
         <Footer />
-        <Analytics />
       </body>
     </html>
   );
