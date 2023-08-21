@@ -22,10 +22,13 @@ export async function POST(
   console.log(key);
 
   try {
-    await addStory({ nickname: key, email: email });
+    const res = await addStory({ nickname: key, email: email });
+    if (res === "ok") {
+      return NextResponse.json({ msg: "create success", code: 200 });
+    } else if (res == "exist") {
+      return NextResponse.json({ msg: "story exist", code: 402 });
+    }
   } catch (error) {
     return NextResponse.json({ msg: error });
   }
-
-  return NextResponse.json({ msg: "create success" });
 }
