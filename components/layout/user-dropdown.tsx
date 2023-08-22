@@ -19,7 +19,7 @@ export default function UserDropdown({ session }: { session: Session }) {
       <Popover
         content={
           <div className="w-full rounded-md bg-white p-2 sm:w-56">
-            <p className="text-sm">0000000@gmail.com{email}</p>
+            <p className="text-sm">{email}</p>
             <Link
               className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
               href="/workspace"
