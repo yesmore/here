@@ -1,4 +1,4 @@
-interface UserStory {
+export interface UserStory {
   id: string;
   email: string;
   nickname: string;
