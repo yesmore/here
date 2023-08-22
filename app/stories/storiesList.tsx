@@ -1,33 +1,23 @@
 "use client";
 
-import { fetcher } from "@/lib/utils";
 import { Session } from "next-auth";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
 import ReactMarkdown from "react-markdown";
 import Card from "@/components/shared/card";
 import ComponentGrid from "@/components/home/component-grid";
 import { UserStory } from "@/lib/types/story";
-
-function useStories() {
-  let api = `/api/story`;
-  const { data, error, isLoading } = useSWR<[UserStory]>(api, () =>
-    fetcher(api, { method: "GET" }),
-  );
-
-  return {
-    stories: data,
-    isLoading,
-    isError: error,
-  };
-}
+import toast, { Toaster } from "react-hot-toast";
+import { useStories } from "./request";
 
 export default function StoryList({ session }: { session: Session | null }) {
   const { stories, isLoading, isError } = useStories();
 
   const renderList = () => {
     return (
-      <div className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2">
+      <div
+        onClick={() => toast("Hello World")}
+        className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2"
+      >
         {stories?.map((item) => {
           return <StoryItem session={session} story={item} key={item.id} />;
         })}
@@ -37,6 +27,8 @@ export default function StoryList({ session }: { session: Session | null }) {
         {stories?.map((item) => {
           return <StoryItem session={session} story={item} key={item.id} />;
         })}
+
+        <Toaster />
       </div>
     );
   };
@@ -63,7 +55,7 @@ export function StoryItem({
 
   return (
     <div
-      className={`relative w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md`}
+      className={`relative w-full overflow-hidden rounded-lg border border-gray-200 `}
     >
       {/* <div className="flex h-60 items-center justify-center">{demo}</div> */}
       <div className="mx-auto max-w-md text-center">

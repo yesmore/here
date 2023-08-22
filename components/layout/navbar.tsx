@@ -32,7 +32,6 @@ export default function NavBar({ session }: { session: Session | null }) {
             ></Image>
             {/* <p>Meet U</p> */}
           </Link>
-
           <div>
             {session ? (
               <UserDropdown session={session} />
