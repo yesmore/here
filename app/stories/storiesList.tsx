@@ -7,6 +7,7 @@ import useSWR from "swr";
 import ReactMarkdown from "react-markdown";
 import Card from "@/components/shared/card";
 import ComponentGrid from "@/components/home/component-grid";
+import { UserStory } from "@/lib/types/story";
 
 function useStories() {
   let api = `/api/story`;
