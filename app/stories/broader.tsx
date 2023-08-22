@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function StoryBrodar({
+export default function StoryItem({
   value,
   onChange,
 }: {

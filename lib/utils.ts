@@ -29,6 +29,9 @@ export async function fetcher<JSON = any>(
   return res.json();
 }
 
+// export const fetcherSWR = (...args: any[]) =>
+// fetch(...args).then((res) => res.json());
+
 export function nFormatter(num: number, digits?: number) {
   if (!num) return "0";
   const lookup = [

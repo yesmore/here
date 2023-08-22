@@ -9,9 +9,9 @@ export async function GET(
 ) {
   try {
     const res = await getStories(1, 10);
-    return NextResponse.json({ msg: "hi", code: 200, data: res });
+    return NextResponse.json(res);
   } catch (error) {
-    return NextResponse.json({ msg: error, code: 500 });
+    return NextResponse.json(error);
   }
 }
 
@@ -26,11 +26,11 @@ export async function POST(
   try {
     const res = await addStory({ nickname: key, email: email });
     if (res === "ok") {
-      return NextResponse.json({ msg: "create success", code: 200 });
+      return NextResponse.json("create success");
     } else if (res === "exist") {
-      return NextResponse.json({ msg: "story exist", code: 402 });
+      return NextResponse.json("story exist");
     }
   } catch (error) {
-    return NextResponse.json({ msg: error, code: "500" });
+    return NextResponse.json(error);
   }
 }
