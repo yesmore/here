@@ -10,7 +10,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "app/api/auth/[...nextauth]/route";
 import "@/styles/home.css";
 import Link from "next/link";
-import HomeInput from "../components/input/homeInput";
+import HomeInput from "../components/home/homeInput";
 import "@/styles/globals.css";
 import "@/styles/home.css";
 import "@/styles/input.css";
@@ -36,29 +36,10 @@ export default async function Home() {
         </h1>
         <HomeInput session={session} />
 
-        <div
+        {/* <div
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
           style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
-        >
-          {/* <Link
-            href="/about"
-            className="nice-border border text-sm hover:border-gray-800"
-          >
-            About MeetU
-          </Link>
-          <Link
-            href="/stories"
-            className="nice-border border text-sm hover:border-gray-800"
-          >
-            Stories
-          </Link> */}
-          {/* <Link
-            href="/workspace"
-            className="nice-border border text-sm hover:border-gray-800"
-          >
-            Workspace
-          </Link> */}
-        </div>
+        ></div> */}
       </div>
 
       <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">

@@ -7,7 +7,6 @@ import Popover from "@/components/shared/popover";
 import Image from "next/image";
 import { Session } from "next-auth";
 import Link from "next/link";
-import { useStoryByEmail } from "@/pages/[nickname]/request";
 import { UserStory } from "@/lib/types/story";
 
 export default function UserDropdown({
@@ -38,7 +37,9 @@ export default function UserDropdown({
                   href={`/${story?.nickname}`}
                 >
                   <LinkIcon className="h-4 w-4" />
-                  <p className="text-sm">Link me</p>
+                  <p className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-bold text-transparent">
+                    Link me
+                  </p>
                 </Link>
                 <Link
                   className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"

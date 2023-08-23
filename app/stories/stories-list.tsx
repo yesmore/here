@@ -37,7 +37,7 @@ export default function StoryList({ session }: { session: Session | null }) {
   return (
     <>
       <div className="story-list">
-        {/* {isLoading ? (
+        {isLoading ? (
           <p>loading</p>
         ) : (
           <div
@@ -53,7 +53,7 @@ export default function StoryList({ session }: { session: Session | null }) {
 
             <Toaster />
           </div>
-        )} */}
+        )}
       </div>
     </>
   );

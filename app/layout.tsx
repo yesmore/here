@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import Script from "next/script";
 
 export const metadata = {
-  title: "MeetU",
+  title: "Meet U ",
   description: "...",
   metadataBase: new URL("https://meetu.dev"),
   themeColor: "#FFF",

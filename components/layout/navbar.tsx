@@ -26,10 +26,7 @@ export default function NavBar({ session }: { session: Session | null }) {
       >
         <div className="mx-5 flex h-16 w-full max-w-screen-xl items-center justify-between">
           <div className="flex">
-            <Link
-              href="/"
-              className="mr-2 flex items-center font-display text-2xl"
-            >
+            <Link href="/" className="flex items-center font-display text-2xl">
               <Image
                 src="/logo.png"
                 alt="logo"
