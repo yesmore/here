@@ -14,13 +14,13 @@ export function UserCard({
   session: Session | null;
   nickname: string;
 }) {
-  if (["workspace", "story"].includes(nickname)) return null;
-
   const { story, isLoading, isError } = useStoryByNickname(nickname);
 
   useEffect(() => {
     console.log("[useEffect]", story);
   }, [story]);
+
+  if (["workspace", "story"].includes(nickname)) return <NotFound />;
 
   if (!isLoading && !story) return <NotFound />;
 

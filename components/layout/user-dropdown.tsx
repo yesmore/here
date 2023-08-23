@@ -13,9 +13,9 @@ export default function UserDropdown({ session }: { session: Session }) {
   const { email, image } = session?.user || {};
   const [openPopover, setOpenPopover] = useState(false);
 
-  if (!email) return null;
+  const { story, isLoading, isError } = useStoryByEmail(email || "");
 
-  const { story, isLoading, isError } = useStoryByEmail(email);
+  if (!email) return null;
 
   return (
     <div className="relative inline-block text-left">
