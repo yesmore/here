@@ -22,15 +22,12 @@ export default function StoryList({ session }: { session: Session | null }) {
             onClick={() => toast("Hello World")}
             className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2"
           >
-            {stories?.map((item) => {
-              return <StoryItem session={session} story={item} key={item.id} />;
-            })}
-            {stories?.map((item) => {
-              return <StoryItem session={session} story={item} key={item.id} />;
-            })}
-            {stories?.map((item) => {
-              return <StoryItem session={session} story={item} key={item.id} />;
-            })}
+            {stories &&
+              stories.map((item) => {
+                return (
+                  <StoryItem session={session} story={item} key={item.id} />
+                );
+              })}
 
             <Toaster />
           </div>

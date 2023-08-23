@@ -30,7 +30,8 @@ export default function UserDropdown({
             <button className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100">
               <p className="truncate text-sm">{email}</p>
             </button>
-            {story && (
+
+            {story?.nickname !== undefined ? (
               <>
                 <Link
                   className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
@@ -47,6 +48,8 @@ export default function UserDropdown({
                   <p className="text-sm">Workspace</p>
                 </Link>
               </>
+            ) : (
+              <></>
             )}
 
             <button
