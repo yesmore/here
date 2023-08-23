@@ -7,7 +7,7 @@ export default async function Workspace() {
 
   return (
     <>
-      <div className="z-10 w-full px-5 xl:px-0">
+      <div className="z-10 mt-20 w-full px-5 xl:px-0">
         <InputArea session={session} />
       </div>
     </>

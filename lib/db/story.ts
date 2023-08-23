@@ -45,3 +45,17 @@ export const getStoryByEmail = async (email: string) => {
   }
   return null;
 };
+
+export const getStoryByNickname = async (nickname: string) => {
+  const res = await prisma.story.findFirst({
+    where: {
+      nickname: nickname,
+    },
+  });
+  console.log("查询结果", res);
+
+  if (res) {
+    return res;
+  }
+  return null;
+};

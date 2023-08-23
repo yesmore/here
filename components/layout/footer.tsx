@@ -15,11 +15,11 @@ export default function Footer() {
       <span>Copyright © 2023 </span>
       <a
         className="ml-1 font-medium text-gray-800 underline transition-colors"
-        href="https://github.com/yesmore"
+        href="https://meetu.dev"
         target="_blank"
         rel="noopener noreferrer"
       >
-        yesmore
+        MeetU
       </a>
       {/* <a
         className="nice-border flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-100 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800"

@@ -6,13 +6,17 @@ import useSWR from "swr";
 import { fetcher } from "@/lib/utils";
 
 export default function InputArea({ session }: { session: Session | null }) {
-  const [key, setKey] = useState<string>("");
+  const [nickname, setKey] = useState<string>("");
 
   const createStory = () => {
     if (session?.user) {
       fetch(`/api/story`, {
         method: "POST",
-        body: JSON.stringify({ key, email: session.user.email }),
+        body: JSON.stringify({
+          nickname,
+          email: session.user.email,
+          type: "create",
+        }),
       });
     }
   };

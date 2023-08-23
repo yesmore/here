@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { addStory, getStories } from "@/lib/db/story";
+import { addStory, getStories, getStoryByNickname } from "@/lib/db/story";
 // import { authOptions } from "../auth/[...nextauth]/route";
 // import { getServerSession } from "next-auth/next";
 
@@ -19,18 +19,29 @@ export async function POST(
   req: NextRequest,
   { params }: { params: Record<string, string | string | undefined[]> },
 ) {
-  const { key, email } = await req.json();
+  const { nickname, email, type } = await req.json();
 
-  console.log(key);
+  console.log(nickname);
 
-  try {
-    const res = await addStory({ nickname: key, email: email });
-    if (res === "ok") {
-      return NextResponse.json("create success");
-    } else if (res === "exist") {
-      return NextResponse.json("story exist");
+  if (type === "create") {
+    try {
+      const res = await addStory({ nickname: nickname, email: email });
+      if (res === "ok") {
+        return NextResponse.json("create success");
+      } else if (res === "exist") {
+        return NextResponse.json("story exist");
+      }
+    } catch (error) {
+      return NextResponse.json(error);
     }
-  } catch (error) {
-    return NextResponse.json(error);
+  } else if (type === "get-by-nickname") {
+    try {
+      const res = await getStoryByNickname(nickname);
+      return NextResponse.json(res);
+    } catch (error) {
+      return NextResponse.json(error);
+    }
   }
+
+  return NextResponse.json("Not found.");
 }
