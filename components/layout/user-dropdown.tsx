@@ -30,20 +30,24 @@ export default function UserDropdown({
             <button className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100">
               <p className="truncate text-sm">{email}</p>
             </button>
-            <Link
-              className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
-              href={`/${story?.nickname}`}
-            >
-              <LinkIcon className="h-4 w-4" />
-              <p className="text-sm">Link me</p>
-            </Link>
-            <Link
-              className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
-              href={`/workspace/${story?.nickname}`}
-            >
-              <LayoutDashboard className="h-4 w-4" />
-              <p className="text-sm">Workspace</p>
-            </Link>
+            {story && (
+              <>
+                <Link
+                  className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
+                  href={`/${story?.nickname}`}
+                >
+                  <LinkIcon className="h-4 w-4" />
+                  <p className="text-sm">Link me</p>
+                </Link>
+                <Link
+                  className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
+                  href={`/workspace/${story?.nickname}`}
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  <p className="text-sm">Workspace</p>
+                </Link>
+              </>
+            )}
 
             <button
               className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"

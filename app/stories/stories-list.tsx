@@ -14,22 +14,28 @@ export default function StoryList({ session }: { session: Session | null }) {
 
   const renderList = () => {
     return (
-      <div
-        onClick={() => toast("Hello World")}
-        className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2"
-      >
-        {stories?.map((item) => {
-          return <StoryItem session={session} story={item} key={item.id} />;
-        })}
-        {stories?.map((item) => {
-          return <StoryItem session={session} story={item} key={item.id} />;
-        })}
-        {stories?.map((item) => {
-          return <StoryItem session={session} story={item} key={item.id} />;
-        })}
+      <>
+        {isLoading ? (
+          <p>loading</p>
+        ) : (
+          <div
+            onClick={() => toast("Hello World")}
+            className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2"
+          >
+            {stories?.map((item) => {
+              return <StoryItem session={session} story={item} key={item.id} />;
+            })}
+            {stories?.map((item) => {
+              return <StoryItem session={session} story={item} key={item.id} />;
+            })}
+            {stories?.map((item) => {
+              return <StoryItem session={session} story={item} key={item.id} />;
+            })}
 
-        <Toaster />
-      </div>
+            <Toaster />
+          </div>
+        )}
+      </>
     );
   };
 
