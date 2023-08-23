@@ -25,16 +25,34 @@ export default function NavBar({ session }: { session: Session | null }) {
         } z-30 transition-all`}
       >
         <div className="mx-5 flex h-16 w-full max-w-screen-xl items-center justify-between">
-          <Link href="/" className="flex items-center font-display text-2xl">
-            <Image
-              src="/logo.png"
-              alt="logo"
-              width="30"
-              height="30"
-              className="mr-2 rounded-sm"
-            ></Image>
-            {/* <p>Meet U</p> */}
-          </Link>
+          <div className="flex">
+            <Link
+              href="/"
+              className="mr-2 flex items-center font-display text-2xl"
+            >
+              <Image
+                src="/logo.png"
+                alt="logo"
+                width="30"
+                height="30"
+                className="mr-2 rounded-sm"
+              ></Image>
+              {/* <p>Meet U</p> */}
+            </Link>
+            <Link
+              href="/stories"
+              className="mx-4 flex items-center font-display hover:text-slate-500"
+            >
+              story
+            </Link>
+            <Link
+              href="/about"
+              className="flex items-center font-display hover:text-slate-500"
+            >
+              about
+            </Link>
+          </div>
+
           <div>
             {session ? (
               <UserDropdown session={session} story={story} />

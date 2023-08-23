@@ -10,12 +10,34 @@ import toast, { Toaster } from "react-hot-toast";
 import { useStories } from "./request";
 
 export default function StoryList({ session }: { session: Session | null }) {
+  // useEffect(() => {})
   const { stories, isLoading, isError } = useStories();
 
-  const renderList = () => {
-    return (
-      <>
-        {isLoading ? (
+  // const renderList = () => {
+  //   return (
+  //     <>
+  //       {isLoading && stories ? (
+  //         <p>loading</p>
+  //       ) : (
+  //         <div
+  //           onClick={() => toast("Hello World")}
+  //           className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2"
+  //         >
+  //           {stories?.map((item) => {
+  //             return <StoryItem session={session} story={item} key={item.id} />;
+  //           })}
+
+  //           <Toaster />
+  //         </div>
+  //       )}
+  //     </>
+  //   );
+  // };
+
+  return (
+    <>
+      <div className="story-list">
+        {/* {isLoading ? (
           <p>loading</p>
         ) : (
           <div
@@ -31,15 +53,7 @@ export default function StoryList({ session }: { session: Session | null }) {
 
             <Toaster />
           </div>
-        )}
-      </>
-    );
-  };
-
-  return (
-    <>
-      <div className="story-list">
-        {isLoading ? <p>loading</p> : renderList()}
+        )} */}
       </div>
     </>
   );
@@ -48,23 +62,19 @@ export default function StoryList({ session }: { session: Session | null }) {
 export function StoryItem({
   session,
   story,
-  onChange,
 }: {
   session: Session | null;
   story: UserStory;
-  onChange?: (val: string) => void;
 }) {
-  const [x, setX] = useState("");
+  // const [x, setX] = useState("");
 
   return (
     <div
-      className={`relative w-full overflow-hidden rounded-lg border border-gray-200 `}
+      className={`relative h-full w-full rounded-lg border border-gray-200 p-2 `}
     >
-      <div className="mx-auto max-w-md text-center">
-        <h2 className="bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display text-xl font-bold text-transparent md:text-3xl md:font-normal">
-          {story.nickname}
-        </h2>
-        <div className="prose-sm -mt-2 leading-normal text-gray-500 md:prose">
+      <div className="">
+        <h2 className="">{story.nickname}</h2>
+        <div className="">
           <ReactMarkdown>{story.describtion}</ReactMarkdown>
         </div>
       </div>

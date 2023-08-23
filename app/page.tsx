@@ -40,7 +40,7 @@ export default async function Home() {
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
           style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
         >
-          <Link
+          {/* <Link
             href="/about"
             className="nice-border border text-sm hover:border-gray-800"
           >
@@ -51,7 +51,7 @@ export default async function Home() {
             className="nice-border border text-sm hover:border-gray-800"
           >
             Stories
-          </Link>
+          </Link> */}
           {/* <Link
             href="/workspace"
             className="nice-border border text-sm hover:border-gray-800"
