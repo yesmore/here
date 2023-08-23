@@ -29,6 +29,18 @@ export default async function RootLayout({
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-MJ79QL6TXQ"
         ></Script>
+        <Script
+          async
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-MJ79QL6TXQ');
+              `,
+          }}
+        ></Script>
       </head>
 
       <body className={cx(sfPro.variable, inter.variable)}>
