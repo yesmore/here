@@ -52,12 +52,12 @@ export default async function Home() {
           >
             Stories
           </Link>
-          <Link
+          {/* <Link
             href="/workspace"
             className="nice-border border text-sm hover:border-gray-800"
           >
             Workspace
-          </Link>
+          </Link> */}
         </div>
       </div>
 

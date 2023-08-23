@@ -15,7 +15,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="z-10 text-center">
+    <div className="z-10 mt-32 text-center">
       <h2>Something went wrong!</h2>
       <button
         className="nice-border mt-4"

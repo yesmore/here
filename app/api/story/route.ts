@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { addStory, getStories, getStoryByNickname } from "@/lib/db/story";
+import {
+  addStory,
+  getStories,
+  getStoryByEmail,
+  getStoryByNickname,
+} from "@/lib/db/story";
 // import { authOptions } from "../auth/[...nextauth]/route";
 // import { getServerSession } from "next-auth/next";
 
@@ -37,6 +42,13 @@ export async function POST(
   } else if (type === "get-by-nickname") {
     try {
       const res = await getStoryByNickname(nickname);
+      return NextResponse.json(res);
+    } catch (error) {
+      return NextResponse.json(error);
+    }
+  } else if (type === "get-by-email") {
+    try {
+      const res = await getStoryByEmail(email);
       return NextResponse.json(res);
     } catch (error) {
       return NextResponse.json(error);

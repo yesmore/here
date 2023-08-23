@@ -24,7 +24,7 @@ export default function HomeInput({ session }: { session: Session | null }) {
       <button
         className="invite-btn"
         type="button"
-        onClick={() => route.push(`/workspace?words=${input}`)}
+        onClick={() => route.push(`/workspace/${input}`)}
       >
         Join
       </button>

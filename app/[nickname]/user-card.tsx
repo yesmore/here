@@ -1,11 +1,11 @@
 "use client";
 
-import { UserStory } from "@/lib/types/story";
 import { Session } from "next-auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { useStoryByNicename } from "./request";
 import NotFound from "@/components/layout/not-found";
+import { useStoryByNickname } from "./request";
+import toast, { Toaster } from "react-hot-toast";
 
 export function UserCard({
   session,
@@ -14,7 +14,13 @@ export function UserCard({
   session: Session | null;
   nickname: string;
 }) {
-  const { story, isLoading, isError } = useStoryByNicename(nickname);
+  if (["workspace", "story"].includes(nickname)) return null;
+
+  const { story, isLoading, isError } = useStoryByNickname(nickname);
+
+  useEffect(() => {
+    console.log("[useEffect]", story);
+  }, [story]);
 
   if (!isLoading && !story) return <NotFound />;
 
@@ -34,6 +40,8 @@ export function UserCard({
           </div>
         </div>
       )}
+
+      <Toaster />
     </div>
   );
 }

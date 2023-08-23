@@ -1,8 +1,9 @@
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
-import { UserCard } from "./user-card";
+import NotFound from "@/components/layout/not-found";
+import { getStoryByNickname } from "@/lib/db/story";
+import { authOptions } from "@/pages/api/auth/[...nextauth]/route";
 
-export default async function UserHome({
+export default async function WorkspaceItem({
   params,
 }: {
   params: { nickname: string };
@@ -12,7 +13,7 @@ export default async function UserHome({
   return (
     <>
       <div className="z-10 mt-20 w-full max-w-xl p-3 xl:px-0">
-        <UserCard session={session} nickname={params.nickname} />
+        {params.nickname}
       </div>
     </>
   );
