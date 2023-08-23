@@ -8,12 +8,17 @@ import Image from "next/image";
 import { Session } from "next-auth";
 import Link from "next/link";
 import { useStoryByEmail } from "@/pages/[nickname]/request";
+import { UserStory } from "@/lib/types/story";
 
-export default function UserDropdown({ session }: { session: Session }) {
+export default function UserDropdown({
+  session,
+  story,
+}: {
+  session: Session;
+  story?: UserStory;
+}) {
   const { email, image } = session?.user || {};
   const [openPopover, setOpenPopover] = useState(false);
-
-  const { story, isLoading, isError } = useStoryByEmail(email || "");
 
   if (!email) return null;
 

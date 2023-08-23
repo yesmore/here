@@ -40,6 +40,7 @@ export async function POST(
       return NextResponse.json(error);
     }
   } else if (type === "get-by-nickname") {
+    if (!nickname) return NextResponse.json("empty nickname");
     try {
       const res = await getStoryByNickname(nickname);
       return NextResponse.json(res);
@@ -47,6 +48,7 @@ export async function POST(
       return NextResponse.json(error);
     }
   } else if (type === "get-by-email") {
+    if (!email) return NextResponse.json("empty email");
     try {
       const res = await getStoryByEmail(email);
       return NextResponse.json(res);

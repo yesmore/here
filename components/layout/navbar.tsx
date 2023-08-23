@@ -6,8 +6,11 @@ import useScroll from "@/lib/hooks/use-scroll";
 import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
+import { useStoryByEmail } from "@/pages/[nickname]/request";
 
 export default function NavBar({ session }: { session: Session | null }) {
+  const { story } = useStoryByEmail(session?.user?.email || "");
+
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const scrolled = useScroll(50);
 
@@ -34,7 +37,7 @@ export default function NavBar({ session }: { session: Session | null }) {
           </Link>
           <div>
             {session ? (
-              <UserDropdown session={session} />
+              <UserDropdown session={session} story={story} />
             ) : (
               <button
                 className="nice-border rounded-full border border-gray-100 text-sm hover:border-gray-800"
