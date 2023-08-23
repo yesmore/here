@@ -27,10 +27,12 @@ export default async function RootLayout({
       <head>
         <Script
           async
+          id="googletagmanager-a"
           src="https://www.googletagmanager.com/gtag/js?id=G-MJ79QL6TXQ"
         ></Script>
         <Script
           async
+          id="googletagmanager-b"
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: `
