@@ -17,52 +17,36 @@ export default async function Home() {
 
   return (
     <>
-      <div className="h-screen w-full bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100 pt-32">
+      <div className="w-full bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100 pt-32">
         <Suspense fallback="...">
           {/* @ts-expect-error Server Component */}
           <Nav />
         </Suspense>
-        <div className="z-10">
-          <div className="mx-auto w-full max-w-[70%] text-center">
+        <div className="z-10 pb-12">
+          <div
+            className="mx-auto w-full max-w-[70%] text-center"
+            style={{
+              animationDelay: "0.15s",
+              animationFillMode: "forwards",
+            }}
+          >
             <p className="title-font animate-fade-up text-center font-display text-3xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:text-5xl">
-              <span
-                className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent "
-                style={{
-                  animationDelay: "0.15s",
-                  animationFillMode: "forwards",
-                }}
-              >
+              <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
                 Meeting{" "}
               </span>
               you, a memory painted on the canvas of{" "}
-              <span
-                className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent "
-                style={{
-                  animationDelay: "0.15s",
-                  animationFillMode: "forwards",
-                }}
-              >
-                forever
+              <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
+                forever.
               </span>
-              .
             </p>
 
-            <p className="mt-5 text-slate-500">
+            <p className="mt-5 animate-fade-up text-slate-500 ">
               Enter your nickname ,and create your homepage with just one
               click.🎉
             </p>
             <HomeInput session={session} />
-
-            <div className="mx-auto w-full text-center">
-              {/* <Image
-                src="/u2.png"
-                alt="u2"
-                width="128"
-                height="128"
-                className="w-32 rounded-sm md:w-24"
-              /> */}
-            </div>
           </div>
+          <About />
         </div>
       </div>
       <Footer />
@@ -70,59 +54,55 @@ export default async function Home() {
   );
 }
 
-const features = [
-  {
-    title: "MeetU",
-    description:
-      "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
-    large: true,
-  },
-  {
-    title: "Performance first",
-    description:
-      "Built on [Next.js](https://nextjs.org/) primitives like `@next/font` and `next/image` for stellar performance.",
-    demo: <WebVitals />,
-  },
-  {
-    title: "One-click Deploy",
-    description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
-    demo: (
-      <a href={DEPLOY_URL}>
-        <Image
-          src="https://vercel.com/button"
-          alt="Deploy with Vercel"
-          width={120}
-          height={30}
-          unoptimized
-        />
-      </a>
-    ),
-  },
-  {
-    title: "Built-in Auth + Database",
-    description:
-      "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
-    demo: (
-      <div className="flex items-center justify-center space-x-20">
-        <Image alt="Auth.js logo" src="/authjs.webp" width={50} height={50} />
-        <Image alt="Prisma logo" src="/prisma.svg" width={50} height={50} />
+function About() {
+  return (
+    <>
+      <div className="grids mx-auto mt-12 max-w-[80%] text-center">
+        <div className="z-10 flex w-full items-center justify-center gap-8 py-8 md:gap-12">
+          <CardItem
+            bgColor="bg-cyan-400"
+            rotate="rotate-12 origin-top-left"
+            icon="🤩"
+          />
+          <CardItem rotate="rotate-45 " icon="🍭" />
+          <CardItem
+            bgColor="bg-orange-400"
+            rotate="rotate-12 origin-top-left"
+            icon="🎉"
+          />
+          <CardItem bgColor="bg-pink-400" rotate="-rotate-12" icon="🎭" />
+        </div>
+        <div className="pb-8 pt-2 text-2xl font-semibold">
+          Choose a{" "}
+          <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
+            link{" "}
+          </span>
+          that best represents you.
+        </div>
       </div>
-    ),
-  },
-  {
-    title: "Hooks, utilities, and more",
-    description:
-      "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
-    demo: (
-      <div className="grid grid-flow-col grid-rows-3 gap-10 p-10">
-        <span className="font-mono font-semibold">useIntersectionObserver</span>
-        <span className="font-mono font-semibold">useLocalStorage</span>
-        <span className="font-mono font-semibold">useScroll</span>
-        <span className="font-mono font-semibold">nFormatter</span>
-        <span className="font-mono font-semibold">capitalize</span>
-        <span className="font-mono font-semibold">truncate</span>
+    </>
+  );
+}
+
+function CardItem({
+  bgColor = "bg-yellow-400",
+  rotate = "rotate-12",
+  icon,
+}: {
+  bgColor?: string;
+  rotate?: string;
+  icon: string;
+}) {
+  return (
+    <>
+      <div
+        className={
+          `${bgColor} ${rotate}` +
+          " flex h-14 w-14 cursor-pointer items-center justify-center rounded-xl text-xl shadow-md transition-all hover:rotate-0 md:h-20 md:w-20"
+        }
+      >
+        <span className="md:scale-150">{icon}</span>
       </div>
-    ),
-  },
-];
+    </>
+  );
+}

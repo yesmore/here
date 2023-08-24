@@ -33,9 +33,9 @@ export default function NavBar({ session }: { session: Session | null }) {
                 height="30"
                 className="mr-2 rounded-sm"
               ></Image>
-              {/* <p className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-bold text-transparent">
+              <p className="via-dark-500 bg-gradient-to-r from-gray-500 to-gray-400 bg-clip-text font-bold text-transparent">
                 MeetU
-              </p> */}
+              </p>
             </Link>
             <Link
               href="/stories"
@@ -43,12 +43,12 @@ export default function NavBar({ session }: { session: Session | null }) {
             >
               story
             </Link>
-            <Link
+            {/* <Link
               href="/about"
               className="flex items-center font-display hover:text-slate-500"
             >
               about
-            </Link>
+            </Link> */}
           </div>
 
           <div>

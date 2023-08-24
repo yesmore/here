@@ -36,7 +36,7 @@ export default function HomeInput({ session }: { session: Session | null }) {
   const renderUnLink = () => (
     <>
       <input
-        placeholder={"coder..."}
+        placeholder={"nickname"}
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
