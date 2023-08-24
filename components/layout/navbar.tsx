@@ -33,9 +33,9 @@ export default function NavBar({ session }: { session: Session | null }) {
                 height="30"
                 className="mr-2 rounded-sm"
               ></Image>
-              <p className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-bold text-transparent">
+              {/* <p className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-bold text-transparent">
                 MeetU
-              </p>
+              </p> */}
             </Link>
             <Link
               href="/stories"

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "app/api/auth/[...nextauth]/route";
 import "@/styles/home.css";
-import HomeInput from "../components/home/homeInput";
+import HomeInput from "../components/home/home-input";
 import "@/styles/globals.css";
 import "@/styles/home.css";
 import "@/styles/input.css";

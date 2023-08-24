@@ -4,37 +4,48 @@ import { useState } from "react";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 import { useStoryByEmail } from "@/pages/[nickname]/request";
+import Link from "next/link";
 
 export default function HomeInput({ session }: { session: Session | null }) {
   const route = useRouter();
   const { story, isLoading } = useStoryByEmail(session?.user?.email || "");
   const [input, setInput] = useState<string>("");
 
+  // 已注册
   const renderLinked = () => (
     <>
       <input
         type="text"
-        placeholder={`meetu.dev/${story?.nickname}`}
         disabled={true}
-        className="placeholder-cyan-500"
+        value={`${story?.nickname}`}
+        className="cursor-pointer text-cyan-600"
       />
-      <button
+      <span className="absolute left-3 top-2.5 font-semibold text-cyan-500">
+        meetu.dev/
+      </span>
+      <Link
         className="invite-btn"
         type="button"
-        onClick={() => route.push(`/${input}`)}
+        href={`/${story?.nickname}`}
+        target="_blank"
       >
         Linked
-      </button>
+      </Link>
     </>
   );
   const renderUnLink = () => (
     <>
       <input
-        placeholder={"Call me by your name..."}
+        placeholder={"coder..."}
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        className="text text-cyan-600 placeholder-gray-400"
       />
+      <span className="text absolute left-3 top-2.5 font-semibold text-cyan-500">
+        meetu.dev/
+      </span>
+
       <button
         className="invite-btn"
         type="button"
@@ -48,7 +59,8 @@ export default function HomeInput({ session }: { session: Session | null }) {
   return (
     <>
       <div className="input-container mx-auto mt-6 animate-fade-up">
-        {!isLoading && story?.nickname ? renderLinked() : renderUnLink()}
+        {renderLinked()}
+        {/* {!isLoading && story?.nickname ? renderLinked() : renderUnLink()} */}
       </div>
     </>
   );

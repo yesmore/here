@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 
 export default function StoryList({ session }: { session: Session | null }) {
   // useEffect(() => {})
-  const { stories, isLoading, isError } = useStories();
+  const { stories, isLoading } = useStories();
 
   if (isLoading) {
     return (
