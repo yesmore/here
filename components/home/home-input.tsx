@@ -59,8 +59,8 @@ export default function HomeInput({ session }: { session: Session | null }) {
   return (
     <>
       <div className="input-container mx-auto mt-6 animate-fade-up">
-        {renderLinked()}
-        {/* {!isLoading && story?.nickname ? renderLinked() : renderUnLink()} */}
+        {/* {renderLinked()} */}
+        {!isLoading && story?.nickname ? renderLinked() : renderUnLink()}
       </div>
     </>
   );
