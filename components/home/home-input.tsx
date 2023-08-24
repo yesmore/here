@@ -1,15 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { KeyboardEventHandler, useState } from "react";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 import { useStoryByEmail } from "@/pages/[nickname]/request";
 import Link from "next/link";
+import LoadingDots from "../shared/icons/loading-dots";
 
 export default function HomeInput({ session }: { session: Session | null }) {
   const route = useRouter();
   const { story, isLoading } = useStoryByEmail(session?.user?.email || "");
   const [input, setInput] = useState<string>("");
+  const [joinClicked, setJoinClicked] = useState(false);
+
+  const handleEnter = (key: string) => {
+    if (key === "Enter" && input !== "") {
+      goToWorkSpace();
+    }
+  };
+  const goToWorkSpace = () => {
+    setJoinClicked(true);
+    route.push(`/workspace/${input}`);
+    setTimeout(() => {
+      setJoinClicked(false);
+    }, 10000);
+  };
 
   // 已注册
   const renderLinked = () => (
@@ -41,6 +56,7 @@ export default function HomeInput({ session }: { session: Session | null }) {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         className="text text-cyan-600 placeholder-gray-400"
+        onKeyDown={(e) => handleEnter(e.key)}
       />
       <span className="text absolute left-3 top-2.5 font-semibold text-cyan-500">
         meetu.dev/
@@ -49,9 +65,10 @@ export default function HomeInput({ session }: { session: Session | null }) {
       <button
         className="invite-btn"
         type="button"
-        onClick={() => route.push(`/workspace/${input}`)}
+        onClick={() => goToWorkSpace()}
+        disabled={joinClicked}
       >
-        Join
+        {joinClicked ? <LoadingDots color="#efefef" /> : <>Join</>}
       </button>
     </>
   );
