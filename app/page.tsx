@@ -24,7 +24,7 @@ export default async function Home() {
         </Suspense>
         <div className="z-10 pb-12">
           <div
-            className="mx-auto w-full max-w-[70%] text-center"
+            className="mx-auto w-full max-w-[80%] text-center md:max-w-[70%]"
             style={{
               animationDelay: "0.15s",
               animationFillMode: "forwards",
