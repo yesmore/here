@@ -23,18 +23,8 @@ export default async function Home() {
           <Nav />
         </Suspense>
         <div className="z-10">
-          <div className="mx-auto w-full max-w-xl text-center">
-            <p className="title-font animate-fade-up text-center font-display text-5xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:text-5xl">
-              <span
-                className="items-end justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent "
-                style={{
-                  animationDelay: "0.15s",
-                  animationFillMode: "forwards",
-                }}
-              >
-                Meeting{" "}
-              </span>
-              you engraves a lasting{" "}
+          <div className="mx-auto w-full max-w-[70%] text-center">
+            <p className="title-font animate-fade-up text-center font-display text-3xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:text-5xl">
               <span
                 className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent "
                 style={{
@@ -42,11 +32,22 @@ export default async function Home() {
                   animationFillMode: "forwards",
                 }}
               >
-                memory
+                Meeting{" "}
               </span>
+              you, a memory painted on the canvas of{" "}
+              <span
+                className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent "
+                style={{
+                  animationDelay: "0.15s",
+                  animationFillMode: "forwards",
+                }}
+              >
+                forever
+              </span>
+              .
             </p>
 
-            <p className="mt-5 px-20 text-slate-500">
+            <p className="mt-5 text-slate-500">
               Enter your nickname ,and create your homepage with just one
               click.🎉
             </p>
