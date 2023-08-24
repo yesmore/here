@@ -7,7 +7,7 @@ import {
   useCallback,
   useMemo,
 } from "react";
-import { LoadingDots, Google } from "@/components/shared/icons";
+import { LoadingDots, Google, Github } from "@/components/shared/icons";
 import Image from "next/image";
 
 const SignInModal = ({
@@ -17,7 +17,8 @@ const SignInModal = ({
   showSignInModal: boolean;
   setShowSignInModal: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const [signInClicked, setSignInClicked] = useState(false);
+  const [signInGoogleClicked, setSignInGoogleClicked] = useState(false);
+  const [signInGithubClicked, setSignInGithubClicked] = useState(false);
 
   return (
     <Modal showModal={showSignInModal} setShowModal={setShowSignInModal}>
@@ -40,23 +41,44 @@ const SignInModal = ({
 
         <div className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 md:px-16">
           <button
-            disabled={signInClicked}
+            disabled={signInGoogleClicked}
             className={`${
-              signInClicked
+              signInGoogleClicked
                 ? "cursor-not-allowed bg-gray-100"
                 : "border text-black hover:bg-gray-50"
             } nice-border flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 hover:border-gray-800 focus:outline-none`}
             onClick={() => {
-              setSignInClicked(true);
+              setSignInGoogleClicked(true);
               signIn("google");
             }}
           >
-            {signInClicked ? (
+            {signInGoogleClicked ? (
               <LoadingDots color="#808080" />
             ) : (
               <>
                 <Google className="h-5 w-5" />
                 <p>Sign In with Google</p>
+              </>
+            )}
+          </button>
+          <button
+            disabled={signInGithubClicked}
+            className={`${
+              signInGithubClicked
+                ? "cursor-not-allowed bg-gray-100"
+                : "border text-black hover:bg-gray-50"
+            } nice-border flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 hover:border-gray-800 focus:outline-none`}
+            onClick={() => {
+              setSignInGithubClicked(true);
+              signIn("github");
+            }}
+          >
+            {signInGithubClicked ? (
+              <LoadingDots color="#808080" />
+            ) : (
+              <>
+                <Github className="h-5 w-5" />
+                <p>Sign In with Github</p>
               </>
             )}
           </button>
