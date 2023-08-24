@@ -96,7 +96,7 @@
   bottom: 4px;
   z-index: 10;
   border-radius: 4px;
-  background-color: rgb(236 72 153);
+  background-color: rgb(236 72 153) !important;
   color: #fff;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -120,6 +120,6 @@
 
 .input-container input:placeholder-shown ~ .invite-btn {
   pointer-events: none;
-  background-color: gray;
+  background-color: gray !important;
   opacity: 0.5;
 }

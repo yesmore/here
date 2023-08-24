@@ -8,52 +8,52 @@ import ComponentGrid from "@/components/home/component-grid";
 import { UserStory } from "@/lib/types/story";
 import toast, { Toaster } from "react-hot-toast";
 import { useStories } from "./request";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { useRouter } from "next/navigation";
 
 export default function StoryList({ session }: { session: Session | null }) {
   // useEffect(() => {})
   const { stories, isLoading, isError } = useStories();
 
-  // const renderList = () => {
-  //   return (
-  //     <>
-  //       {isLoading && stories ? (
-  //         <p>loading</p>
-  //       ) : (
-  //         <div
-  //           onClick={() => toast("Hello World")}
-  //           className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2"
-  //         >
-  //           {stories?.map((item) => {
-  //             return <StoryItem session={session} story={item} key={item.id} />;
-  //           })}
+  if (isLoading) {
+    return (
+      <>
+        <div className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2">
+          {[1, 2, 3, 4, 5, 6].map((item) => {
+            return (
+              <div key={item} className="rounded-md border border-gray-200 p-3">
+                <div className="flex items-center gap-3">
+                  <Skeleton circle width={50} height={50} />
+                  <Skeleton width={140} height={40} />
+                </div>
 
-  //           <Toaster />
-  //         </div>
-  //       )}
-  //     </>
-  //   );
-  // };
+                <Skeleton count={3} />
+              </div>
+            );
+          })}
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
       <div className="story-list">
-        {isLoading ? (
-          <p>loading</p>
-        ) : (
-          <div
-            onClick={() => toast("Hello World")}
-            className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2"
-          >
-            {stories &&
-              stories.map((item) => {
-                return (
-                  <StoryItem session={session} story={item} key={item.id} />
-                );
-              })}
+        <div className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2">
+          {stories?.map((item) => {
+            return (
+              <StoryItem
+                session={session}
+                story={item}
+                isLoading={isLoading}
+                key={item.id}
+              />
+            );
+          })}
 
-            <Toaster />
-          </div>
-        )}
+          <Toaster />
+        </div>
       </div>
     </>
   );
@@ -62,21 +62,23 @@ export default function StoryList({ session }: { session: Session | null }) {
 export function StoryItem({
   session,
   story,
+  isLoading,
 }: {
   session: Session | null;
   story: UserStory;
+  isLoading: Boolean;
 }) {
   // const [x, setX] = useState("");
+  const router = useRouter();
 
   return (
     <div
-      className={`relative h-full w-full rounded-lg border border-gray-200 p-2 `}
+      className={`story-item relative h-full w-full cursor-pointer rounded-lg border border-gray-200 p-2 transition-all`}
+      onClick={() => router.push(`/${story.nickname}`)}
     >
       <div className="">
         <h2 className="">{story.nickname}</h2>
-        <div className="">
-          <ReactMarkdown>{story.describtion}</ReactMarkdown>
-        </div>
+        <div className="">{story.describtion}</div>
       </div>
     </div>
   );

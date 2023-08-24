@@ -10,7 +10,6 @@ import { useStoryByEmail } from "@/pages/[nickname]/request";
 
 export default function NavBar({ session }: { session: Session | null }) {
   const { story } = useStoryByEmail(session?.user?.email || "");
-
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const scrolled = useScroll(50);
 
@@ -26,7 +25,7 @@ export default function NavBar({ session }: { session: Session | null }) {
       >
         <div className="mx-5 flex h-16 w-full max-w-screen-xl items-center justify-between">
           <div className="flex">
-            <Link href="/" className="flex items-center font-display text-2xl">
+            <Link href="/" className="flex items-center font-display">
               <Image
                 src="/logo.png"
                 alt="logo"
@@ -34,7 +33,9 @@ export default function NavBar({ session }: { session: Session | null }) {
                 height="30"
                 className="mr-2 rounded-sm"
               ></Image>
-              {/* <p>Meet U</p> */}
+              <p className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-bold text-transparent">
+                MeetU
+              </p>
             </Link>
             <Link
               href="/stories"

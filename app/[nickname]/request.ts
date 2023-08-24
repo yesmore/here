@@ -3,13 +3,12 @@ import useSWR from "swr";
 import { UserStory } from "@/lib/types/story";
 
 export function useStoryByNickname(nickname: string) {
-  let api = `/api/story`;
+  let api = `/api/story-name`;
   const { data, error, isLoading } = useSWR<UserStory>(api, () =>
     fetcher(api, {
       method: "POST",
       body: JSON.stringify({
         nickname: nickname,
-        type: "get-by-nickname",
       }),
     }),
   );
@@ -22,14 +21,14 @@ export function useStoryByNickname(nickname: string) {
 }
 
 export function useStoryByEmail(email: string) {
-  let api = `/api/story`;
+  let api = `/api/story-email`;
   const { data, error, isLoading } = useSWR<UserStory>(api, () =>
     fetcher(api, {
       method: "POST",
       body: JSON.stringify({
         email: email,
-        type: "get-by-email",
       }),
+      // cache: "no-store",
     }),
   );
 

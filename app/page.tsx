@@ -1,64 +1,70 @@
-import Card from "@/components/shared/card";
-import Balancer from "react-wrap-balancer";
 import { DEPLOY_URL } from "@/lib/constants";
-import { Github, Twitter } from "@/components/shared/icons";
 import WebVitals from "@/components/home/web-vitals";
-import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
-import { nFormatter } from "@/lib/utils";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "app/api/auth/[...nextauth]/route";
 import "@/styles/home.css";
-import Link from "next/link";
 import HomeInput from "../components/home/homeInput";
 import "@/styles/globals.css";
 import "@/styles/home.css";
 import "@/styles/input.css";
+import { Suspense } from "react";
+import Nav from "@/components/layout/nav";
+import Footer from "@/components/layout/footer";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
   return (
     <>
-      <div className="z-10 mt-32 w-full max-w-xl px-5 xl:px-0">
-        <h1
-          className="title-font flex animate-fade-up items-end justify-center bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-5xl font-bold  tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-6xl"
-          style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
-        >
-          <Balancer>Meet</Balancer>
-          <Image
-            src="/u2.png"
-            alt="u2"
-            width="98"
-            height="98"
-            className="ml-4 w-16 rounded-sm md:w-24"
-          />
-        </h1>
-        <HomeInput session={session} />
+      <div className="h-screen w-full bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100 pt-32">
+        <Suspense fallback="...">
+          {/* @ts-expect-error Server Component */}
+          <Nav />
+        </Suspense>
+        <div className="z-10">
+          <div className="mx-auto w-full max-w-xl text-center">
+            <p className="title-font animate-fade-up text-center font-display text-5xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:text-5xl">
+              <span
+                className="items-end justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent "
+                style={{
+                  animationDelay: "0.15s",
+                  animationFillMode: "forwards",
+                }}
+              >
+                Meeting{" "}
+              </span>
+              you engraves a lasting{" "}
+              <span
+                className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent "
+                style={{
+                  animationDelay: "0.15s",
+                  animationFillMode: "forwards",
+                }}
+              >
+                memory
+              </span>
+            </p>
 
-        {/* <div
-          className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
-          style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
-        ></div> */}
-      </div>
+            <p className="mt-5 px-20 text-slate-500">
+              Enter your nickname ,and create your homepage with just one
+              click.🎉
+            </p>
+            <HomeInput session={session} />
 
-      <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
-        {/* {features.map(({ title, description, demo, large }) => (
-          <Card
-            key={title}
-            title={title}
-            description={description}
-            demo={
-              title === "Beautiful, reusable components" ? (
-                <ComponentGrid />
-              ) : (
-                demo
-              )
-            }
-            large={large}
-          />
-        ))} */}
+            <div className="mx-auto w-full text-center">
+              {/* <Image
+                src="/u2.png"
+                alt="u2"
+                width="128"
+                height="128"
+                className="w-32 rounded-sm md:w-24"
+              /> */}
+            </div>
+          </div>
+        </div>
       </div>
+      <Footer />
     </>
   );
 }

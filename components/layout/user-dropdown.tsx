@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import { signOut } from "next-auth/react";
-import { LayoutDashboard, LogOut, Link as LinkIcon } from "lucide-react";
+import {
+  LayoutDashboard,
+  LogOut,
+  Link as LinkIcon,
+  ExternalLink,
+} from "lucide-react";
 import Popover from "@/components/shared/popover";
 import Image from "next/image";
 import { Session } from "next-auth";
@@ -35,10 +40,11 @@ export default function UserDropdown({
                 <Link
                   className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
                   href={`/${story?.nickname}`}
+                  target="_blank"
                 >
-                  <LinkIcon className="h-4 w-4" />
+                  <ExternalLink className="h-4 w-4" />
                   <p className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-bold text-transparent">
-                    Link me
+                    Link now
                   </p>
                 </Link>
                 <Link
