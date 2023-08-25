@@ -18,17 +18,6 @@ export default function Footer() {
           className="rounded-sm"
         ></Image>
       </Link>
-      <div className="justify-centertext-sm mt-2 flex items-center justify-center">
-        <span>Copyright © 2023 </span>
-        <Link
-          className="ml-1 font-medium text-gray-800 transition-colors"
-          href="https://meetu.dev"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          MeetU
-        </Link>
-      </div>
       <div className="mt-2 text-sm">
         <Link href="/privacy">Privacy policy</Link>
         <span className="mx-2">‣</span>
@@ -40,6 +29,17 @@ export default function Footer() {
           target="_blank"
         >
           Discord
+        </Link>
+      </div>
+      <div className="mt-2 flex items-center justify-center text-sm">
+        <span>Copyright © 2023 </span>
+        <Link
+          className="ml-1 font-medium text-gray-800 transition-colors"
+          href="https://meetu.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          MeetU
         </Link>
       </div>
     </div>

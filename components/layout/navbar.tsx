@@ -40,7 +40,7 @@ export default function NavBar({ session }: { session: Session | null }) {
             </Link>
             <Link
               href="/stories"
-              className="mx-4 flex items-center font-display hover:text-slate-500"
+              className="mx-4 flex items-center font-display text-slate-600 hover:text-slate-500"
             >
               story
             </Link>
