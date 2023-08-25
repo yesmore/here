@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getStories, getStoryByNickname } from "@/lib/db/story";
+import { getPublicStories, getStoryByNickname } from "@/lib/db/story";
 // import { authOptions } from "../auth/[...nextauth]/route";
 // import { getServerSession } from "next-auth/next";
 
@@ -8,7 +8,7 @@ export async function GET(
   { params }: { params: Record<string, string | string | undefined[]> },
 ) {
   try {
-    const res = await getStories(1, 10);
+    const res = await getPublicStories(1, 10);
     return NextResponse.json(res);
   } catch (error) {
     return NextResponse.json(error);
