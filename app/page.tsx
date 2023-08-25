@@ -18,10 +18,8 @@ export default async function Home() {
   return (
     <>
       <div className="w-full bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100 pt-32">
-        <Suspense fallback="...">
-          {/* @ts-expect-error Server Component */}
-          <Nav />
-        </Suspense>
+        {/* @ts-expect-error Server Component */}
+        <Nav />
         <div className="z-10 pb-12">
           <div
             className="mx-auto w-full max-w-[80%] text-center md:max-w-[70%]"

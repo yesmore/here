@@ -8,9 +8,16 @@ export interface CreateStoryProps {
   public: boolean;
 }
 
-export const getStories = async (pageNum: number, pageSize: number = 10) => {
+export const getPublicStories = async (
+  pageNum: number,
+  pageSize: number = 10,
+) => {
   if (pageNum && pageSize) {
-    return await prisma.story.findMany();
+    return await prisma.story.findMany({
+      where: {
+        public: true,
+      },
+    });
   }
 };
 
@@ -30,11 +37,15 @@ export const addStory = async (props: CreateStoryProps) => {
     await prisma.story.create({
       data: {
         email: props.email,
-        tags: ["tag1", "tag2"],
+        tags: props.tags,
         nickname: props.nickname,
-        public: true,
-        describtion: "",
-        expires: new Date(),
+        public: props.public,
+        describtion: props.describtion,
+        expires: new Date(
+          new Date().getFullYear() + 1,
+          new Date().getMonth(),
+          new Date().getDate(),
+        ),
         createdAt: new Date(),
         updatedAt: new Date(),
       },

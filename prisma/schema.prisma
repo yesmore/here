@@ -67,7 +67,7 @@ model Story {
   email       String
   nickname    String
   tags        String[]
-  describtion String   @default("")
+  describtion String
   public      Boolean  @default(true)
   expires     DateTime
   createdAt   DateTime

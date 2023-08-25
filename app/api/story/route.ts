@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   addStory,
-  getStories,
+  getPublicStories,
   getStoryByEmail,
   getStoryByNickname,
 } from "@/lib/db/story";
@@ -13,7 +13,7 @@ export async function GET(
   { params }: { params: Record<string, string | string | undefined[]> },
 ) {
   try {
-    const res = await getStories(1, 10);
+    const res = await getPublicStories(1, 10);
     return NextResponse.json(res);
   } catch (error) {
     return NextResponse.json(error);
@@ -43,7 +43,7 @@ export async function POST(
       public: publicStory,
     });
     if (res === "ok") {
-      return NextResponse.json("create success");
+      return NextResponse.json("success");
     } else {
       return NextResponse.json(res);
     }

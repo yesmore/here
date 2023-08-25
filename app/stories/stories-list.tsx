@@ -19,16 +19,20 @@ export default function StoryList({ session }: { session: Session | null }) {
   if (isLoading) {
     return (
       <>
-        <div className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2">
-          {[1, 2, 3, 4, 5, 6].map((item) => {
+        <div className="mx-6 grid auto-cols-max grid-cols-1 gap-4  sm:grid-cols-2 md:mx-10 md:grid-cols-3">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
             return (
-              <div key={item} className="rounded-md border border-gray-200 p-3">
+              <div
+                key={item}
+                className="w-full rounded-md border border-gray-200 p-3"
+              >
                 <div className="flex items-center gap-3">
                   <Skeleton circle width={50} height={50} />
-                  <Skeleton width={140} height={40} />
+                  <Skeleton height={40} />
                 </div>
 
-                <Skeleton count={3} />
+                <Skeleton height={20} />
+                <Skeleton count={2} />
               </div>
             );
           })}
@@ -39,8 +43,9 @@ export default function StoryList({ session }: { session: Session | null }) {
 
   return (
     <>
-      <div className="story-list">
-        <div className="grid auto-cols-max grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="story-list mx-6 md:mx-10">
+        {/* <div className="grid auto-cols-max grid-flow-row auto-rows-min grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 "> */}
+        <div className="flex flex-wrap items-start justify-start gap-4">
           {stories?.map((item) => {
             return (
               <StoryItem
@@ -51,7 +56,6 @@ export default function StoryList({ session }: { session: Session | null }) {
               />
             );
           })}
-
           <Toaster />
         </div>
       </div>
@@ -73,12 +77,12 @@ export function StoryItem({
 
   return (
     <div
-      className={`story-item relative h-full w-full cursor-pointer rounded-lg border border-gray-200 p-2 transition-all`}
+      className={`story-item relative h-full grow cursor-pointer rounded-lg p-2 shadow transition-all duration-300`}
       onClick={() => router.push(`/${story.nickname}`)}
     >
       <div className="">
-        <h2 className="">{story.nickname}</h2>
-        <div className="">{story.describtion}</div>
+        <h2 className="truncate">{story.nickname}</h2>
+        {story.describtion && <p className="break-all">{story.describtion}</p>}
       </div>
     </div>
   );

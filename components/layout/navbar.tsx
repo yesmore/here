@@ -7,6 +7,7 @@ import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
 import { useStoryByEmail } from "@/pages/[nickname]/request";
+import { Suspense } from "react";
 
 export default function NavBar({ session }: { session: Session | null }) {
   const { story } = useStoryByEmail(session?.user?.email || "");
@@ -51,24 +52,26 @@ export default function NavBar({ session }: { session: Session | null }) {
             </Link> */}
           </div>
 
-          <div>
-            {session ? (
-              <UserDropdown session={session} story={story} />
-            ) : (
-              <button
-                className="nice-border rounded-full border border-gray-100 text-sm hover:border-gray-800"
-                onClick={() => setShowSignInModal(true)}
-              >
-                Sign in
-              </button>
-              // <button
-              //   className="rounded-full border border-[#229beccb] bg-[#229beccb] p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-[#229beccb]"
-              //   onClick={() => setShowSignInModal(true)}
-              // >
-              //   Sign in
-              // </button>
-            )}
-          </div>
+          <Suspense fallback="...">
+            <div>
+              {session ? (
+                <UserDropdown session={session} story={story} />
+              ) : (
+                <button
+                  className="nice-border rounded-full border border-gray-100 text-sm hover:border-gray-800"
+                  onClick={() => setShowSignInModal(true)}
+                >
+                  Sign in
+                </button>
+                // <button
+                //   className="rounded-full border border-[#229beccb] bg-[#229beccb] p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-[#229beccb]"
+                //   onClick={() => setShowSignInModal(true)}
+                // >
+                //   Sign in
+                // </button>
+              )}
+            </div>
+          </Suspense>
         </div>
       </div>
     </>

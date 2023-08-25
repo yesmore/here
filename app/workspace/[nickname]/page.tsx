@@ -14,7 +14,7 @@ export default async function WorkspaceItem({
 
   return (
     <>
-      <div className="z-10 mt-20 w-full max-w-xl p-3 xl:px-0">
+      <div className="z-10 mt-20 w-full p-3 xl:px-0">
         <InputArea session={session} nickname={params.nickname} />
       </div>
       <Toaster />

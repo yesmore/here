@@ -24,10 +24,8 @@ export default async function Layout({
   return (
     <div className={cx(sfPro.variable, inter.variable)}>
       <div className="fixed h-screen w-full bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100" />
-      <Suspense fallback="...">
-        {/* @ts-expect-error Server Component */}
-        <Nav />
-      </Suspense>
+      {/* @ts-expect-error Server Component */}
+      <Nav />
       <main className="flex min-h-screen w-full flex-col items-center">
         {children}
       </main>

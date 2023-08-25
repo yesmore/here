@@ -7,7 +7,7 @@ export default async function Stories() {
 
   return (
     <>
-      <div className="z-10 mt-20 w-full max-w-xl p-3 xl:px-0">
+      <div className="z-10 mt-20 w-full p-3 xl:px-0">
         <StoryList session={session} />
       </div>
     </>
