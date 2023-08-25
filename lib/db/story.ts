@@ -1,8 +1,11 @@
 import prisma from "./prisma";
 
-interface Props {
+export interface CreateStoryProps {
   email: string;
   nickname: string;
+  tags: string[];
+  describtion: string;
+  public: boolean;
 }
 
 export const getStories = async (pageNum: number, pageSize: number = 10) => {
@@ -11,16 +14,25 @@ export const getStories = async (pageNum: number, pageSize: number = 10) => {
   }
 };
 
-export const addStory = async (props: Props) => {
-  const findStory = await getStoryByEmail(props.email);
-  console.log("[findStory]", findStory);
+export const addStory = async (props: CreateStoryProps) => {
+  const findStodyByNickname = await getStoryByNickname(props.nickname);
+  const findStoryByEmail = await getStoryByEmail(props.email);
+  console.log("[findStory]", findStodyByNickname, findStoryByEmail);
 
-  if (findStory === null) {
+  if (findStodyByNickname) {
+    return "oops! this nickname already exists";
+  }
+  if (findStoryByEmail) {
+    return "you have already created a link";
+  }
+
+  if (findStodyByNickname === null && findStoryByEmail === null) {
     await prisma.story.create({
       data: {
         email: props.email,
         tags: ["tag1", "tag2"],
         nickname: props.nickname,
+        public: true,
         describtion: "",
         expires: new Date(),
         createdAt: new Date(),
@@ -29,7 +41,7 @@ export const addStory = async (props: Props) => {
     });
     return "ok";
   }
-  return "exist";
+  return "something went wrong";
 };
 
 export const getStoryByEmail = async (email: string) => {

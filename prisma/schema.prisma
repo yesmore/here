@@ -68,6 +68,7 @@ model Story {
   nickname    String
   tags        String[]
   describtion String   @default("")
+  public      Boolean  @default(true)
   expires     DateTime
   createdAt   DateTime
   updatedAt   DateTime @updatedAt

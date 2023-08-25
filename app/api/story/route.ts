@@ -24,38 +24,30 @@ export async function POST(
   req: NextRequest,
   { params }: { params: Record<string, string | string | undefined[]> },
 ) {
-  const { nickname, email, type } = await req.json();
+  const {
+    nickname,
+    email,
+    tags,
+    describtion,
+    public: publicStory,
+  } = await req.json();
 
   console.log(nickname);
 
-  if (type === "create") {
-    try {
-      const res = await addStory({ nickname: nickname, email: email });
-      if (res === "ok") {
-        return NextResponse.json("create success");
-      } else if (res === "exist") {
-        return NextResponse.json("story exist");
-      }
-    } catch (error) {
-      return NextResponse.json(error);
-    }
-  } else if (type === "get-by-nickname") {
-    if (!nickname) return NextResponse.json("empty nickname");
-    try {
-      const res = await getStoryByNickname(nickname);
+  try {
+    const res = await addStory({
+      nickname: nickname,
+      email: email,
+      tags,
+      describtion,
+      public: publicStory,
+    });
+    if (res === "ok") {
+      return NextResponse.json("create success");
+    } else {
       return NextResponse.json(res);
-    } catch (error) {
-      return NextResponse.json(error);
     }
-  } else if (type === "get-by-email") {
-    if (!email) return NextResponse.json("empty email");
-    try {
-      const res = await getStoryByEmail(email);
-      return NextResponse.json(res);
-    } catch (error) {
-      return NextResponse.json(error);
-    }
+  } catch (error) {
+    return NextResponse.json(error);
   }
-
-  return NextResponse.json("Not found.");
 }
