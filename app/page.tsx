@@ -11,6 +11,8 @@ import "@/styles/input.css";
 import { Suspense } from "react";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
+import SocialCard from "@/components/home/home-social-card";
+import { Github, Google, Twitter } from "@/components/shared/icons";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -54,7 +56,7 @@ export default async function Home() {
 
 function About() {
   return (
-    <>
+    <div>
       <div className="grids mx-auto mt-12 max-w-[80%] text-center">
         <div className="z-10 flex w-full items-center justify-center gap-8 py-8 md:gap-12">
           <CardItem
@@ -71,14 +73,17 @@ function About() {
           <CardItem bgColor="bg-pink-400" rotate="-rotate-12" icon="🎭" />
         </div>
         <div className="pb-8 pt-2 text-2xl font-semibold">
-          Choose a{" "}
+          Choose the{" "}
           <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
             link{" "}
           </span>
           that best represents you.
         </div>
       </div>
-    </>
+      <div className="mx-auto mt-12 flex max-w-[80%] items-center justify-center ">
+        <SocialCard />
+      </div>
+    </div>
   );
 }
 

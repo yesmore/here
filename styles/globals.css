@@ -31,3 +31,8 @@
   box-shadow: none;
   transform: translate(3px, 3px);
 }
+
+.dot-bg {
+  background: radial-gradient(circle at 1px 1px, #c0c0c0 1px, transparent 0);
+  background-size: 21px 21px;
+}

@@ -23,10 +23,10 @@ export default async function Layout({
 }) {
   return (
     <div className={cx(sfPro.variable, inter.variable)}>
-      <div className="fixed h-screen w-full bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100" />
+      <div className="dot-bg fixed h-screen w-full bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100" />
       {/* @ts-expect-error Server Component */}
       <Nav />
-      <main className="flex min-h-screen w-full flex-col items-center">
+      <main className=" flex min-h-screen w-full flex-col items-center">
         {children}
       </main>
       <Footer />
