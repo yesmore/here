@@ -24,7 +24,9 @@ export default function Popover({
     <>
       {isMobile && children}
       {openPopover && isMobile && (
-        <Leaflet setShow={setOpenPopover}>{content}</Leaflet>
+        <Leaflet setShow={setOpenPopover} showBlur={true}>
+          {content}
+        </Leaflet>
       )}
       {isDesktop && (
         <PopoverPrimitive.Root
