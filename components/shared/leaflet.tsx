@@ -3,9 +3,11 @@ import { AnimatePresence, motion, useAnimation } from "framer-motion";
 
 export default function Leaflet({
   setShow,
+  showBlur,
   children,
 }: {
   setShow: Dispatch<SetStateAction<boolean>>;
+  showBlur: boolean;
   children: ReactNode;
 }) {
   const leafletRef = useRef<HTMLDivElement>(null);
@@ -55,14 +57,16 @@ export default function Leaflet({
         </div>
         {children}
       </motion.div>
-      <motion.div
-        key="leaflet-backdrop"
-        className="fixed inset-0 z-30 bg-gray-100 bg-opacity-10 backdrop-blur"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={() => setShow(false)}
-      />
+      {showBlur && (
+        <motion.div
+          key="leaflet-backdrop"
+          className="fixed inset-0 z-30 bg-gray-100 bg-opacity-10 backdrop-blur"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setShow(false)}
+        />
+      )}
     </AnimatePresence>
   );
 }

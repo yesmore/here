@@ -5,3 +5,5 @@ export { default as ExpandingArrow } from "./expanding-arrow";
 export { default as Github } from "./github";
 export { default as Twitter } from "./twitter";
 export { default as Google } from "./google";
+export { default as Widgets } from "./widgets";
+export { default as Color } from "./color";

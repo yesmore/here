@@ -1,7 +1,7 @@
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
 import { UserCard } from "./user-card";
-import UserFooter from "./user-footer";
+import UserFooter from "@/components/layout/user-footer";
 
 export default async function UserHome({
   params,

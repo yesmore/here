@@ -16,10 +16,12 @@ export default function Modal({
   children,
   showModal,
   setShowModal,
+  showBlur = true,
 }: {
   children: React.ReactNode;
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
+  showBlur?: boolean;
 }) {
   const desktopModalRef = useRef(null);
 
@@ -43,8 +45,18 @@ export default function Modal({
     <AnimatePresence>
       {showModal && (
         <>
-          {isMobile && <Leaflet setShow={setShowModal}>{children}</Leaflet>}
-          {isDesktop && (
+          {/* <p
+            className="z-10 ml-2 w-10 rounded-md border text-center text-sm text-slate-500 hover:bg-gray-300 hover:text-slate-700"
+            onClick={() => setShowModal(false)}
+          >
+            ESC
+          </p> */}
+          {isMobile && (
+            <Leaflet setShow={setShowModal} showBlur={showBlur}>
+              {children}
+            </Leaflet>
+          )}
+          {isDesktop && showBlur && (
             <>
               <FocusTrap focusTrapOptions={{ initialFocus: false }}>
                 <motion.div

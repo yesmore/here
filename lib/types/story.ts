@@ -4,6 +4,11 @@ export interface UserStory {
   nickname: string;
   tags: string[];
   describtion: string;
+  meta_text_color: string;
+  meta_bg_color: string;
+  meta_font_style: string;
+  meta_font_size: string;
+
   expires: string;
   createdAt: string;
   updatedAt: string;

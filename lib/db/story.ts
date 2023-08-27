@@ -41,6 +41,10 @@ export const addStory = async (props: CreateStoryProps) => {
         nickname: props.nickname,
         public: props.public,
         describtion: props.describtion,
+        meta_bg_color: "0",
+        meta_text_color: "0",
+        meta_font_size: "0",
+        meta_font_style: "0",
         expires: new Date(
           new Date().getFullYear() + 1,
           new Date().getMonth(),

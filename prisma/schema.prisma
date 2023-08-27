@@ -63,15 +63,23 @@ model VerificationToken {
 }
 
 model Story {
-  id          String   @id @default(cuid())
-  email       String
-  nickname    String
-  tags        String[]
-  describtion String
-  public      Boolean  @default(true)
-  expires     DateTime
-  createdAt   DateTime
-  updatedAt   DateTime @updatedAt
+  id              String   @id @default(cuid())
+  email           String
+  nickname        String
+  tags            String[]
+  describtion     String
+  public          Boolean  @default(true)
+  meta_text_color String   @default("0")
+  meta_bg_color   String   @default("0")
+  meta_font_style String   @default("0")
+  meta_font_size  String   @default("0")
+  expires         DateTime
+  createdAt       DateTime
+  updatedAt       DateTime @updatedAt
 
   User User @relation(fields: [email], references: [email])
 }
+
+// model Grid {
+//   id String @id @default(cuid())
+// }
