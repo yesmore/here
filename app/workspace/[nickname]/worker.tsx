@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { Session } from "next-auth";
 import { CreateStoryProps } from "@/lib/db/story";
 import "@/styles/toggle.css";
@@ -9,7 +9,7 @@ import { useSignInModal } from "@/components/layout/sign-in-modal";
 import { Color, LoadingDots, Widgets } from "@/components/shared/icons";
 import UserFooter from "@/components/layout/user-footer";
 import Modal from "@/components/shared/modal";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Smartphone, Monitor } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useStoryByNickname } from "@/pages/[nickname]/request";
@@ -45,6 +45,24 @@ export default function Worker({
   const [showRightSider, setShowRightSider] = useState<boolean>(true);
   const [showBottomWidget, setShowBottomWidget] = useState<boolean>(false);
   const [showBottomMetaInfo, setShowBottomMetaInfo] = useState<boolean>(false);
+  const [showOnPC, setShowOnPC] = useState<boolean>(true);
+
+  useEffect(() => {
+    setMetaInfo({
+      meta_bg_color: story?.meta_bg_color ?? "0",
+      meta_text_color: story?.meta_text_color ?? "0",
+      meta_font_size: story?.meta_font_size ?? "0",
+      meta_font_style: story?.meta_font_style ?? "0",
+      nickname: nickname,
+      describtion: story?.describtion || "",
+      public: story?.public || true,
+      tags: story?.tags || [],
+      email: session?.user?.email || "",
+      avatar:
+        session?.user?.image ||
+        "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/gcloud/avatars/21.png",
+    });
+  }, [story]);
 
   const handleCreateStory = async () => {
     setShowCreateLoading(true);
@@ -76,6 +94,16 @@ export default function Worker({
       toast("Please sign in first", { icon: "🥵" });
     }
   };
+  const handleShowOnPC = () => {
+    setShowLeftSider(!showLeftSider);
+    setShowRightSider(!showRightSider);
+    setShowOnPC(!showOnPC);
+  };
+  const handleShowOnMobile = () => {
+    setShowLeftSider(!showLeftSider);
+    setShowRightSider(!showRightSider);
+    setShowOnPC(!showOnPC);
+  };
 
   const renderHeadTools = () => (
     <>
@@ -88,16 +116,28 @@ export default function Worker({
           Preview <ExternalLink className="w-4 text-slate-500" />
         </Link>
 
-        <div className="tools hidden text-sm text-slate-600 hover:text-slate-800 md:flex">
+        <div className="tools hidden text-sm text-slate-600 md:flex">
           <button
-            className="flex items-center gap-1"
+            className="flex items-center gap-1 hover:text-slate-800 "
+            onClick={handleShowOnPC}
+          >
+            <Monitor className=" h-4 w-4" />
+          </button>
+          <button
+            className="mx-2 flex items-center gap-1 hover:text-slate-800 "
+            onClick={handleShowOnMobile}
+          >
+            <Smartphone className=" h-4 w-4" />
+          </button>
+          <button
+            className="flex items-center gap-1 hover:text-slate-800 "
             onClick={() => setShowLeftSider(!showLeftSider)}
           >
             <Widgets className=" h-4 w-4" />
             Widgets
           </button>
           <button
-            className="ml-3 flex items-center gap-1"
+            className="ml-3 flex items-center gap-1 hover:text-slate-800 "
             onClick={() => setShowRightSider(!showRightSider)}
           >
             <Color className=" h-4 w-4" />
