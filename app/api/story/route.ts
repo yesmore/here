@@ -1,12 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  addStory,
-  getPublicStories,
-  getStoryByEmail,
-  getStoryByNickname,
-} from "@/lib/db/story";
-// import { authOptions } from "../auth/[...nextauth]/route";
-// import { getServerSession } from "next-auth/next";
+import { addStory, getPublicStories } from "@/lib/db/story";
 
 export async function GET(
   req: NextRequest,
@@ -24,23 +17,22 @@ export async function POST(
   req: NextRequest,
   { params }: { params: Record<string, string | string | undefined[]> },
 ) {
-  const {
-    nickname,
-    email,
-    tags,
-    describtion,
-    public: publicStory,
-  } = await req.json();
+  const { email, metaInfo } = await req.json();
 
-  console.log(nickname);
+  console.log(metaInfo);
 
   try {
     const res = await addStory({
-      nickname: nickname,
       email: email,
-      tags,
-      describtion,
-      public: publicStory,
+      avatar: metaInfo.avatar,
+      nickname: metaInfo.nickname,
+      tags: metaInfo.tags,
+      describtion: metaInfo.describtion,
+      public: metaInfo.publicStory,
+      meta_text_color: metaInfo.meta_text_color,
+      meta_bg_color: metaInfo.meta_bg_color,
+      meta_font_style: metaInfo.meta_font_style,
+      meta_font_size: metaInfo.meta_font_size,
     });
     if (res === "ok") {
       return NextResponse.json("success");

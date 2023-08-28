@@ -4,6 +4,7 @@ export interface UserStory {
   nickname: string;
   tags: string[];
   describtion: string;
+  public: boolean;
   meta_text_color: string;
   meta_bg_color: string;
   meta_font_style: string;

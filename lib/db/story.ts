@@ -2,10 +2,15 @@ import prisma from "./prisma";
 
 export interface CreateStoryProps {
   email: string;
+  avatar: string;
   nickname: string;
   tags: string[];
   describtion: string;
   public: boolean;
+  meta_text_color: string;
+  meta_bg_color: string;
+  meta_font_style: string;
+  meta_font_size: string;
 }
 
 export const getPublicStories = async (
@@ -41,10 +46,10 @@ export const addStory = async (props: CreateStoryProps) => {
         nickname: props.nickname,
         public: props.public,
         describtion: props.describtion,
-        meta_bg_color: "0",
-        meta_text_color: "0",
-        meta_font_size: "0",
-        meta_font_style: "0",
+        meta_bg_color: props.meta_bg_color,
+        meta_text_color: props.meta_text_color,
+        meta_font_size: props.meta_font_size,
+        meta_font_style: props.meta_font_style,
         expires: new Date(
           new Date().getFullYear() + 1,
           new Date().getMonth(),

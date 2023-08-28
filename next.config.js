@@ -7,6 +7,7 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "avatars.githubusercontent.com",
       "vercel.com",
+      "gcloud-1303456836.cos.ap-chengdu.myqcloud.com",
     ],
   },
   async redirects() {

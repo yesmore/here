@@ -1,41 +1,3 @@
-.input-group {
-  display: flex;
-  align-items: center;
-}
-
-.input {
-  min-height: 50px;
-  max-width: 150px;
-  padding: 0 1rem;
-  color: #fff;
-  font-size: 15px;
-  border: 1px solid #5e4dcd;
-  border-radius: 6px 0 0 6px;
-  background-color: transparent;
-}
-
-.button--submit {
-  min-height: 50px;
-  padding: 0.5em 1em;
-  border: none;
-  border-radius: 0 6px 6px 0;
-  background-color: #5e4dcd;
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.button--submit:hover {
-  background-color: #5e5dcd;
-}
-
-.input:focus,
-.input:focus-visible {
-  border-color: #3898ec;
-  outline: none;
-}
-
 /* --- */
 
 .home-input {
@@ -122,4 +84,41 @@
   pointer-events: none;
   background-color: gray !important;
   opacity: 0.5;
+}
+
+/* --- */
+.worker-input,
+.worker-textarea-input {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  position: static;
+  min-width: 240px;
+}
+
+.worker-input label.text,
+.worker-textarea-input label.text {
+  font-size: 0.75rem;
+  color: #818cf8;
+  font-weight: 700;
+  position: relative;
+  top: 0.5rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  width: fit-content;
+  background: #fff;
+}
+
+.worker-input input[type="text"].input,
+.worker-textarea-input .input {
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  border: 2px #818cf8 solid;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.worker-input input[type="text"].input:focus,
+.worker-textarea-input .input:focus {
+  outline: none;
 }

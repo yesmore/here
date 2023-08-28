@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import { Session } from "next-auth";
 import { CreateStoryProps } from "@/lib/db/story";
 import "@/styles/toggle.css";
@@ -11,6 +11,11 @@ import UserFooter from "@/components/layout/user-footer";
 import Modal from "@/components/shared/modal";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { useStoryByNickname } from "@/pages/[nickname]/request";
+import PlaceHolder from "@/components/shared/placeholder";
+import "@/styles/input.css";
+import ReactMarkdown from "react-markdown";
 
 export default function Worker({
   session,
@@ -19,20 +24,27 @@ export default function Worker({
   session: Session | null;
   nickname: string;
 }) {
+  const { story, isLoading, isError } = useStoryByNickname(nickname);
+  const [metaInfo, setMetaInfo] = useState<CreateStoryProps>({
+    meta_bg_color: story?.meta_bg_color ?? "0",
+    meta_text_color: story?.meta_text_color ?? "0",
+    meta_font_size: story?.meta_font_size ?? "0",
+    meta_font_style: story?.meta_font_style ?? "0",
+    nickname: nickname,
+    describtion: story?.describtion || "",
+    public: story?.public || true,
+    tags: story?.tags || [],
+    email: session?.user?.email || "",
+    avatar:
+      session?.user?.image ||
+      "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/gcloud/avatars/21.png",
+  });
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const [showCreateLoading, setShowCreateLoading] = useState<boolean>(false);
-  const [name, setNickname] = useState<string>(nickname);
-  const [tags, setTags] = useState<string[]>([]);
-  const [describtion, setDescribtion] = useState<string>("");
-  const [publicStory, setPublic] = useState<boolean>(true);
   const [showLeftSider, setShowLeftSider] = useState<boolean>(true);
   const [showRightSider, setShowRightSider] = useState<boolean>(true);
   const [showBottomWidget, setShowBottomWidget] = useState<boolean>(false);
   const [showBottomMetaInfo, setShowBottomMetaInfo] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   setNickname(nickname);
-  // }, [nickname]);
 
   const handleCreateStory = async () => {
     setShowCreateLoading(true);
@@ -43,12 +55,9 @@ export default function Worker({
       const res = await fetch(`/api/story`, {
         method: "POST",
         body: JSON.stringify({
-          nickname: name,
+          metaInfo: metaInfo,
           email: session.user.email,
-          tags: tags,
-          describtion: describtion,
-          public: publicStory,
-        } as CreateStoryProps),
+        }),
       });
       if (res.ok) {
         setShowCreateLoading(false);
@@ -60,6 +69,8 @@ export default function Worker({
         }
       }
     } else {
+      setShowBottomWidget(false);
+      setShowBottomMetaInfo(false);
       setShowCreateLoading(false);
       setShowSignInModal(true);
       toast("Please sign in first", { icon: "🥵" });
@@ -70,13 +81,14 @@ export default function Worker({
     <>
       <div className="header mb-1 flex h-10 w-full items-center justify-between">
         <Link
-          href={`/${name}`}
+          href={`/${metaInfo.nickname}`}
           target="_blank"
-          className="flex cursor-pointer gap-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent "
+          className="flex cursor-pointer gap-1 truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent"
         >
-          meetu.dev/{name} <ExternalLink className="w-4 text-slate-500" />
+          Preview <ExternalLink className="w-4 text-slate-500" />
         </Link>
-        <div className="tools hidden text-sm text-slate-600 md:flex">
+
+        <div className="tools hidden text-sm text-slate-600 hover:text-slate-800 md:flex">
           <button
             className="flex items-center gap-1"
             onClick={() => setShowLeftSider(!showLeftSider)}
@@ -92,7 +104,7 @@ export default function Worker({
             Palette
           </button>
         </div>
-        <div className="tools flex text-sm text-slate-600 md:hidden ">
+        <div className="tools flex text-sm text-slate-600 hover:text-slate-800 md:hidden ">
           <button
             className="flex items-center gap-1"
             onClick={() => {
@@ -131,28 +143,23 @@ export default function Worker({
         )}
 
         {/* 中间预览区 */}
-        <div className="preview-area flex h-screen justify-center">
-          {name}
+        <div className="preview-area flex h-screen flex-col items-center">
+          <p>{metaInfo.nickname}</p>
+          <ReactMarkdown>{metaInfo.describtion}</ReactMarkdown>
+
+          {/* <PlaceHolder /> */}
           <UserFooter />
         </div>
 
         {/* 右侧编辑区 */}
         {showRightSider && (
           <WorkerSiderWrapper position="right">
-            <button className="nice-border w-40" onClick={handleCreateStory}>
-              {showCreateLoading ? (
-                <LoadingDots color="#070707" />
-              ) : (
-                <>Create {publicStory && "& Publish"}</>
-              )}
-            </button>
             <MetaInfoWorker
-              nickname={name}
-              describtion={describtion}
-              publicStory={publicStory}
-              setNickname={setNickname}
-              setPublic={setPublic}
-              setDescribtion={setDescribtion}
+              session={session}
+              metaInfo={metaInfo}
+              showCreateLoading={showCreateLoading}
+              setMetaInfo={setMetaInfo}
+              onCreateStory={handleCreateStory}
             />
           </WorkerSiderWrapper>
         )}
@@ -185,12 +192,12 @@ export default function Worker({
             ESC
           </p>
           <MetaInfoWorker
-            nickname={name}
-            describtion={describtion}
-            publicStory={publicStory}
-            setNickname={setNickname}
-            setPublic={setPublic}
-            setDescribtion={setDescribtion}
+            className="p-3"
+            session={session}
+            metaInfo={metaInfo}
+            showCreateLoading={showCreateLoading}
+            setMetaInfo={setMetaInfo}
+            onCreateStory={handleCreateStory}
           />
         </Modal>
       </div>
@@ -199,46 +206,89 @@ export default function Worker({
 }
 
 function MetaInfoWorker({
-  nickname,
-  setNickname,
-  describtion,
-  setDescribtion,
-  publicStory,
-  setPublic,
+  className,
+  session,
+  metaInfo,
+  showCreateLoading,
+  setMetaInfo,
+  onCreateStory,
 }: {
-  nickname: string;
-  setNickname: Dispatch<SetStateAction<string>>;
-  describtion: string;
-  setDescribtion: Dispatch<SetStateAction<string>>;
-  publicStory: boolean;
-  setPublic: Dispatch<SetStateAction<boolean>>;
+  className?: string;
+  session: Session | null;
+  metaInfo: CreateStoryProps;
+  showCreateLoading: boolean;
+  setMetaInfo: Dispatch<SetStateAction<CreateStoryProps>>;
+  onCreateStory: () => void;
 }) {
   return (
-    <div className="">
-      <input
-        type="text"
-        value={nickname}
-        onChange={(e) => setNickname(e.target.value)}
-      />
-      <input
-        value={describtion}
-        type="text"
-        onChange={(e) => setDescribtion(e.target.value)}
-      />
+    <div className={`worker-info ${className}`}>
+      <div className="basic">
+        <div className="flex items-center justify-between">
+          <Image
+            src={metaInfo.avatar}
+            alt="avatar"
+            width="50"
+            height="50"
+            className="rounded-full border border-gray-300 "
+          />
+          <button
+            className="nice-border w-34 h-8 text-sm"
+            onClick={onCreateStory}
+          >
+            {showCreateLoading ? (
+              <LoadingDots color="#070707" />
+            ) : (
+              <>Create {metaInfo.public && "& Publish"}</>
+            )}
+          </button>
+        </div>
 
-      <div className="checkbox-wrapper-5">
-        <div className="check" onClick={() => setPublic(!publicStory)}>
-          <input onChange={() => null} checked={publicStory} type="checkbox" />
-          <label></label>
+        <WorkerInput
+          label="Nickname:"
+          placeholder={metaInfo.nickname}
+          setValue={(val) => setMetaInfo({ ...metaInfo, nickname: val })}
+        />
+        <WorkerTextareaInput
+          label="Describtion:"
+          placeholder={metaInfo.describtion || "support markdown"}
+          setValue={(val) => setMetaInfo({ ...metaInfo, describtion: val })}
+        />
+      </div>
+
+      <div className="mt-4 flex items-center justify-start gap-2">
+        <div className="checkbox-wrapper-5">
+          <div
+            className="check"
+            onClick={() =>
+              setMetaInfo({ ...metaInfo, public: !metaInfo.public })
+            }
+          >
+            <input
+              onChange={() => null}
+              checked={metaInfo.public}
+              type="checkbox"
+            />
+            <label></label>
+          </div>
+        </div>
+        <div className="flex items-center text-sm">
+          Publish card to&nbsp;
+          <Link
+            href={`/stories`}
+            target="_blank"
+            className="flex cursor-pointer items-center gap-1 truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent"
+          >
+            Story <ExternalLink className="w-4 text-slate-500" />
+          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-function WidgetWorker() {
+const WidgetWorker = () => {
   return <>21312</>;
-}
+};
 
 const WorkerSiderWrapper = ({
   children,
@@ -264,18 +314,47 @@ const WorkerSiderWrapper = ({
     </div>
   );
 };
-const WorkerBottomWrapperModal = ({
-  showModal,
-  setShowModal,
-  children,
+
+const WorkerInput = ({
+  label,
+  placeholder,
+  setValue,
 }: {
-  showModal: boolean;
-  setShowModal: Dispatch<SetStateAction<boolean>>;
-  children: React.ReactNode;
+  label: string;
+  placeholder: string;
+  setValue: (value: string) => void;
 }) => {
   return (
-    <Modal showModal={showModal} setShowModal={setShowModal}>
-      {children}
-    </Modal>
+    <div className="worker-input">
+      <label className="text">{label}</label>
+      <input
+        type="text"
+        placeholder={placeholder}
+        onChange={(e) => setValue(e.target.value)}
+        className="input"
+      />
+    </div>
+  );
+};
+
+const WorkerTextareaInput = ({
+  label,
+  placeholder,
+  setValue,
+}: {
+  label: string;
+  placeholder: string;
+  type?: string;
+  setValue: (value: string) => void;
+}) => {
+  return (
+    <div className="worker-textarea-input">
+      <label className="text">{label}</label>
+      <textarea
+        placeholder={placeholder}
+        onChange={(e) => setValue(e.target.value)}
+        className="input"
+      />
+    </div>
   );
 };
