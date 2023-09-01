@@ -11,26 +11,20 @@ import UserFooter from "@/components/layout/user-footer";
 import Modal from "@/components/shared/modal";
 import { ExternalLink, Smartphone, Monitor } from "lucide-react";
 import Link from "next/link";
-import { useStoryByNickname } from "@/pages/[nickname]/request";
+import { useStoryByEmail } from "@/pages/[nickname]/request";
 import PlaceHolder from "@/components/shared/placeholder";
 import "@/styles/input.css";
 import ReactMarkdown from "react-markdown";
 import { MetaInfoWorker, WidgetWorker } from "./workerItem";
 
-export default function Worker({
-  session,
-  nickname,
-}: {
-  session: Session | null;
-  nickname: string;
-}) {
-  const { story, isLoading, isError } = useStoryByNickname(nickname);
+export default function Worker({ session }: { session: Session | null }) {
+  const { story, isLoading, isError } = useStoryByEmail(
+    session?.user?.email || "",
+  );
+
   const [metaInfo, setMetaInfo] = useState<CreateStoryProps>({
-    meta_bg_color: story?.meta_bg_color ?? "0",
-    meta_text_color: story?.meta_text_color ?? "0",
-    meta_font_size: story?.meta_font_size ?? "0",
-    meta_font_style: story?.meta_font_style ?? "0",
-    nickname: nickname,
+    id: story?.id,
+    nickname: story?.nickname ?? "",
     describtion: story?.describtion || "",
     public: story?.public || true,
     tags: story?.tags || [],
@@ -38,6 +32,10 @@ export default function Worker({
     avatar:
       session?.user?.image ||
       "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/gcloud/avatars/21.png",
+    meta_bg_color: story?.meta_bg_color ?? "0",
+    meta_text_color: story?.meta_text_color ?? "0",
+    meta_font_size: story?.meta_font_size ?? "0",
+    meta_font_style: story?.meta_font_style ?? "0",
   });
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const [showCreateLoading, setShowCreateLoading] = useState<boolean>(false);
@@ -53,7 +51,7 @@ export default function Worker({
       meta_text_color: story?.meta_text_color ?? "0",
       meta_font_size: story?.meta_font_size ?? "0",
       meta_font_style: story?.meta_font_style ?? "0",
-      nickname: nickname,
+      nickname: story?.nickname ?? "",
       describtion: story?.describtion || "",
       public: story?.public || true,
       tags: story?.tags || [],

@@ -63,12 +63,6 @@ export default function NavBar({ session }: { session: Session | null }) {
                 >
                   Sign in
                 </button>
-                // <button
-                //   className="rounded-full border border-[#229beccb] bg-[#229beccb] p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-[#229beccb]"
-                //   onClick={() => setShowSignInModal(true)}
-                // >
-                //   Sign in
-                // </button>
               )}
             </div>
           </Suspense>

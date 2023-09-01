@@ -21,8 +21,17 @@ export async function POST(
 
   console.log(metaInfo);
 
+  if (!email) {
+    return NextResponse.json("where is email?");
+  }
+
+  if (metaInfo.nickname && metaInfo.nickname.length <= 1) {
+    return NextResponse.json("nickname is too short");
+  }
+
   try {
     const res = await addStory({
+      id: metaInfo.id,
       email: email,
       avatar: metaInfo.avatar,
       nickname: metaInfo.nickname,
@@ -34,11 +43,7 @@ export async function POST(
       meta_font_style: metaInfo.meta_font_style,
       meta_font_size: metaInfo.meta_font_size,
     });
-    if (res === "ok") {
-      return NextResponse.json("success");
-    } else {
-      return NextResponse.json(res);
-    }
+    return NextResponse.json(res);
   } catch (error) {
     return NextResponse.json(error);
   }

@@ -1,6 +1,7 @@
 import prisma from "./prisma";
 
 export interface CreateStoryProps {
+  id?: string;
   email: string;
   avatar: string;
   nickname: string;
@@ -35,7 +36,26 @@ export const addStory = async (props: CreateStoryProps) => {
     return "oops! this nickname already exists";
   }
   if (findStoryByEmail) {
-    return "you have already created a link";
+    console.log("更新story", props.nickname);
+
+    await prisma.story.update({
+      where: {
+        id: props.id,
+        // email: props.email,
+      },
+      data: {
+        email: props.email,
+        tags: props.tags,
+        nickname: props.nickname,
+        public: props.public,
+        describtion: props.describtion,
+        meta_bg_color: props.meta_bg_color,
+        meta_text_color: props.meta_text_color,
+        meta_font_size: props.meta_font_size,
+        meta_font_style: props.meta_font_style,
+      },
+    });
+    return "updated!";
   }
 
   if (findStodyByNickname === null && findStoryByEmail === null) {
@@ -59,7 +79,7 @@ export const addStory = async (props: CreateStoryProps) => {
         updatedAt: new Date(),
       },
     });
-    return "ok";
+    return "Created!";
   }
   return "something went wrong";
 };

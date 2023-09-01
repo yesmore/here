@@ -20,7 +20,7 @@ export default function HomeInput({ session }: { session: Session | null }) {
   };
   const goToWorkSpace = () => {
     setJoinClicked(true);
-    route.push(`/workspace/${input}`);
+    route.push(`/workspace`);
     setTimeout(() => {
       setJoinClicked(false);
     }, 10000);

@@ -5,17 +5,13 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]/route";
 import Worker from "./worker";
 import { Toaster } from "react-hot-toast";
 
-export default async function WorkspaceItem({
-  params,
-}: {
-  params: { nickname: string };
-}) {
+export default async function WorkspaceItem({}: {}) {
   const session = await getServerSession(authOptions);
 
   return (
     <>
       <div className="z-10 w-full">
-        <Worker session={session} nickname={params.nickname} />
+        <Worker session={session} />
       </div>
       <Toaster />
     </>

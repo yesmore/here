@@ -46,7 +46,7 @@ export const MetaInfoWorker = ({
 
         <WorkerInput
           label="Nickname:"
-          placeholder={metaInfo.nickname}
+          placeholder={metaInfo.nickname || "please enter nickname"}
           setValue={(val) => setMetaInfo({ ...metaInfo, nickname: val })}
         />
         <WorkerTextareaInput

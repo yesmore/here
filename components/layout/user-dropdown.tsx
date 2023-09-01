@@ -49,7 +49,7 @@ export default function UserDropdown({
                 </Link>
                 <Link
                   className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
-                  href={`/workspace/${story?.nickname}`}
+                  href={`/workspace`}
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   <p className="text-sm">Workspace</p>
