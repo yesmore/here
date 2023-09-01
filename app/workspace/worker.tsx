@@ -16,15 +16,18 @@ import PlaceHolder from "@/components/shared/placeholder";
 import "@/styles/input.css";
 import ReactMarkdown from "react-markdown";
 import { MetaInfoWorker, WidgetWorker } from "./workerItem";
+import { useSearchParams } from "next/navigation";
 
 export default function Worker({ session }: { session: Session | null }) {
+  const searchParams = useSearchParams();
+  const input_nickname = searchParams.get("n") || "";
   const { story, isLoading, isError } = useStoryByEmail(
     session?.user?.email || "",
   );
 
   const [metaInfo, setMetaInfo] = useState<CreateStoryProps>({
     id: story?.id,
-    nickname: story?.nickname ?? "",
+    nickname: story?.nickname || input_nickname,
     describtion: story?.describtion || "",
     public: story?.public || true,
     tags: story?.tags || [],
@@ -52,7 +55,7 @@ export default function Worker({ session }: { session: Session | null }) {
       meta_text_color: story?.meta_text_color ?? "0",
       meta_font_size: story?.meta_font_size ?? "0",
       meta_font_style: story?.meta_font_style ?? "0",
-      nickname: story?.nickname ?? "",
+      nickname: story?.nickname || input_nickname,
       describtion: story?.describtion || "",
       public: story?.public || true,
       tags: story?.tags || [],
@@ -110,77 +113,79 @@ export default function Worker({ session }: { session: Session | null }) {
           href={`/${metaInfo.nickname}`}
           title="preview link"
           target="_blank"
-          className="flex cursor-pointer gap-1 truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent"
+          className="absolute left-3 flex cursor-pointer gap-1 truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent"
         >
           Preview <ExternalLink className="w-4 text-slate-500" />
         </Link>
 
-        <div className="tools hidden text-sm md:flex">
-          <button
-            className={
-              "flex items-center gap-1 rounded-full transition-all hover:opacity-50 " +
-              `${showOnPC && "bg-gray-200 p-2"}`
-            }
-            title="PC"
-            onClick={handleShowOnPC}
-          >
-            <Monitor className=" h-4 w-4" />
-          </button>
-          <button
-            className={
-              "mx-2 flex items-center gap-1 rounded-full transition-all hover:opacity-50 " +
-              `${!showOnPC && " bg-gray-200 p-2"}`
-            }
-            onClick={handleShowOnMobile}
-            title="Mobile"
-          >
-            <Smartphone className=" h-4 w-4" />
-          </button>
-          <button
-            className="flex items-center gap-1 transition-all hover:opacity-50"
-            onClick={() => setShowLeftSider(!showLeftSider)}
-          >
-            <Widgets className=" h-4 w-4 text-blue-700" />
-            <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
-              Widgets
-            </span>
-          </button>
-          <button
-            className="ml-3 flex items-center gap-1 transition-all hover:opacity-50"
-            onClick={() => setShowRightSider(!showRightSider)}
-          >
-            <Color className=" h-4 w-4 text-blue-700" />
-            <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
-              Palette
-            </span>
-          </button>
-        </div>
-        {/* mobile */}
-        <div className="tools flex text-sm text-slate-600 hover:text-slate-800 md:hidden ">
-          <button
-            className="flex items-center gap-1"
-            onClick={() => {
-              setShowBottomMetaInfo(false);
-              setShowBottomWidget(!showBottomWidget);
-            }}
-          >
-            <Widgets className="h-4 w-4 text-blue-700" />
-            <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
-              Widgets
-            </span>
-          </button>
-          <button
-            className="ml-3 flex items-center gap-1"
-            onClick={() => {
-              setShowBottomWidget(false);
-              setShowBottomMetaInfo(!showBottomMetaInfo);
-            }}
-          >
-            <Color className="h-4 w-4 text-blue-700" />
-            <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
-              Palette
-            </span>
-          </button>
+        <div className="absolute right-3 ">
+          <div className="tools hidden text-sm md:flex">
+            <button
+              className={
+                "flex items-center gap-1 rounded-full transition-all hover:opacity-50 " +
+                `${showOnPC && "bg-gray-200 p-2"}`
+              }
+              title="PC"
+              onClick={handleShowOnPC}
+            >
+              <Monitor className=" h-4 w-4" />
+            </button>
+            <button
+              className={
+                "mx-2 flex items-center gap-1 rounded-full transition-all hover:opacity-50 " +
+                `${!showOnPC && " bg-gray-200 p-2"}`
+              }
+              onClick={handleShowOnMobile}
+              title="Mobile"
+            >
+              <Smartphone className=" h-4 w-4" />
+            </button>
+            <button
+              className="flex items-center gap-1 transition-all hover:opacity-50"
+              onClick={() => setShowLeftSider(!showLeftSider)}
+            >
+              {/* <Widgets className=" h-4 w-4 text-blue-700" /> */}
+              <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
+                Widgets
+              </span>
+            </button>
+            <button
+              className="ml-3 flex items-center gap-1 transition-all hover:opacity-50"
+              onClick={() => setShowRightSider(!showRightSider)}
+            >
+              {/* <Color className=" h-4 w-4 text-blue-700" /> */}
+              <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
+                Palette
+              </span>
+            </button>
+          </div>
+          {/* mobile */}
+          <div className="tools flex text-sm text-slate-600 hover:text-slate-800 md:hidden ">
+            <button
+              className="flex items-center gap-1"
+              onClick={() => {
+                setShowBottomMetaInfo(false);
+                setShowBottomWidget(!showBottomWidget);
+              }}
+            >
+              {/* <Widgets className="h-4 w-4 text-blue-700" /> */}
+              <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
+                Widgets
+              </span>
+            </button>
+            <button
+              className="ml-3 flex items-center gap-1"
+              onClick={() => {
+                setShowBottomWidget(false);
+                setShowBottomMetaInfo(!showBottomMetaInfo);
+              }}
+            >
+              {/* <Color className="h-4 w-4 text-blue-700" /> */}
+              <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
+                Palette
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </>
