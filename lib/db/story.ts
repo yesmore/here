@@ -38,7 +38,7 @@ export const addStory = async (props: CreateStoryProps) => {
 
     await prisma.story.update({
       where: {
-        email: props.email,
+        id: props.id,
       },
       data: {
         tags: props.tags,

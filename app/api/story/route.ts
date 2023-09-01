@@ -34,6 +34,7 @@ export async function POST(
 
   try {
     const res = await addStory({
+      id: metaInfo.id,
       email: metaInfo.email,
       avatar: metaInfo.avatar,
       nickname: metaInfo.nickname,

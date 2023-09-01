@@ -47,6 +47,7 @@ export default function Worker({ session }: { session: Session | null }) {
 
   useEffect(() => {
     setMetaInfo({
+      id: story?.id,
       meta_bg_color: story?.meta_bg_color ?? "0",
       meta_text_color: story?.meta_text_color ?? "0",
       meta_font_size: story?.meta_font_size ?? "0",
