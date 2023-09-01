@@ -17,22 +17,24 @@ export async function POST(
   req: NextRequest,
   { params }: { params: Record<string, string | string | undefined[]> },
 ) {
-  const { email, metaInfo } = await req.json();
+  const { metaInfo } = await req.json();
 
   console.log(metaInfo);
 
-  if (!email) {
+  if (!metaInfo.email) {
     return NextResponse.json("where is email?");
   }
 
-  if (metaInfo.nickname && metaInfo.nickname.length <= 1) {
-    return NextResponse.json("nickname is too short");
+  if (
+    metaInfo.nickname &&
+    (metaInfo.nickname.length <= 1 || metaInfo.nickname.length >= 60)
+  ) {
+    return NextResponse.json("Invalid nickname");
   }
 
   try {
     const res = await addStory({
-      id: metaInfo.id,
-      email: email,
+      email: metaInfo.email,
       avatar: metaInfo.avatar,
       nickname: metaInfo.nickname,
       tags: metaInfo.tags,

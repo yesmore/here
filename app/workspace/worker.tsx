@@ -66,20 +66,19 @@ export default function Worker({ session }: { session: Session | null }) {
     setShowCreateLoading(true);
     setTimeout(() => {
       setShowCreateLoading(false);
-    }, 10000);
+    }, 30000);
     if (session?.user) {
       const res = await fetch(`/api/story`, {
         method: "POST",
         body: JSON.stringify({
           metaInfo: metaInfo,
-          email: session.user.email,
         }),
       });
       if (res.ok) {
         setShowCreateLoading(false);
         const resJson = await res.json();
-        if (resJson === "success") {
-          toast("Ready!", { icon: "🎉" });
+        if (["Updated", "Created"].includes(resJson)) {
+          toast(resJson, { icon: "🎉" });
         } else {
           toast(resJson, { icon: "🥵" });
         }
@@ -93,55 +92,69 @@ export default function Worker({ session }: { session: Session | null }) {
     }
   };
   const handleShowOnPC = () => {
-    setShowLeftSider(!showLeftSider);
-    setShowRightSider(!showRightSider);
-    setShowOnPC(!showOnPC);
+    setShowLeftSider(false);
+    setShowRightSider(false);
+    setShowOnPC(true);
   };
   const handleShowOnMobile = () => {
-    setShowLeftSider(!showLeftSider);
-    setShowRightSider(!showRightSider);
-    setShowOnPC(!showOnPC);
+    setShowLeftSider(false);
+    setShowRightSider(false);
+    setShowOnPC(false);
   };
 
   const renderHeadTools = () => (
     <>
-      <div className="header mb-1 flex h-10 w-full items-center justify-between">
+      <div className="header mb-1 flex h-10 w-full items-center justify-between px-3">
         <Link
           href={`/${metaInfo.nickname}`}
+          title="preview link"
           target="_blank"
           className="flex cursor-pointer gap-1 truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent"
         >
           Preview <ExternalLink className="w-4 text-slate-500" />
         </Link>
 
-        <div className="tools hidden text-sm text-slate-600 md:flex">
+        <div className="tools hidden text-sm md:flex">
           <button
-            className="flex items-center gap-1 hover:text-slate-800 "
+            className={
+              "flex items-center gap-1 rounded-full transition-all hover:opacity-50 " +
+              `${showOnPC && "bg-gray-200 p-2"}`
+            }
+            title="PC"
             onClick={handleShowOnPC}
           >
             <Monitor className=" h-4 w-4" />
           </button>
           <button
-            className="mx-2 flex items-center gap-1 hover:text-slate-800 "
+            className={
+              "mx-2 flex items-center gap-1 rounded-full transition-all hover:opacity-50 " +
+              `${!showOnPC && " bg-gray-200 p-2"}`
+            }
             onClick={handleShowOnMobile}
+            title="Mobile"
           >
             <Smartphone className=" h-4 w-4" />
           </button>
           <button
-            className="flex items-center gap-1 hover:text-slate-800 "
+            className="flex items-center gap-1 transition-all hover:opacity-50"
             onClick={() => setShowLeftSider(!showLeftSider)}
           >
-            <Widgets className=" h-4 w-4" />
-            Widgets
+            <Widgets className=" h-4 w-4 text-blue-700" />
+            <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
+              Widgets
+            </span>
           </button>
           <button
-            className="ml-3 flex items-center gap-1 hover:text-slate-800 "
+            className="ml-3 flex items-center gap-1 transition-all hover:opacity-50"
             onClick={() => setShowRightSider(!showRightSider)}
           >
-            <Color className=" h-4 w-4" />
-            Palette
+            <Color className=" h-4 w-4 text-blue-700" />
+            <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
+              Palette
+            </span>
           </button>
         </div>
+        {/* mobile */}
         <div className="tools flex text-sm text-slate-600 hover:text-slate-800 md:hidden ">
           <button
             className="flex items-center gap-1"
@@ -150,8 +163,10 @@ export default function Worker({ session }: { session: Session | null }) {
               setShowBottomWidget(!showBottomWidget);
             }}
           >
-            <Widgets className=" h-4 w-4" />
-            Widgets
+            <Widgets className="h-4 w-4 text-blue-700" />
+            <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
+              Widgets
+            </span>
           </button>
           <button
             className="ml-3 flex items-center gap-1"
@@ -160,8 +175,10 @@ export default function Worker({ session }: { session: Session | null }) {
               setShowBottomMetaInfo(!showBottomMetaInfo);
             }}
           >
-            <Color className=" h-4 w-4" />
-            Palette
+            <Color className="h-4 w-4 text-blue-700" />
+            <span className="truncate bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-semibold text-transparent transition-all">
+              Palette
+            </span>
           </button>
         </div>
       </div>
@@ -169,10 +186,15 @@ export default function Worker({ session }: { session: Session | null }) {
   );
 
   return (
-    <div className="worker-wrapper dot-bg bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100 px-3">
+    <div
+      className={
+        "worker-wrapper mx-auto bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100" +
+        ` ${showOnPC ? "" : "max-w-md rounded-md shadow-xl "}`
+      }
+    >
       {renderHeadTools()}
       {/* main */}
-      <div className="relative mx-auto h-screen overflow-x-hidden">
+      <div className="mx-auto h-screen">
         {/* 左侧编辑区 */}
         {showLeftSider && (
           <WorkerSiderWrapper position="left">
@@ -181,7 +203,12 @@ export default function Worker({ session }: { session: Session | null }) {
         )}
 
         {/* 中间预览区 */}
-        <div className="preview-area flex h-screen flex-col items-center">
+        <div
+          className={
+            "preview-area mx-auto flex h-screen flex-col items-center px-3 pt-3 " +
+            ` ${showOnPC ? "" : "max-w-md"}`
+          }
+        >
           <p>{metaInfo.nickname}</p>
           <ReactMarkdown>{metaInfo.describtion}</ReactMarkdown>
 
@@ -257,7 +284,7 @@ const WorkerSiderWrapper = ({
         position == "left"
           ? "left-sider left-1 -translate-x-72 animate-slide-left-fade"
           : "right-sider right-1 translate-x-72 animate-slide-right-fade"
-      } absolute top-0 z-10 hidden w-64 rounded-md bg-white p-2 shadow-md transition-all duration-500 md:block`}
+      } absolute top-12 z-10 hidden w-64 rounded-md bg-white p-2 shadow-md transition-all duration-500 md:block`}
       style={{
         animationDelay: "0.15s",
         animationFillMode: "forwards",

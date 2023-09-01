@@ -1,5 +1,5 @@
 .checkbox-wrapper-5 .check {
-  --size: 25px;
+  --size: 16px;
   position: relative;
   background: linear-gradient(90deg, #fbe589, #fee890);
   line-height: 0;
@@ -26,6 +26,7 @@
   height: var(--size);
   background: #d7d7d7;
   overflow: hidden;
+  line-height: var(--size);
 }
 
 .checkbox-wrapper-5 .check input[type="checkbox"] {

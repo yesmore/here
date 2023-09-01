@@ -32,19 +32,15 @@ export const addStory = async (props: CreateStoryProps) => {
   const findStoryByEmail = await getStoryByEmail(props.email);
   console.log("[findStory]", findStodyByNickname, findStoryByEmail);
 
-  if (findStodyByNickname) {
-    return "oops! this nickname already exists";
-  }
+  // 更新：已注册且已经成过Link
   if (findStoryByEmail) {
     console.log("更新story", props.nickname);
 
     await prisma.story.update({
       where: {
-        id: props.id,
-        // email: props.email,
+        email: props.email,
       },
       data: {
-        email: props.email,
         tags: props.tags,
         nickname: props.nickname,
         public: props.public,
@@ -55,9 +51,13 @@ export const addStory = async (props: CreateStoryProps) => {
         meta_font_style: props.meta_font_style,
       },
     });
-    return "updated!";
+    return "Updated";
   }
 
+  // 已注册但未生成过Link
+  if (findStodyByNickname) {
+    return "oops! this nickname already exists";
+  }
   if (findStodyByNickname === null && findStoryByEmail === null) {
     await prisma.story.create({
       data: {
@@ -79,7 +79,7 @@ export const addStory = async (props: CreateStoryProps) => {
         updatedAt: new Date(),
       },
     });
-    return "Created!";
+    return "Created";
   }
   return "something went wrong";
 };

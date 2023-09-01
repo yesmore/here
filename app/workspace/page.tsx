@@ -10,7 +10,7 @@ export default async function WorkspaceItem({}: {}) {
 
   return (
     <>
-      <div className="z-10 w-full">
+      <div className="dot-bg relative z-10 w-full overflow-x-hidden ">
         <Worker session={session} />
       </div>
       <Toaster />

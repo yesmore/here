@@ -35,5 +35,9 @@
 .dot-bg {
   background: radial-gradient(circle at 1px 1px, #c0c0c0 1px, transparent 0);
   background-size: 21px 21px;
+  /* background-color: rgb(238, 227, 212); */
+}
+
+.worker-bg {
   background-color: rgb(238, 227, 212);
 }

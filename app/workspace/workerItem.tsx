@@ -32,31 +32,36 @@ export const MetaInfoWorker = ({
             height="50"
             className="rounded-full border border-gray-300 "
           />
-          <button
-            className="nice-border w-34 h-8 text-sm"
-            onClick={onCreateStory}
-          >
-            {showCreateLoading ? (
-              <LoadingDots color="#070707" />
-            ) : (
-              <>Create {metaInfo.public && "& Publish"}</>
-            )}
-          </button>
+          <p>{metaInfo.tags}</p>
         </div>
 
         <WorkerInput
           label="Nickname:"
-          placeholder={metaInfo.nickname || "please enter nickname"}
+          value={metaInfo.nickname}
           setValue={(val) => setMetaInfo({ ...metaInfo, nickname: val })}
         />
         <WorkerTextareaInput
           label="Describtion:"
-          placeholder={metaInfo.describtion || "support markdown"}
+          value={metaInfo.describtion}
           setValue={(val) => setMetaInfo({ ...metaInfo, describtion: val })}
         />
       </div>
 
-      <div className="mt-4 flex items-center justify-start gap-2">
+      <button
+        className="nice-border my-4 h-8 w-full text-sm "
+        onClick={onCreateStory}
+      >
+        {showCreateLoading ? (
+          <LoadingDots color="#070707" />
+        ) : (
+          <>
+            {metaInfo.nickname ? "Update" : "Create"}{" "}
+            {metaInfo.public && "& Publish"}
+          </>
+        )}
+      </button>
+
+      <div className="flex items-start justify-start gap-2">
         <div className="checkbox-wrapper-5">
           <div
             className="check"
@@ -88,16 +93,16 @@ export const MetaInfoWorker = ({
 };
 
 export const WidgetWorker = () => {
-  return <>21312</>;
+  return <div className="p-3">21312</div>;
 };
 
 export const WorkerInput = ({
   label,
-  placeholder,
+  value,
   setValue,
 }: {
   label: string;
-  placeholder: string;
+  value: string;
   setValue: (value: string) => void;
 }) => {
   return (
@@ -105,8 +110,9 @@ export const WorkerInput = ({
       <label className="text">{label}</label>
       <input
         type="text"
-        placeholder={placeholder}
+        placeholder="please enter nickname"
         onChange={(e) => setValue(e.target.value)}
+        value={value}
         className="input"
       />
     </div>
@@ -115,11 +121,11 @@ export const WorkerInput = ({
 
 export const WorkerTextareaInput = ({
   label,
-  placeholder,
+  value,
   setValue,
 }: {
   label: string;
-  placeholder: string;
+  value: string;
   type?: string;
   setValue: (value: string) => void;
 }) => {
@@ -127,8 +133,15 @@ export const WorkerTextareaInput = ({
     <div className="worker-textarea-input">
       <label className="text">{label}</label>
       <textarea
-        placeholder={placeholder}
-        onChange={(e) => setValue(e.target.value)}
+        placeholder="support markdown"
+        value={value}
+        onChange={(e) =>
+          setValue(
+            e.target.value.length <= 200
+              ? e.target.value
+              : e.target.value.substring(0, 200),
+          )
+        }
         className="input"
       />
     </div>
