@@ -60,7 +60,7 @@ export default function Worker({ session }: { session: Session | null }) {
         session?.user?.image ||
         "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/gcloud/avatars/21.png",
     });
-  }, [story]);
+  }, [story, session?.user]);
 
   const handleCreateStory = async () => {
     setShowCreateLoading(true);
