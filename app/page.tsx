@@ -34,7 +34,7 @@ export default async function Home() {
               <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
                 Meet{" "}
               </span>
-              your homepage, and a memory painted on the canvas of{" "}
+              your homepage, and leave a corner on the web{" "}
               <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
                 forever.
               </span>
