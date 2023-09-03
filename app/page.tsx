@@ -32,9 +32,9 @@ export default async function Home() {
           >
             <p className="title-font animate-fade-up text-center font-display text-3xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:text-5xl">
               <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
-                Meeting{" "}
+                Meet{" "}
               </span>
-              you, a memory painted on the canvas of{" "}
+              your homepage, and a memory painted on the canvas of{" "}
               <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
                 forever.
               </span>
@@ -81,7 +81,7 @@ function About() {
         </div>
       </div>
       <div className="mx-auto mt-12 flex max-w-[80%] items-center justify-center ">
-        <SocialCard />
+        {/* <SocialCard /> */}
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { addStory, getPublicStories } from "@/lib/db/story";
+import { isAllAlphabetic } from "@/lib/utils";
 
 export async function GET(
   req: NextRequest,
@@ -22,13 +23,16 @@ export async function POST(
   console.log(metaInfo);
 
   if (!metaInfo.email) {
-    return NextResponse.json("where is email?");
+    return NextResponse.json("Where is email?");
   }
 
   if (
     metaInfo.nickname &&
     (metaInfo.nickname.length <= 1 || metaInfo.nickname.length >= 60)
   ) {
+    return NextResponse.json("Invalid nickname");
+  }
+  if (!isAllAlphabetic(metaInfo.nickname)) {
     return NextResponse.json("Invalid nickname");
   }
 

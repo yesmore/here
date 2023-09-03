@@ -17,6 +17,7 @@ import "@/styles/input.css";
 import ReactMarkdown from "react-markdown";
 import { MetaInfoWorker, WidgetWorker } from "./workerItem";
 import { useSearchParams } from "next/navigation";
+import { isAllAlphabetic } from "@/lib/utils";
 
 export default function Worker({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
@@ -67,6 +68,10 @@ export default function Worker({ session }: { session: Session | null }) {
   }, [story, session?.user]);
 
   const handleCreateStory = async () => {
+    if (!isAllAlphabetic(metaInfo.nickname)) {
+      toast("Invalid nickname", { icon: "🥵" });
+      return;
+    }
     setShowCreateLoading(true);
     setTimeout(() => {
       setShowCreateLoading(false);

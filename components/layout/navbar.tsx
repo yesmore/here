@@ -35,7 +35,7 @@ export default function NavBar({ session }: { session: Session | null }) {
                 className="mr-2 rounded-sm"
               ></Image>
               <p className="via-dark-500 bg-gradient-to-r from-gray-500 to-gray-400 bg-clip-text font-bold text-transparent">
-                MeetU
+                Meet.U
               </p>
             </Link>
             <Link

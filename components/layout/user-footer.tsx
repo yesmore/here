@@ -23,7 +23,7 @@ export default function UserFooter() {
           ></Image>
           {/* <p>Meet U</p> */}
           <p className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text font-bold text-transparent">
-            MeetU
+            Meet.U
           </p>
         </Link>
       </div>
