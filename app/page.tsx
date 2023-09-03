@@ -32,16 +32,16 @@ export default async function Home() {
           >
             <p className="title-font animate-fade-up text-center font-display text-3xl font-bold tracking-[-0.02em] text-slate-700 drop-shadow-sm md:text-5xl">
               <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
-                Meet{" "}
+                Make{" "}
               </span>
-              your homepage, and leave a corner on the web{" "}
+               your unique space on the internet with meetu, and keep it here{" "}
               <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
                 forever.
               </span>
             </p>
 
             <p className="mt-5 animate-fade-up text-slate-500 ">
-              Enter your nickname ,and create your homepage with just one
+              Enter a nickname ,and create your homepage with just one
               click.🎉
             </p>
             <HomeInput session={session} />
