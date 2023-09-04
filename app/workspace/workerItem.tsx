@@ -80,7 +80,7 @@ export const MetaInfoWorker = ({
       <div className="meta mt-3">
         <div className="bg-color mb-3">
           <p className="mb-1 font-mono text-sm text-slate-500">BACKGROUND</p>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-3">
             {Object.keys(colorValueMappings).map((key: string) => (
               <div
                 className={

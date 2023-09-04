@@ -6,11 +6,20 @@ export const gradientColorsValue = ["0", "1", "2", "3", "4", "5", "6"];
 export const commonColorsValue = ["10", "11", "12", "13", "14", "15"];
 export const colorValueMappings: KeyValueMappings = {
   "0": "bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100",
-  "1": "bg-gradient-to-br from-yellow-50 via-cyan-50 to-cyan-100",
+  "1": "bg-gradient-to-br from-yellow-50 via-yellow-50 to-cyan-100",
   "2": "bg-gradient-to-br from-pink-50 via-cyan-50 to-yellow-100",
-  "100": "#000",
-  "101": "#fff",
-  "102": "#55b9f3",
+  "3": "bg-gradient-to-br from-slate-600 via-slate-400 to-slate-500",
+  "4": "bg-gradient-to-br from-purple-400 via-pink-300 to-pink-200",
+  "100": "#000000",
+  "101": "#ffffff",
+  "102": "#52a0e5",
+  "103": "#a3c4d7",
+  "104": "#d7c9a3",
+  "105": "#f0b798",
+  "107": "#bd7aff",
+  "108": "#66e5d0",
+  "109": "#d37a73",
+  "110": "#c4d5fd",
 };
 
 export const sizeValueMappings: KeyValueMappings = {

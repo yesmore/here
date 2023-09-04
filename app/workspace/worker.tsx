@@ -237,32 +237,36 @@ export default function Worker({ session }: { session: Session | null }) {
         )}
 
         {/* 中间预览区 */}
-        <div
-          className={
-            "preview-area mx-auto flex h-screen flex-col items-center px-3 pt-3 transition-all " +
-            ` ${showOnPC ? "" : "max-w-md"}`
-          }
-          style={{
-            color: `${translateValueToColor(metaInfo.meta_text_color)}`,
-            fontSize: `${translateValueToSize(metaInfo.meta_font_size)}px`,
-            fontStyle: `${translateValueToFontStyle(metaInfo.meta_font_style)}`,
-            fontWeight: `${translateValueToFontWeight(
-              metaInfo.meta_font_weight,
-            )}`,
-          }}
-        >
-          <p
+        <div>
+          <div
+            className={
+              "preview-area mx-auto flex h-screen flex-col items-center px-3 pt-3 transition-all " +
+              ` ${showOnPC ? "" : "max-w-md"}`
+            }
             style={{
+              color: `${translateValueToColor(metaInfo.meta_text_color)}`,
+              fontSize: `${translateValueToSize(metaInfo.meta_font_size)}px`,
               fontStyle: `${translateValueToFontStyle(
                 metaInfo.meta_font_style,
               )}`,
+              fontWeight: `${translateValueToFontWeight(
+                metaInfo.meta_font_weight,
+              )}`,
             }}
           >
-            {metaInfo.nickname}
-          </p>
-          <ReactMarkdown>{metaInfo.describtion}</ReactMarkdown>
+            <p
+              style={{
+                fontStyle: `${translateValueToFontStyle(
+                  metaInfo.meta_font_style,
+                )}`,
+              }}
+            >
+              {metaInfo.nickname}
+            </p>
+            <ReactMarkdown>{metaInfo.describtion}</ReactMarkdown>
 
-          {/* <PlaceHolder /> */}
+            {/* <PlaceHolder /> */}
+          </div>
           <UserFooter />
         </div>
 
