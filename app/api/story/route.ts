@@ -49,6 +49,7 @@ export async function POST(
       meta_bg_color: metaInfo.meta_bg_color,
       meta_font_style: metaInfo.meta_font_style,
       meta_font_size: metaInfo.meta_font_size,
+      meta_font_weight: metaInfo.meta_font_weight,
     });
     return NextResponse.json(res);
   } catch (error) {
