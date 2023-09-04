@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import { Session } from "next-auth";
 import { CreateStoryProps } from "@/lib/db/story";
+import Image from "next/image";
 import "@/styles/toggle.css";
 import toast from "react-hot-toast";
 import { useSignInModal } from "@/components/layout/sign-in-modal";
-import { Color, Widgets } from "@/components/shared/icons";
 import UserFooter from "@/components/layout/user-footer";
 import Modal from "@/components/shared/modal";
 import { ExternalLink, Smartphone, Monitor } from "lucide-react";
@@ -19,9 +19,6 @@ import { MetaInfoWorker, WidgetWorker, WorkerSiderWrapper } from "./workerItem";
 import { useSearchParams } from "next/navigation";
 import { isAllAlphabetic } from "@/lib/utils";
 import {
-  colorValueMappings,
-  commonColorsValue,
-  gradientColorsValue,
   translateValueToColor,
   translateValueToFontStyle,
   translateValueToFontWeight,
@@ -237,10 +234,10 @@ export default function Worker({ session }: { session: Session | null }) {
         )}
 
         {/* 中间预览区 */}
-        <div>
+        <div className="preview-main">
           <div
             className={
-              "preview-area mx-auto flex h-screen flex-col items-center px-3 pt-3 transition-all " +
+              "preview-area mx-auto h-screen px-3 pt-3 transition-all " +
               ` ${showOnPC ? "" : "max-w-md"}`
             }
             style={{
@@ -254,19 +251,40 @@ export default function Worker({ session }: { session: Session | null }) {
               )}`,
             }}
           >
-            <p
-              style={{
-                fontStyle: `${translateValueToFontStyle(
-                  metaInfo.meta_font_style,
-                )}`,
-              }}
+            <div
+              className={
+                "head-info flex items-center justify-center" +
+                // ` flex-row gap-5` +
+                ` flex-col`
+              }
             >
-              {metaInfo.nickname}
-            </p>
-            <ReactMarkdown>{metaInfo.describtion}</ReactMarkdown>
+              <Image
+                src={metaInfo.avatar}
+                alt="avatar"
+                width="50"
+                height="50"
+                className="h-12 w-12 rounded-full border border-gray-300 md:h-20 md:w-20"
+              />
+              <div className="text-center">
+                <p
+                  className="text-2xl md:text-3xl"
+                  style={{
+                    fontStyle: `${translateValueToFontStyle(
+                      metaInfo.meta_font_style,
+                    )}`,
+                  }}
+                >
+                  {metaInfo.nickname}
+                </p>
+                <ReactMarkdown className=" w-48 text-sm opacity-70 md:text-base">
+                  {metaInfo.describtion}
+                </ReactMarkdown>
+              </div>
+            </div>
 
-            {/* <PlaceHolder /> */}
+            <PlaceHolder />
           </div>
+
           <UserFooter />
         </div>
 

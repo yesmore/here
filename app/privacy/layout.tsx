@@ -6,7 +6,7 @@ import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
 
 export const metadata = {
-  title: "About | MeetU",
+  title: "Privacy",
   description: "...",
   metadataBase: new URL("https://meetu.dev"),
   themeColor: "#FFF",

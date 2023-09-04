@@ -4,7 +4,7 @@ import { sfPro, inter } from "@/styles/fonts";
 import Nav from "@/components/layout/nav";
 
 export const metadata = {
-  title: "Workspace | MeetU",
+  title: "Workspace",
   description: "...",
   metadataBase: new URL("https://meetu.dev"),
   themeColor: "#FFF",

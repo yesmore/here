@@ -5,11 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LoadingDots } from "@/components/shared/icons";
 import { ExternalLink } from "lucide-react";
-import {
-  colorValueMappings,
-  sizeValueMappings,
-  translateValueToColor,
-} from "./enum";
+import { colorValueMappings, sizeValueMappings } from "./enum";
 
 export const WorkerSiderWrapper = ({
   children,
@@ -51,8 +47,15 @@ export const MetaInfoWorker = ({
   setMetaInfo: Dispatch<SetStateAction<CreateStoryProps>>;
   onCreateStory: () => void;
 }) => {
+  const selectedBorder = (isShow: Boolean) => {
+    return isShow ? "border-slate-200" : "";
+  };
+  const selectedBackground = (isShow: Boolean) => {
+    return isShow ? "bg-gray-200" : "";
+  };
+
   return (
-    <div className={`worker-info ${className}`}>
+    <div className={`worker-info ${className} `}>
       <div className="basic">
         <div className="flex items-center justify-between">
           <Image
@@ -62,7 +65,19 @@ export const MetaInfoWorker = ({
             height="50"
             className="rounded-full border border-gray-300 "
           />
-          <p>{metaInfo.tags}</p>
+          <button
+            className="nice-border h-8 bg-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-sm font-semibold text-transparent"
+            onClick={onCreateStory}
+          >
+            {showCreateLoading ? (
+              <LoadingDots color="#070707" />
+            ) : (
+              <>
+                {metaInfo.nickname ? "Update" : "Create"}{" "}
+                {metaInfo.public && "& Publish"}
+              </>
+            )}
+          </button>
         </div>
 
         <WorkerInput
@@ -85,11 +100,7 @@ export const MetaInfoWorker = ({
               <div
                 className={
                   " h-10 w-10 cursor-pointer rounded border border-slate-100 transition-all hover:shadow-md" +
-                  ` ${
-                    key === metaInfo.meta_bg_color
-                      ? " border-2 border-slate-200"
-                      : ""
-                  }` +
+                  ` ${selectedBorder(key === metaInfo.meta_bg_color)}` +
                   ` ${Number(key) < 100 ? colorValueMappings[key] : ""}`
                 }
                 style={{
@@ -107,18 +118,14 @@ export const MetaInfoWorker = ({
         </div>
         <div className="text-color mb-3">
           <p className="mb-1 font-mono text-sm text-slate-500">TEXT</p>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             {Object.keys(colorValueMappings).map(
               (key: string) =>
                 Number(key) >= 100 && (
                   <div
                     className={
                       " h-5 w-5 cursor-pointer rounded-full border transition-all hover:shadow-md" +
-                      ` ${
-                        key === metaInfo.meta_text_color
-                          ? " border-2 border-slate-200"
-                          : ""
-                      }`
+                      ` ${selectedBorder(key === metaInfo.meta_text_color)}`
                     }
                     style={{
                       backgroundColor: `${colorValueMappings[key]}`,
@@ -140,7 +147,7 @@ export const MetaInfoWorker = ({
                 key={key}
                 className={
                   " h-6 cursor-pointer rounded-lg transition-all" +
-                  ` ${key === metaInfo.meta_font_size ? "bg-gray-200" : ""}`
+                  ` ${selectedBackground(key === metaInfo.meta_font_size)}`
                 }
                 style={{
                   fontSize: `${sizeValueMappings[key]}px`,
@@ -158,7 +165,7 @@ export const MetaInfoWorker = ({
             <div
               className={
                 "w-full cursor-pointer rounded-full border border-slate-300 px-2 py-1 text-center text-sm hover:shadow" +
-                ` ${metaInfo.meta_font_style === "1" ? "bg-gray-200" : ""}`
+                ` ${selectedBackground(metaInfo.meta_font_style === "1")}`
               }
               onClick={() =>
                 setMetaInfo({
@@ -172,7 +179,7 @@ export const MetaInfoWorker = ({
             <div
               className={
                 "w-full cursor-pointer rounded-full border border-slate-300 px-2 py-1 text-center text-sm hover:shadow" +
-                ` ${metaInfo.meta_font_weight === "1" ? "bg-gray-200" : ""}`
+                ` ${selectedBackground(metaInfo.meta_font_weight === "1")}`
               }
               onClick={() =>
                 setMetaInfo({
@@ -187,20 +194,6 @@ export const MetaInfoWorker = ({
           </div>
         </div>
       </div>
-
-      <button
-        className="nice-border my-4 h-8 w-full text-sm "
-        onClick={onCreateStory}
-      >
-        {showCreateLoading ? (
-          <LoadingDots color="#070707" />
-        ) : (
-          <>
-            {metaInfo.nickname ? "Update" : "Create"}{" "}
-            {metaInfo.public && "& Publish"}
-          </>
-        )}
-      </button>
 
       <div className="flex items-start justify-start gap-2">
         <div className="checkbox-wrapper-5">

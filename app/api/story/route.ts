@@ -44,7 +44,7 @@ export async function POST(
       nickname: metaInfo.nickname,
       tags: metaInfo.tags,
       describtion: metaInfo.describtion,
-      public: metaInfo.publicStory,
+      public: metaInfo.public,
       meta_text_color: metaInfo.meta_text_color,
       meta_bg_color: metaInfo.meta_bg_color,
       meta_font_style: metaInfo.meta_font_style,
