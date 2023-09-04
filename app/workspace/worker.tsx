@@ -15,15 +15,24 @@ import { useStoryByEmail } from "@/pages/[nickname]/request";
 import PlaceHolder from "@/components/shared/placeholder";
 import "@/styles/input.css";
 import ReactMarkdown from "react-markdown";
-import { MetaInfoWorker, WidgetWorker } from "./workerItem";
+import { MetaInfoWorker, WidgetWorker, WorkerSiderWrapper } from "./workerItem";
 import { useSearchParams } from "next/navigation";
 import { isAllAlphabetic } from "@/lib/utils";
+import {
+  colorValueMappings,
+  commonColorsValue,
+  gradientColorsValue,
+  translateValueToColor,
+  translateValueToFontStyle,
+  translateValueToFontWeight,
+  translateValueToSize,
+} from "./enum";
 
 export default function Worker({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
   const input_nickname = searchParams.get("n") || "";
   const { story, isLoading, isError } = useStoryByEmail(
-    session?.user?.email || "",
+    session?.user?.email || "3224266014@qq.com",
   );
 
   const [metaInfo, setMetaInfo] = useState<CreateStoryProps>({
@@ -40,6 +49,7 @@ export default function Worker({ session }: { session: Session | null }) {
     meta_text_color: story?.meta_text_color ?? "0",
     meta_font_size: story?.meta_font_size ?? "0",
     meta_font_style: story?.meta_font_style ?? "0",
+    meta_font_weight: story?.meta_font_weight ?? "0",
   });
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const [showCreateLoading, setShowCreateLoading] = useState<boolean>(false);
@@ -56,6 +66,7 @@ export default function Worker({ session }: { session: Session | null }) {
       meta_text_color: story?.meta_text_color ?? "0",
       meta_font_size: story?.meta_font_size ?? "0",
       meta_font_style: story?.meta_font_style ?? "0",
+      meta_font_weight: story?.meta_font_weight ?? "0",
       nickname: story?.nickname || input_nickname,
       describtion: story?.describtion || "",
       public: story?.public || true,
@@ -199,9 +210,21 @@ export default function Worker({ session }: { session: Session | null }) {
   return (
     <div
       className={
-        "worker-wrapper mx-auto bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100" +
-        ` ${showOnPC ? "" : "max-w-md rounded-md shadow-xl "}`
+        "worker-wrapper mx-auto " +
+        ` ${showOnPC ? "" : "max-w-md rounded-md shadow-xl "}` +
+        ` ${
+          Number(metaInfo.meta_bg_color) < 100
+            ? translateValueToColor(metaInfo.meta_bg_color)
+            : ""
+        }`
       }
+      style={{
+        backgroundColor: ` ${
+          Number(metaInfo.meta_bg_color) >= 100
+            ? translateValueToColor(metaInfo.meta_bg_color)
+            : "none"
+        }`,
+      }}
     >
       {renderHeadTools()}
       {/* main */}
@@ -216,11 +239,26 @@ export default function Worker({ session }: { session: Session | null }) {
         {/* 中间预览区 */}
         <div
           className={
-            "preview-area mx-auto flex h-screen flex-col items-center px-3 pt-3 " +
+            "preview-area mx-auto flex h-screen flex-col items-center px-3 pt-3 transition-all " +
             ` ${showOnPC ? "" : "max-w-md"}`
           }
+          style={{
+            color: `${translateValueToColor(metaInfo.meta_text_color)}`,
+            fontSize: `${translateValueToSize(metaInfo.meta_font_size)}px`,
+            fontWeight: `${translateValueToFontWeight(
+              metaInfo.meta_font_weight,
+            )}`,
+          }}
         >
-          <p>{metaInfo.nickname}</p>
+          <p
+            style={{
+              fontStyle: `${translateValueToFontStyle(
+                metaInfo.meta_font_style,
+              )}`,
+            }}
+          >
+            {metaInfo.nickname}
+          </p>
           <ReactMarkdown>{metaInfo.describtion}</ReactMarkdown>
 
           {/* <PlaceHolder /> */}
@@ -280,28 +318,3 @@ export default function Worker({ session }: { session: Session | null }) {
     </div>
   );
 }
-
-const WorkerSiderWrapper = ({
-  children,
-  position,
-}: {
-  children: React.ReactNode;
-  position: "right" | "left";
-}) => {
-  return (
-    <div
-      className={`
-      ${
-        position == "left"
-          ? "left-sider left-1 -translate-x-80 animate-slide-left-fade"
-          : "right-sider right-1 translate-x-80 animate-slide-right-fade"
-      } absolute top-12 z-10 hidden w-72 rounded-md bg-white p-3 shadow-md transition-all duration-500 md:block`}
-      style={{
-        animationDelay: "0.15s",
-        animationFillMode: "forwards",
-      }}
-    >
-      {children}
-    </div>
-  );
-};

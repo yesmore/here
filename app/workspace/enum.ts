@@ -2,10 +2,17 @@ interface KeyValueMappings {
   [colorValue: string]: string;
 }
 
+export const gradientColorsValue = ["0", "1", "2", "3", "4", "5", "6"];
+export const commonColorsValue = ["10", "11", "12", "13", "14", "15"];
 export const colorValueMappings: KeyValueMappings = {
-  "0": "#000",
-  "1": "#FF0000",
+  "0": "bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100",
+  "1": "bg-gradient-to-br from-yellow-50 via-cyan-50 to-cyan-100",
+  "2": "bg-gradient-to-br from-pink-50 via-cyan-50 to-yellow-100",
+  "100": "#000",
+  "101": "#fff",
+  "102": "#55b9f3",
 };
+
 export const sizeValueMappings: KeyValueMappings = {
   "0": "12",
   "1": "14",
@@ -13,11 +20,16 @@ export const sizeValueMappings: KeyValueMappings = {
 };
 export const styleValueMappings: KeyValueMappings = {
   "0": "",
-  "1": "",
+  "1": "italic",
   "2": "",
 };
+export const weightValueMappings: KeyValueMappings = {
+  "0": "300",
+  "1": "400",
+  "2": "700",
+};
 
-// Color
+// Color (text\background)
 export function translateValueToColor(value: string): string {
   return colorValueMappings[value] || "#ffffff";
 }
@@ -48,6 +60,18 @@ export function translateValueToFontStyle(value: string): string {
 export function translateFontStyle(style: string): string {
   for (const value in styleValueMappings) {
     if (styleValueMappings[value] === style) {
+      return value;
+    }
+  }
+  return "";
+}
+// Weight
+export function translateValueToFontWeight(value: string): string {
+  return weightValueMappings[value] || "";
+}
+export function translateFontWeight(weight: string): string {
+  for (const value in weightValueMappings) {
+    if (weightValueMappings[value] === weight) {
       return value;
     }
   }

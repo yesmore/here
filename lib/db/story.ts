@@ -12,6 +12,7 @@ export interface CreateStoryProps {
   meta_bg_color: string;
   meta_font_style: string;
   meta_font_size: string;
+  meta_font_weight: string;
 }
 
 export const getPublicStories = async (
@@ -49,6 +50,7 @@ export const addStory = async (props: CreateStoryProps) => {
         meta_text_color: props.meta_text_color,
         meta_font_size: props.meta_font_size,
         meta_font_style: props.meta_font_style,
+        meta_font_weight: props.meta_font_weight,
       },
     });
     return "Updated";

@@ -5,6 +5,32 @@ import Image from "next/image";
 import Link from "next/link";
 import { LoadingDots } from "@/components/shared/icons";
 import { ExternalLink } from "lucide-react";
+import { colorValueMappings, translateValueToColor } from "./enum";
+
+export const WorkerSiderWrapper = ({
+  children,
+  position,
+}: {
+  children: React.ReactNode;
+  position: "right" | "left";
+}) => {
+  return (
+    <div
+      className={`
+      ${
+        position == "left"
+          ? "left-sider left-1 -translate-x-80 animate-slide-left-fade"
+          : "right-sider right-1 translate-x-80 animate-slide-right-fade"
+      } absolute top-12 z-10 hidden w-72 rounded-md bg-white p-3 shadow-md transition-all duration-500 md:block`}
+      style={{
+        animationDelay: "0.15s",
+        animationFillMode: "forwards",
+      }}
+    >
+      {children}
+    </div>
+  );
+};
 
 export const MetaInfoWorker = ({
   className,
@@ -45,6 +71,71 @@ export const MetaInfoWorker = ({
           value={metaInfo.describtion}
           setValue={(val) => setMetaInfo({ ...metaInfo, describtion: val })}
         />
+      </div>
+
+      <div className="meta mt-3">
+        <div className="bg-color mb-3">
+          <p className=" font-mono text-sm font-semibold text-slate-500">
+            BACKGROUND
+          </p>
+          <div className="flex items-center gap-2">
+            {Object.keys(colorValueMappings).map((key: string) => (
+              <div
+                className={
+                  " h-10 w-10 cursor-pointer rounded border transition-all hover:shadow-md" +
+                  ` ${
+                    key === metaInfo.meta_bg_color
+                      ? " border-2 border-slate-200"
+                      : ""
+                  }` +
+                  ` ${Number(key) < 100 ? colorValueMappings[key] : ""}`
+                }
+                style={{
+                  backgroundColor: `${
+                    Number(key) >= 100 ? colorValueMappings[key] : ""
+                  }`,
+                }}
+                key={key}
+                onClick={() => {
+                  setMetaInfo({ ...metaInfo, meta_bg_color: key });
+                }}
+              ></div>
+            ))}
+          </div>
+        </div>
+        <div className="text-color">
+          <p className=" font-mono text-sm font-semibold text-slate-500">
+            TEXT
+          </p>
+          <div className="flex items-center gap-1">
+            {Object.keys(colorValueMappings).map(
+              (key: string) =>
+                Number(key) >= 100 && (
+                  <div
+                    className={
+                      " h-5 w-5 cursor-pointer rounded-full border transition-all hover:shadow-md" +
+                      ` ${
+                        key === metaInfo.meta_text_color
+                          ? " border-2 border-slate-200"
+                          : ""
+                      }`
+                    }
+                    style={{
+                      backgroundColor: `${colorValueMappings[key]}`,
+                    }}
+                    key={key}
+                    onClick={() => {
+                      setMetaInfo({ ...metaInfo, meta_text_color: key });
+                    }}
+                  ></div>
+                ),
+            )}
+          </div>
+        </div>
+
+        <div className="font-size"></div>
+        <div className="font-weight"></div>
+        <div className="font-style"></div>
       </div>
 
       <button
