@@ -6,7 +6,7 @@
 @import url("./input.css"); */
 
 *::-webkit-scrollbar {
-  width: 8px;
+  width: 0px;
   height: 10px;
 }
 
@@ -15,7 +15,7 @@
   border-radius: 4px;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: hsl(0, 0%, 59%);
+  background: hsla(0, 0%, 59%, 0.524);
 }
 
 .nice-border {

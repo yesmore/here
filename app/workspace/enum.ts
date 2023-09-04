@@ -21,12 +21,10 @@ export const sizeValueMappings: KeyValueMappings = {
 export const styleValueMappings: KeyValueMappings = {
   "0": "",
   "1": "italic",
-  "2": "",
 };
 export const weightValueMappings: KeyValueMappings = {
-  "0": "300",
-  "1": "400",
-  "2": "700",
+  "0": "400",
+  "1": "600",
 };
 
 // Color (text\background)

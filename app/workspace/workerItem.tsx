@@ -5,7 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { LoadingDots } from "@/components/shared/icons";
 import { ExternalLink } from "lucide-react";
-import { colorValueMappings, translateValueToColor } from "./enum";
+import {
+  colorValueMappings,
+  sizeValueMappings,
+  translateValueToColor,
+} from "./enum";
 
 export const WorkerSiderWrapper = ({
   children,
@@ -19,9 +23,9 @@ export const WorkerSiderWrapper = ({
       className={`
       ${
         position == "left"
-          ? "left-sider left-1 -translate-x-80 animate-slide-left-fade"
-          : "right-sider right-1 translate-x-80 animate-slide-right-fade"
-      } absolute top-12 z-10 hidden w-72 rounded-md bg-white p-3 shadow-md transition-all duration-500 md:block`}
+          ? "left-sider left-3 -translate-x-80 animate-slide-left-fade"
+          : "right-sider right-3 translate-x-80 animate-slide-right-fade"
+      } absolute top-12 z-10 hidden h-3/4 w-72 overflow-y-auto rounded-md bg-white p-3 shadow-md transition-all duration-500 md:block`}
       style={{
         animationDelay: "0.15s",
         animationFillMode: "forwards",
@@ -75,14 +79,12 @@ export const MetaInfoWorker = ({
 
       <div className="meta mt-3">
         <div className="bg-color mb-3">
-          <p className=" font-mono text-sm font-semibold text-slate-500">
-            BACKGROUND
-          </p>
+          <p className="mb-1 font-mono text-sm text-slate-500">BACKGROUND</p>
           <div className="flex items-center gap-2">
             {Object.keys(colorValueMappings).map((key: string) => (
               <div
                 className={
-                  " h-10 w-10 cursor-pointer rounded border transition-all hover:shadow-md" +
+                  " h-10 w-10 cursor-pointer rounded border border-slate-100 transition-all hover:shadow-md" +
                   ` ${
                     key === metaInfo.meta_bg_color
                       ? " border-2 border-slate-200"
@@ -103,10 +105,8 @@ export const MetaInfoWorker = ({
             ))}
           </div>
         </div>
-        <div className="text-color">
-          <p className=" font-mono text-sm font-semibold text-slate-500">
-            TEXT
-          </p>
+        <div className="text-color mb-3">
+          <p className="mb-1 font-mono text-sm text-slate-500">TEXT</p>
           <div className="flex items-center gap-1">
             {Object.keys(colorValueMappings).map(
               (key: string) =>
@@ -132,8 +132,59 @@ export const MetaInfoWorker = ({
             )}
           </div>
         </div>
-
-        <div className="font-size"></div>
+        <div className="font-size mb-3">
+          <p className="mb-1 font-mono text-sm text-slate-500">FONT</p>
+          <div className="grid grid-cols-3 items-center rounded-full border border-slate-300 bg-gray-50 px-2 py-1 text-center transition-all">
+            {Object.keys(sizeValueMappings).map((key) => (
+              <div
+                className={
+                  " h-6 cursor-pointer rounded-lg transition-all" +
+                  ` ${key === metaInfo.meta_font_size ? "bg-gray-200" : ""}`
+                }
+                style={{
+                  fontSize: `${sizeValueMappings[key]}px`,
+                  lineHeight: "24px",
+                }}
+                onClick={() =>
+                  setMetaInfo({ ...metaInfo, meta_font_size: key })
+                }
+              >
+                {sizeValueMappings[key]}px
+              </div>
+            ))}
+          </div>
+          <div className="mt-2 flex gap-3">
+            <div
+              className={
+                "w-full cursor-pointer rounded-full border border-slate-300 px-2 py-1 text-center text-sm hover:shadow" +
+                ` ${metaInfo.meta_font_style === "1" ? "bg-gray-200" : ""}`
+              }
+              onClick={() =>
+                setMetaInfo({
+                  ...metaInfo,
+                  meta_font_style: metaInfo.meta_font_style === "0" ? "1" : "0",
+                })
+              }
+            >
+              Italic
+            </div>
+            <div
+              className={
+                "w-full cursor-pointer rounded-full border border-slate-300 px-2 py-1 text-center text-sm hover:shadow" +
+                ` ${metaInfo.meta_font_weight === "1" ? "bg-gray-200" : ""}`
+              }
+              onClick={() =>
+                setMetaInfo({
+                  ...metaInfo,
+                  meta_font_weight:
+                    metaInfo.meta_font_weight === "0" ? "1" : "0",
+                })
+              }
+            >
+              Bolder
+            </div>
+          </div>
+        </div>
         <div className="font-weight"></div>
         <div className="font-style"></div>
       </div>
@@ -184,7 +235,7 @@ export const MetaInfoWorker = ({
 };
 
 export const WidgetWorker = () => {
-  return <div className="p-3">21312</div>;
+  return <div className="p-3">...</div>;
 };
 
 export const WorkerInput = ({

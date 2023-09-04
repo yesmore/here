@@ -245,6 +245,7 @@ export default function Worker({ session }: { session: Session | null }) {
           style={{
             color: `${translateValueToColor(metaInfo.meta_text_color)}`,
             fontSize: `${translateValueToSize(metaInfo.meta_font_size)}px`,
+            fontStyle: `${translateValueToFontStyle(metaInfo.meta_font_style)}`,
             fontWeight: `${translateValueToFontWeight(
               metaInfo.meta_font_weight,
             )}`,
