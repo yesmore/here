@@ -132,11 +132,12 @@ export const MetaInfoWorker = ({
             )}
           </div>
         </div>
-        <div className="font-size mb-3">
+        <div className="font-setting mb-3">
           <p className="mb-1 font-mono text-sm text-slate-500">FONT</p>
           <div className="grid grid-cols-3 items-center rounded-full border border-slate-300 bg-gray-50 px-2 py-1 text-center transition-all">
             {Object.keys(sizeValueMappings).map((key) => (
               <div
+                key={key}
                 className={
                   " h-6 cursor-pointer rounded-lg transition-all" +
                   ` ${key === metaInfo.meta_font_size ? "bg-gray-200" : ""}`
@@ -185,8 +186,6 @@ export const MetaInfoWorker = ({
             </div>
           </div>
         </div>
-        <div className="font-weight"></div>
-        <div className="font-style"></div>
       </div>
 
       <button
