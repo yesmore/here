@@ -293,9 +293,9 @@ const WorkerSiderWrapper = ({
       className={`
       ${
         position == "left"
-          ? "left-sider left-1 -translate-x-72 animate-slide-left-fade"
-          : "right-sider right-1 translate-x-72 animate-slide-right-fade"
-      } absolute top-12 z-10 hidden w-64 rounded-md bg-white p-2 shadow-md transition-all duration-500 md:block`}
+          ? "left-sider left-1 -translate-x-80 animate-slide-left-fade"
+          : "right-sider right-1 translate-x-80 animate-slide-right-fade"
+      } absolute top-12 z-10 hidden w-72 rounded-md bg-white p-3 shadow-md transition-all duration-500 md:block`}
       style={{
         animationDelay: "0.15s",
         animationFillMode: "forwards",
