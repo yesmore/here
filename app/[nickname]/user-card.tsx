@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { UserLinkByName } from "@/components/user-link";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import MainView from "@/components/main/main-view";
 
 export function UserCard({
   session,
@@ -42,18 +43,7 @@ export function UserCard({
 
   return (
     <div className={`relative mx-auto mt-12 w-full rounded-lg text-center`}>
-      <div className="">
-        <h2 className="bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display text-xl font-bold text-transparent md:text-3xl md:font-normal">
-          {story?.nickname}
-        </h2>
-        <div className="prose-sm -mt-2 leading-normal text-gray-500 md:prose">
-          <ReactMarkdown>{story?.describtion ?? ""}</ReactMarkdown>
-        </div>
-        <div> {story?.view}</div>
-
-        <UserLinkByName story={story} />
-      </div>
-      <Toaster />
+      {story && <MainView metaInfo={story} />}
     </div>
   );
 }

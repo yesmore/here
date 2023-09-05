@@ -14,7 +14,6 @@ export default async function UserHome({
     <>
       <div className="relative z-10 h-screen w-full max-w-xl p-3 xl:px-0">
         <UserCard session={session} nickname={params.nickname} />
-        <UserFooter />
       </div>
     </>
   );

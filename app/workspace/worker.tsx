@@ -25,6 +25,7 @@ import {
   translateValueToSize,
 } from "./enum";
 import { UserStory } from "@/lib/types/story";
+import MainView from "@/components/main/main-view";
 
 export default function Worker({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
@@ -260,39 +261,7 @@ export default function Worker({ session }: { session: Session | null }) {
         )}
 
         {/* 中间预览区 */}
-        <div className="preview-main">
-          <div
-            className="preview-area mx-auto h-screen w-full max-w-md px-5 pt-3 transition-all"
-            style={getPreviewAreaStyle(metaInfo)}
-          >
-            <div className={getPreviewAreaClassName(metaInfo)}>
-              <Image
-                src={metaInfo?.avatar ?? ""}
-                alt="avatar"
-                width="50"
-                height="50"
-                className="h-12 w-12 rounded-full border border-gray-300 md:h-20 md:w-20"
-              />
-              <div
-                className={` ${
-                  layoutValueMappings[metaInfo.meta_layout] === "center"
-                    ? "text-center"
-                    : ""
-                } `}
-              >
-                <p className="text-2xl md:text-3xl">{metaInfo.nickname}</p>
-                <ReactMarkdown className=" line-clamp-3 w-72 text-xs opacity-70 md:text-sm">
-                  {metaInfo.describtion}
-                </ReactMarkdown>
-              </div>
-            </div>
-            <div className="widget mt-3">1okk</div>
-
-            {/* <PlaceHolder /> */}
-          </div>
-
-          <UserFooter />
-        </div>
+        <MainView metaInfo={metaInfo} />
 
         {/* 右侧编辑区 */}
         {showRightSider && (
