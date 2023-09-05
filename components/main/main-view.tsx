@@ -17,6 +17,7 @@ export default function MainView({
   metaInfo: UserStory;
   editable: boolean;
 }) {
+  const isCenterLayout = layoutValueMappings[metaInfo.meta_layout] === "center";
   const getWrapperClassName = (metaInfo: UserStory) => {
     const bgClass =
       Number(metaInfo.meta_bg_color) < 100
@@ -37,7 +38,7 @@ export default function MainView({
     const layoutClass =
       layoutValueMappings[metaInfo.meta_layout] === "center"
         ? "flex-col items-center justify-center"
-        : "flex-row items-start justify-start gap-3";
+        : "flex-row items-start justify-start gap-4";
 
     // const loadingClass = showCreateLoading ? "motion-safe:animate-pulse" : "";
 
@@ -61,21 +62,20 @@ export default function MainView({
       >
         <div className={getPreviewAreaClassName(metaInfo)}>
           <Image
+            className={
+              "h-12 w-12 rounded-full border border-gray-300 shadow-md md:h-20 md:w-20" +
+              `${!isCenterLayout ? " mt-2" : ""}`
+            }
             src={metaInfo?.avatar || "/u2.png"}
             alt="avatar"
             width="50"
             height="50"
-            className="h-12 w-12 rounded-full border border-gray-300 md:h-20 md:w-20"
           />
-          <div
-            className={` ${
-              layoutValueMappings[metaInfo.meta_layout] === "center"
-                ? "text-center"
-                : ""
-            } `}
-          >
-            <p className="text-2xl md:text-3xl">{metaInfo.nickname}</p>
-            <ReactMarkdown className=" line-clamp-3 w-72 text-xs opacity-70 md:text-sm">
+          <div className={`${isCenterLayout ? "text-center" : ""}`}>
+            <p className="mb-2 align-top text-2xl md:text-3xl">
+              {metaInfo.nickname}
+            </p>
+            <ReactMarkdown className="line-clamp-3 w-72 text-xs opacity-70 md:text-sm">
               {metaInfo.describtion}
             </ReactMarkdown>
           </div>
