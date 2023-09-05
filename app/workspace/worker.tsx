@@ -19,6 +19,7 @@ import { MetaInfoWorker, WidgetWorker, WorkerSiderWrapper } from "./workerItem";
 import { useSearchParams } from "next/navigation";
 import { isAllAlphabetic } from "@/lib/utils";
 import {
+  layoutValueMappings,
   translateValueToColor,
   translateValueToFontStyle,
   translateValueToFontWeight,
@@ -29,7 +30,7 @@ export default function Worker({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
   const input_nickname = searchParams.get("n") || "";
   const { story, isLoading, isError } = useStoryByEmail(
-    session?.user?.email || "3224266014@qq.com",
+    session?.user?.email || "",
   );
 
   const [metaInfo, setMetaInfo] = useState<CreateStoryProps>({
@@ -239,8 +240,7 @@ export default function Worker({ session }: { session: Session | null }) {
         <div className="preview-main">
           <div
             className={
-              "preview-area mx-auto h-screen px-3 pt-3 transition-all " +
-              ` ${showOnPC ? "" : "max-w-md"}`
+              "preview-area mx-auto h-screen w-full max-w-md px-5 pt-3 transition-all"
             }
             style={{
               color: `${translateValueToColor(metaInfo.meta_text_color)}`,
@@ -255,9 +255,12 @@ export default function Worker({ session }: { session: Session | null }) {
           >
             <div
               className={
-                "head-info flex items-center justify-center" +
-                // ` flex-row gap-5` +
-                ` flex-col`
+                "head-info flex justify-start transition-all" +
+                ` ${
+                  layoutValueMappings[metaInfo.meta_layout] === "center"
+                    ? "flex-col items-center justify-center"
+                    : "flex-row items-start justify-start gap-3"
+                } `
               }
             >
               <Image
@@ -267,7 +270,13 @@ export default function Worker({ session }: { session: Session | null }) {
                 height="50"
                 className="h-12 w-12 rounded-full border border-gray-300 md:h-20 md:w-20"
               />
-              <div className="text-center">
+              <div
+                className={` ${
+                  layoutValueMappings[metaInfo.meta_layout] === "center"
+                    ? "text-center"
+                    : ""
+                } `}
+              >
                 <p
                   className="text-2xl md:text-3xl"
                   style={{
@@ -278,13 +287,14 @@ export default function Worker({ session }: { session: Session | null }) {
                 >
                   {metaInfo.nickname}
                 </p>
-                <ReactMarkdown className=" w-48 text-sm opacity-70 md:text-base">
+                <ReactMarkdown className=" line-clamp-3 w-72 text-xs opacity-70 md:text-sm">
                   {metaInfo.describtion}
                 </ReactMarkdown>
               </div>
             </div>
+            <div className="widget mt-3">1</div>
 
-            <PlaceHolder />
+            {/* <PlaceHolder /> */}
           </div>
 
           <UserFooter />

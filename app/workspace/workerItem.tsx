@@ -51,7 +51,7 @@ export const MetaInfoWorker = ({
     return isShow ? "border-slate-200" : "";
   };
   const selectedBackground = (isShow: Boolean) => {
-    return isShow ? "bg-gray-200" : "";
+    return isShow ? "bg-yellow-50" : "";
   };
 
   return (
@@ -66,7 +66,7 @@ export const MetaInfoWorker = ({
             className="rounded-full border border-gray-300 "
           />
           <button
-            className="nice-border h-8 bg-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-sm font-semibold text-transparent"
+            className="nice-border h-8 w-36 bg-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-sm font-semibold text-transparent"
             onClick={onCreateStory}
           >
             {showCreateLoading ? (
@@ -93,8 +93,46 @@ export const MetaInfoWorker = ({
       </div>
 
       <div className="meta mt-3">
+        <div className="layout-setting mb-3">
+          <p className="mb-1 font-mono text-sm font-semibold text-slate-400">
+            Layout
+          </p>
+          <div className="flex gap-3">
+            <div
+              className={
+                "w-full cursor-pointer rounded-full border border-slate-300 px-2 py-1 text-center text-sm hover:shadow" +
+                ` ${selectedBackground(metaInfo.meta_layout === "1")}`
+              }
+              onClick={() =>
+                setMetaInfo({
+                  ...metaInfo,
+                  meta_layout: metaInfo.meta_layout === "0" ? "1" : "0",
+                })
+              }
+            >
+              Center
+            </div>
+            <div
+              className={
+                "w-full cursor-pointer rounded-full border border-slate-300 px-2 py-1 text-center text-sm hover:shadow" +
+                ` ${selectedBackground(metaInfo.meta_font_weight === "1")}`
+              }
+              onClick={() =>
+                setMetaInfo({
+                  ...metaInfo,
+                  meta_font_weight:
+                    metaInfo.meta_font_weight === "0" ? "1" : "0",
+                })
+              }
+            >
+              Bold
+            </div>
+          </div>
+        </div>
         <div className="bg-color mb-3">
-          <p className="mb-1 font-mono text-sm text-slate-500">BACKGROUND</p>
+          <p className="mb-1 font-mono text-sm font-semibold text-slate-400">
+            Background
+          </p>
           <div className="flex flex-wrap items-center gap-3">
             {Object.keys(colorValueMappings).map((key: string) => (
               <div
@@ -117,7 +155,9 @@ export const MetaInfoWorker = ({
           </div>
         </div>
         <div className="text-color mb-3">
-          <p className="mb-1 font-mono text-sm text-slate-500">TEXT</p>
+          <p className="mb-1 font-mono text-sm font-semibold text-slate-400">
+            Text
+          </p>
           <div className="flex items-center gap-2">
             {Object.keys(colorValueMappings).map(
               (key: string) =>
@@ -140,8 +180,10 @@ export const MetaInfoWorker = ({
           </div>
         </div>
         <div className="font-setting mb-3">
-          <p className="mb-1 font-mono text-sm text-slate-500">FONT</p>
-          <div className="grid grid-cols-3 items-center rounded-full border border-slate-300 bg-gray-50 px-2 py-1 text-center transition-all">
+          <p className="mb-1 font-mono text-sm font-semibold text-slate-400">
+            Font
+          </p>
+          <div className="grid grid-cols-3 items-center rounded-full border border-slate-300 px-2 py-1 text-center transition-all">
             {Object.keys(sizeValueMappings).map((key) => (
               <div
                 key={key}
