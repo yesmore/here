@@ -10,14 +10,9 @@ export const colorValueMappings: KeyValueMappings = {
   "4": "bg-gradient-to-br from-purple-400 via-pink-300 to-pink-200",
   "100": "#000000",
   "101": "#ffffff",
-  "102": "#52a0e5",
+  "102": "#d37a73",
   "103": "#a3c4d7",
   "104": "#d7c9a3",
-  "105": "#f0b798",
-  "107": "#bd7aff",
-  "108": "#66e5d0",
-  "109": "#d37a73",
-  "110": "#c4d5fd",
 };
 export const sizeValueMappings: KeyValueMappings = {
   "0": "12",
