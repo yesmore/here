@@ -30,18 +30,18 @@ export default function Worker({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
   const input_nickname = searchParams.get("n") || "";
   const { story, isLoading, isError } = useStoryByEmail(
-    session?.user?.email || "",
+    session?.user?.email || "3224266014@qq.com",
   );
 
   const [metaInfo, setMetaInfo] = useState<CreateStoryProps>({
     id: story?.id,
-    nickname: story?.nickname || input_nickname,
-    describtion: story?.describtion || "",
-    public: story?.public || true,
-    tags: story?.tags || [],
-    email: session?.user?.email || "",
+    nickname: story?.nickname ?? input_nickname,
+    describtion: story?.describtion ?? "",
+    public: story?.public ?? true,
+    tags: story?.tags ?? [],
+    email: session?.user?.email ?? "",
     avatar:
-      session?.user?.image ||
+      session?.user?.image ??
       "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/gcloud/avatars/21.png",
     meta_bg_color: story?.meta_bg_color ?? "0",
     meta_text_color: story?.meta_text_color ?? "0",
@@ -61,13 +61,13 @@ export default function Worker({ session }: { session: Session | null }) {
   useEffect(() => {
     setMetaInfo({
       id: story?.id,
-      nickname: story?.nickname || input_nickname,
-      describtion: story?.describtion || "",
-      public: story?.public || true,
-      tags: story?.tags || [],
-      email: session?.user?.email || "",
+      nickname: story?.nickname ?? input_nickname,
+      describtion: story?.describtion ?? "",
+      public: story?.public ?? true,
+      tags: story?.tags ?? [],
+      email: session?.user?.email ?? "",
       avatar:
-        session?.user?.image ||
+        session?.user?.image ??
         "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/gcloud/avatars/21.png",
       meta_bg_color: story?.meta_bg_color ?? "0",
       meta_text_color: story?.meta_text_color ?? "0",
@@ -79,6 +79,7 @@ export default function Worker({ session }: { session: Session | null }) {
   }, [story, session?.user]);
 
   const handleCreateStory = async () => {
+    // setShowCreateLoading(true);
     if (!isAllAlphabetic(metaInfo.nickname)) {
       toast("Invalid nickname", { icon: "🥵" });
       return;
@@ -260,7 +261,8 @@ export default function Worker({ session }: { session: Session | null }) {
                   layoutValueMappings[metaInfo.meta_layout] === "center"
                     ? "flex-col items-center justify-center"
                     : "flex-row items-start justify-start gap-3"
-                } `
+                }` +
+                ` ${showCreateLoading ? "motion-safe:animate-pulse" : ""}`
               }
             >
               <Image
@@ -276,6 +278,11 @@ export default function Worker({ session }: { session: Session | null }) {
                     ? "text-center"
                     : ""
                 } `}
+                style={{
+                  fontSize: `${translateValueToSize(
+                    metaInfo.meta_font_size,
+                  )}px!important`,
+                }}
               >
                 <p
                   className="text-2xl md:text-3xl"

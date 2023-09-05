@@ -100,7 +100,7 @@ export const MetaInfoWorker = ({
           <div className="flex gap-3">
             <div
               className={
-                "w-full cursor-pointer rounded-full border border-slate-300 px-2 py-1 text-center text-sm hover:shadow" +
+                "w-full cursor-pointer rounded-full border border-slate-200 px-2 py-1 text-center text-sm hover:shadow" +
                 ` ${selectedBackground(metaInfo.meta_layout === "1")}`
               }
               onClick={() =>
@@ -114,7 +114,7 @@ export const MetaInfoWorker = ({
             </div>
             <div
               className={
-                "w-full cursor-pointer rounded-full border border-slate-300 px-2 py-1 text-center text-sm hover:shadow" +
+                "w-full cursor-pointer rounded-full border border-slate-200 px-2 py-1 text-center text-sm hover:shadow" +
                 ` ${selectedBackground(metaInfo.meta_font_weight === "1")}`
               }
               onClick={() =>
@@ -183,7 +183,7 @@ export const MetaInfoWorker = ({
           <p className="mb-1 font-mono text-sm font-semibold text-slate-400">
             Font
           </p>
-          <div className="grid grid-cols-3 items-center rounded-full border border-slate-300 px-2 py-1 text-center transition-all">
+          <div className="grid grid-cols-3 items-center rounded-full border border-slate-200 px-2 py-1 text-center transition-all">
             {Object.keys(sizeValueMappings).map((key) => (
               <div
                 key={key}
@@ -206,7 +206,7 @@ export const MetaInfoWorker = ({
           <div className="mt-2 flex gap-3">
             <div
               className={
-                "w-full cursor-pointer rounded-full border border-slate-300 px-2 py-1 text-center text-sm hover:shadow" +
+                "w-full cursor-pointer rounded-full border border-slate-200 px-2 py-1 text-center text-sm hover:shadow" +
                 ` ${selectedBackground(metaInfo.meta_font_style === "1")}`
               }
               onClick={() =>
@@ -220,7 +220,7 @@ export const MetaInfoWorker = ({
             </div>
             <div
               className={
-                "w-full cursor-pointer rounded-full border border-slate-300 px-2 py-1 text-center text-sm hover:shadow" +
+                "w-full cursor-pointer rounded-full border border-slate-200 px-2 py-1 text-center text-sm hover:shadow" +
                 ` ${selectedBackground(metaInfo.meta_font_weight === "1")}`
               }
               onClick={() =>
