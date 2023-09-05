@@ -72,10 +72,7 @@ export const MetaInfoWorker = ({
             {showCreateLoading ? (
               <LoadingDots color="#070707" />
             ) : (
-              <>
-                {metaInfo.nickname ? "Update" : "Create"}{" "}
-                {metaInfo.public && "& Publish"}
-              </>
+              <> {metaInfo.nickname ? "Update" : "Create"} </>
             )}
           </button>
         </div>

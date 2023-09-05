@@ -65,6 +65,7 @@ model VerificationToken {
 model Story {
   id               String   @id @default(cuid())
   email            String
+  avatar           String   @default("")
   nickname         String
   tags             String[]
   describtion      String

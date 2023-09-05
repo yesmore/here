@@ -10,7 +10,22 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import UserFooter from "../layout/user-footer";
 
-export default function MainView({ metaInfo }: { metaInfo: UserStory }) {
+export default function MainView({
+  metaInfo,
+  editable,
+}: {
+  metaInfo: UserStory;
+  editable: boolean;
+}) {
+  const getWrapperClassName = (metaInfo: UserStory) => {
+    const bgClass =
+      Number(metaInfo.meta_bg_color) < 100
+        ? translateValueToColor(metaInfo.meta_bg_color)
+        : "";
+    const padding = !editable ? "pt-12" : "";
+
+    return `main-story mx-auto ${bgClass} ${padding}`;
+  };
   const getWrapperPureStyle = (metaInfo: UserStory) => ({
     backgroundColor: ` ${
       Number(metaInfo.meta_bg_color) >= 100
@@ -36,14 +51,17 @@ export default function MainView({ metaInfo }: { metaInfo: UserStory }) {
   });
 
   return (
-    <div className="preview-main">
+    <div
+      className={getWrapperClassName(metaInfo)}
+      style={getWrapperPureStyle(metaInfo)}
+    >
       <div
         className="preview-area mx-auto h-screen w-full max-w-md px-5 pt-3 transition-all"
         style={getPreviewAreaStyle(metaInfo)}
       >
         <div className={getPreviewAreaClassName(metaInfo)}>
           <Image
-            src={metaInfo?.avatar ?? ""}
+            src={metaInfo?.avatar || "/u2.png"}
             alt="avatar"
             width="50"
             height="50"

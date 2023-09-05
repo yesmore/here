@@ -22,7 +22,7 @@ export default async function RootLayout({
 }) {
   return (
     <div className={cx(sfPro.variable, inter.variable)}>
-      <div className="fixed h-screen w-full bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100" />
+      <div className="fixed h-screen w-full" />
       <main className="flex min-h-screen w-full flex-col items-center">
         {children}
       </main>

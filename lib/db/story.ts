@@ -30,6 +30,7 @@ export const addStory = async (props: UserStory) => {
       data: {
         tags: props.tags,
         nickname: props.nickname,
+        avatar: props.avatar,
         public: props.public,
         describtion: props.describtion,
         view: props.view,
@@ -52,6 +53,7 @@ export const addStory = async (props: UserStory) => {
     await prisma.story.create({
       data: {
         email: props.email,
+        avatar: props.avatar,
         tags: props.tags,
         nickname: props.nickname,
         public: props.public,

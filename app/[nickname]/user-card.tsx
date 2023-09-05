@@ -2,11 +2,9 @@
 
 import { Session } from "next-auth";
 import { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
 import NotFound from "@/components/layout/not-found";
 import { useStoryByNickname } from "./request";
 import toast, { Toaster } from "react-hot-toast";
-import { UserLinkByName } from "@/components/user-link";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import MainView from "@/components/main/main-view";
@@ -41,9 +39,5 @@ export function UserCard({
 
   if (!isLoading && !story) return <NotFound />;
 
-  return (
-    <div className={`relative mx-auto mt-12 w-full rounded-lg text-center`}>
-      {story && <MainView metaInfo={story} />}
-    </div>
-  );
+  return <>{story && <MainView metaInfo={story} editable={false} />}</>;
 }

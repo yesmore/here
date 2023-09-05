@@ -12,7 +12,7 @@ export default async function UserHome({
 
   return (
     <>
-      <div className="relative z-10 h-screen w-full max-w-xl p-3 xl:px-0">
+      <div className="relative z-10 w-full overflow-x-hidden">
         <UserCard session={session} nickname={params.nickname} />
       </div>
     </>

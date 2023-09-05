@@ -26,6 +26,7 @@ import {
 } from "./enum";
 import { UserStory } from "@/lib/types/story";
 import MainView from "@/components/main/main-view";
+import { DEFAULT_WOKER_AVATAR } from "@/lib/constants";
 
 export default function Worker({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
@@ -37,9 +38,7 @@ export default function Worker({ session }: { session: Session | null }) {
   const [metaInfo, setMetaInfo] = useState<UserStory>({
     id: story?.id,
     email: session?.user?.email ?? "",
-    avatar:
-      session?.user?.image ??
-      "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/gcloud/avatars/21.png",
+    avatar: session?.user?.image ?? DEFAULT_WOKER_AVATAR,
     nickname: story?.nickname ?? input_nickname,
     describtion: story?.describtion ?? "",
     public: story?.public ?? true,
@@ -64,9 +63,7 @@ export default function Worker({ session }: { session: Session | null }) {
     setMetaInfo({
       id: story?.id,
       email: session?.user?.email ?? "",
-      avatar:
-        session?.user?.image ??
-        "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/gcloud/avatars/21.png",
+      avatar: session?.user?.image ?? DEFAULT_WOKER_AVATAR,
       nickname: story?.nickname ?? input_nickname,
       describtion: story?.describtion ?? "",
       public: story?.public ?? true,
@@ -142,22 +139,6 @@ export default function Worker({ session }: { session: Session | null }) {
         ? translateValueToColor(metaInfo.meta_bg_color)
         : "none"
     }`,
-  });
-  const getPreviewAreaClassName = (metaInfo: UserStory | UserStory) => {
-    const layoutClass =
-      layoutValueMappings[metaInfo.meta_layout] === "center"
-        ? "flex-col items-center justify-center"
-        : "flex-row items-start justify-start gap-3";
-
-    const loadingClass = showCreateLoading ? "motion-safe:animate-pulse" : "";
-
-    return `head-info flex justify-start transition-all ${layoutClass} ${loadingClass}`;
-  };
-  const getPreviewAreaStyle = (metaInfo: UserStory) => ({
-    color: translateValueToColor(metaInfo.meta_text_color),
-    fontSize: `${translateValueToSize(metaInfo.meta_font_size)}px`,
-    fontStyle: translateValueToFontStyle(metaInfo.meta_font_style),
-    fontWeight: translateValueToFontWeight(metaInfo.meta_font_weight),
   });
 
   const renderHeadTools = () => (
@@ -261,7 +242,7 @@ export default function Worker({ session }: { session: Session | null }) {
         )}
 
         {/* 中间预览区 */}
-        <MainView metaInfo={metaInfo} />
+        <MainView metaInfo={metaInfo} editable={true} />
 
         {/* 右侧编辑区 */}
         {showRightSider && (
