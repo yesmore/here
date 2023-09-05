@@ -111,10 +111,41 @@ export const getStoryByNickname = async (nickname: string) => {
       nickname: nickname,
     },
   });
-  console.log("查询结果", res);
 
   if (res) {
+    const currentTime = new Date().getTime();
+    const lastUpdatedTime = res.updatedAt.getTime();
+    console.log("时间", currentTime, lastUpdatedTime);
+    if (currentTime - lastUpdatedTime >= 60000) {
+      console.log("更新", currentTime, lastUpdatedTime);
+
+      await prisma.story.update({
+        where: { id: res.id },
+        data: {
+          view: res.view + 1,
+        },
+      });
+    }
     return res;
   }
   return null;
+};
+
+export const updateStoryView = async (id: string) => {
+  const record = await prisma.story.findUnique({
+    where: { id },
+  });
+  if (record) {
+    const updatedValue = record.view + 1;
+
+    await prisma.story.update({
+      where: { id },
+      data: {
+        view: updatedValue,
+      },
+    });
+    return updatedValue;
+  } else {
+    return "Not found";
+  }
 };

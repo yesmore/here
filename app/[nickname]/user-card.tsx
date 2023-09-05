@@ -49,6 +49,7 @@ export function UserCard({
         <div className="prose-sm -mt-2 leading-normal text-gray-500 md:prose">
           <ReactMarkdown>{story?.describtion ?? ""}</ReactMarkdown>
         </div>
+        <div> {story?.view}</div>
 
         <UserLinkByName story={story} />
       </div>

@@ -3,7 +3,7 @@ import { getPublicStories, getStoryByNickname } from "@/lib/db/story";
 // import { authOptions } from "../auth/[...nextauth]/route";
 // import { getServerSession } from "next-auth/next";
 
-export async function GET(
+export async function GET( // 未使用
   req: NextRequest,
   { params }: { params: Record<string, string | string | undefined[]> },
 ) {
