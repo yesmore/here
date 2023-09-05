@@ -35,14 +35,15 @@ export default function Worker({ session }: { session: Session | null }) {
 
   const [metaInfo, setMetaInfo] = useState<CreateStoryProps>({
     id: story?.id,
-    nickname: story?.nickname ?? input_nickname,
-    describtion: story?.describtion ?? "",
-    public: story?.public ?? true,
-    tags: story?.tags ?? [],
     email: session?.user?.email ?? "",
     avatar:
       session?.user?.image ??
       "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/gcloud/avatars/21.png",
+    nickname: story?.nickname ?? input_nickname,
+    describtion: story?.describtion ?? "",
+    public: story?.public ?? true,
+    tags: story?.tags ?? [],
+    view: story?.view ?? 0,
     meta_bg_color: story?.meta_bg_color ?? "0",
     meta_text_color: story?.meta_text_color ?? "0",
     meta_font_size: story?.meta_font_size ?? "0",
@@ -61,14 +62,15 @@ export default function Worker({ session }: { session: Session | null }) {
   useEffect(() => {
     setMetaInfo({
       id: story?.id,
-      nickname: story?.nickname ?? input_nickname,
-      describtion: story?.describtion ?? "",
-      public: story?.public ?? true,
-      tags: story?.tags ?? [],
       email: session?.user?.email ?? "",
       avatar:
         session?.user?.image ??
         "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/gcloud/avatars/21.png",
+      nickname: story?.nickname ?? input_nickname,
+      describtion: story?.describtion ?? "",
+      public: story?.public ?? true,
+      view: story?.view ?? 0,
+      tags: story?.tags ?? [],
       meta_bg_color: story?.meta_bg_color ?? "0",
       meta_text_color: story?.meta_text_color ?? "0",
       meta_font_size: story?.meta_font_size ?? "0",
@@ -122,6 +124,40 @@ export default function Worker({ session }: { session: Session | null }) {
     setShowRightSider(false);
     setShowOnPC(false);
   };
+
+  const getWrapperClassName = (metaInfo: CreateStoryProps) => {
+    const pcClass = showOnPC ? "" : "max-w-md rounded-md shadow-xl ";
+
+    const bgClass =
+      Number(metaInfo.meta_bg_color) < 100
+        ? translateValueToColor(metaInfo.meta_bg_color)
+        : "";
+
+    return `worker-wrapper mx-auto ${pcClass} ${bgClass}`;
+  };
+  const getWrapperPureStyle = (metaInfo: CreateStoryProps) => ({
+    backgroundColor: ` ${
+      Number(metaInfo.meta_bg_color) >= 100
+        ? translateValueToColor(metaInfo.meta_bg_color)
+        : "none"
+    }`,
+  });
+  const getPreviewAreaClassName = (metaInfo: CreateStoryProps) => {
+    const layoutClass =
+      layoutValueMappings[metaInfo.meta_layout] === "center"
+        ? "flex-col items-center justify-center"
+        : "flex-row items-start justify-start gap-3";
+
+    const loadingClass = showCreateLoading ? "motion-safe:animate-pulse" : "";
+
+    return `head-info flex justify-start transition-all ${layoutClass} ${loadingClass}`;
+  };
+  const getPreviewAreaStyle = (metaInfo: CreateStoryProps) => ({
+    color: translateValueToColor(metaInfo.meta_text_color),
+    fontSize: `${translateValueToSize(metaInfo.meta_font_size)}px`,
+    fontStyle: translateValueToFontStyle(metaInfo.meta_font_style),
+    fontWeight: translateValueToFontWeight(metaInfo.meta_font_weight),
+  });
 
   const renderHeadTools = () => (
     <>
@@ -210,22 +246,8 @@ export default function Worker({ session }: { session: Session | null }) {
 
   return (
     <div
-      className={
-        "worker-wrapper mx-auto " +
-        ` ${showOnPC ? "" : "max-w-md rounded-md shadow-xl "}` +
-        ` ${
-          Number(metaInfo.meta_bg_color) < 100
-            ? translateValueToColor(metaInfo.meta_bg_color)
-            : ""
-        }`
-      }
-      style={{
-        backgroundColor: ` ${
-          Number(metaInfo.meta_bg_color) >= 100
-            ? translateValueToColor(metaInfo.meta_bg_color)
-            : "none"
-        }`,
-      }}
+      className={getWrapperClassName(metaInfo)}
+      style={getWrapperPureStyle(metaInfo)}
     >
       {renderHeadTools()}
       {/* main */}
@@ -240,31 +262,10 @@ export default function Worker({ session }: { session: Session | null }) {
         {/* 中间预览区 */}
         <div className="preview-main">
           <div
-            className={
-              "preview-area mx-auto h-screen w-full max-w-md px-5 pt-3 transition-all"
-            }
-            style={{
-              color: `${translateValueToColor(metaInfo.meta_text_color)}`,
-              fontSize: `${translateValueToSize(metaInfo.meta_font_size)}px`,
-              fontStyle: `${translateValueToFontStyle(
-                metaInfo.meta_font_style,
-              )}`,
-              fontWeight: `${translateValueToFontWeight(
-                metaInfo.meta_font_weight,
-              )}`,
-            }}
+            className="preview-area mx-auto h-screen w-full max-w-md px-5 pt-3 transition-all"
+            style={getPreviewAreaStyle(metaInfo)}
           >
-            <div
-              className={
-                "head-info flex justify-start transition-all" +
-                ` ${
-                  layoutValueMappings[metaInfo.meta_layout] === "center"
-                    ? "flex-col items-center justify-center"
-                    : "flex-row items-start justify-start gap-3"
-                }` +
-                ` ${showCreateLoading ? "motion-safe:animate-pulse" : ""}`
-              }
-            >
+            <div className={getPreviewAreaClassName(metaInfo)}>
               <Image
                 src={metaInfo.avatar}
                 alt="avatar"
@@ -278,28 +279,14 @@ export default function Worker({ session }: { session: Session | null }) {
                     ? "text-center"
                     : ""
                 } `}
-                style={{
-                  fontSize: `${translateValueToSize(
-                    metaInfo.meta_font_size,
-                  )}px!important`,
-                }}
               >
-                <p
-                  className="text-2xl md:text-3xl"
-                  style={{
-                    fontStyle: `${translateValueToFontStyle(
-                      metaInfo.meta_font_style,
-                    )}`,
-                  }}
-                >
-                  {metaInfo.nickname}
-                </p>
+                <p className="text-2xl md:text-3xl">{metaInfo.nickname}</p>
                 <ReactMarkdown className=" line-clamp-3 w-72 text-xs opacity-70 md:text-sm">
                   {metaInfo.describtion}
                 </ReactMarkdown>
               </div>
             </div>
-            <div className="widget mt-3">1</div>
+            <div className="widget mt-3">1okk</div>
 
             {/* <PlaceHolder /> */}
           </div>

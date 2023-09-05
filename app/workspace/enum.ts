@@ -13,6 +13,10 @@ export const colorValueMappings: KeyValueMappings = {
   "102": "#d37a73",
   "103": "#a3c4d7",
   "104": "#d7c9a3",
+  "105": "#ffffff",
+  "106": "#d37a73",
+  "107": "#a3c4d7",
+  "108": "#d7c9a3",
 };
 export const sizeValueMappings: KeyValueMappings = {
   "0": "12",

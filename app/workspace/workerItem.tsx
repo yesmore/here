@@ -133,7 +133,7 @@ export const MetaInfoWorker = ({
           <p className="mb-1 font-mono text-sm font-semibold text-slate-400">
             Background
           </p>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex h-24 flex-wrap items-center gap-3 overflow-x-auto">
             {Object.keys(colorValueMappings).map((key: string) => (
               <div
                 className={

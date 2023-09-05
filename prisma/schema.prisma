@@ -69,6 +69,7 @@ model Story {
   tags             String[]
   describtion      String
   public           Boolean  @default(true)
+  view             Int      @default(0)
   meta_text_color  String   @default("100")
   meta_bg_color    String   @default("0")
   meta_font_style  String   @default("0")

@@ -8,6 +8,7 @@ export interface CreateStoryProps {
   tags: string[];
   describtion: string;
   public: boolean;
+  view: number;
   meta_text_color: string;
   meta_bg_color: string;
   meta_font_style: string;
@@ -47,6 +48,7 @@ export const addStory = async (props: CreateStoryProps) => {
         nickname: props.nickname,
         public: props.public,
         describtion: props.describtion,
+        view: props.view,
         meta_bg_color: props.meta_bg_color,
         meta_text_color: props.meta_text_color,
         meta_font_size: props.meta_font_size,
@@ -70,6 +72,7 @@ export const addStory = async (props: CreateStoryProps) => {
         nickname: props.nickname,
         public: props.public,
         describtion: props.describtion,
+        view: props.view,
         meta_bg_color: props.meta_bg_color,
         meta_text_color: props.meta_text_color,
         meta_font_size: props.meta_font_size,

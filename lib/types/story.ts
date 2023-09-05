@@ -5,6 +5,7 @@ export interface UserStory {
   tags: string[];
   describtion: string;
   public: boolean;
+  view: number;
   meta_text_color: string;
   meta_bg_color: string;
   meta_font_style: string;

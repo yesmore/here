@@ -45,6 +45,7 @@ export async function POST(
       tags: metaInfo.tags,
       describtion: metaInfo.describtion,
       public: metaInfo.public,
+      view: metaInfo.view,
       meta_text_color: metaInfo.meta_text_color,
       meta_bg_color: metaInfo.meta_bg_color,
       meta_font_style: metaInfo.meta_font_style,
