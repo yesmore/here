@@ -34,15 +34,14 @@ export default async function Home() {
               <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
                 Make{" "}
               </span>
-               your unique space on the internet with meetu, and keep it here{" "}
+              your unique space, and stay here{" "}
               <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
                 forever.
               </span>
             </p>
 
             <p className="mt-5 animate-fade-up text-slate-500 ">
-              Enter a nickname ,and create your homepage with just one
-              click.🎉
+              Enter a nickname ,and create your homepage with just one click.🎉
             </p>
             <HomeInput session={session} />
           </div>

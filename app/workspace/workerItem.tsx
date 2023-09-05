@@ -182,7 +182,7 @@ export const MetaInfoWorker = ({
                 })
               }
             >
-              Bolder
+              Bold
             </div>
           </div>
         </div>

@@ -2,8 +2,6 @@ interface KeyValueMappings {
   [colorValue: string]: string;
 }
 
-export const gradientColorsValue = ["0", "1", "2", "3", "4", "5", "6"];
-export const commonColorsValue = ["10", "11", "12", "13", "14", "15"];
 export const colorValueMappings: KeyValueMappings = {
   "0": "bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100",
   "1": "bg-gradient-to-br from-yellow-50 via-yellow-50 to-cyan-100",
@@ -21,7 +19,6 @@ export const colorValueMappings: KeyValueMappings = {
   "109": "#d37a73",
   "110": "#c4d5fd",
 };
-
 export const sizeValueMappings: KeyValueMappings = {
   "0": "12",
   "1": "14",
@@ -34,6 +31,10 @@ export const styleValueMappings: KeyValueMappings = {
 export const weightValueMappings: KeyValueMappings = {
   "0": "400",
   "1": "600",
+};
+export const layoutValueMappings: KeyValueMappings = {
+  "0": "start",
+  "1": "center",
 };
 
 // Color (text\background)
@@ -79,6 +80,18 @@ export function translateValueToFontWeight(value: string): string {
 export function translateFontWeight(weight: string): string {
   for (const value in weightValueMappings) {
     if (weightValueMappings[value] === weight) {
+      return value;
+    }
+  }
+  return "";
+}
+// Layout
+export function translateValueToLayout(value: string): string {
+  return layoutValueMappings[value] || "";
+}
+export function translateLayout(layout: string): string {
+  for (const value in layoutValueMappings) {
+    if (layoutValueMappings[value] === layout) {
       return value;
     }
   }

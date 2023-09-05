@@ -10,6 +10,7 @@ export interface UserStory {
   meta_font_style: string;
   meta_font_size: string;
   meta_font_weight: string;
+  meta_layout: string;
 
   expires: string;
   createdAt: string;

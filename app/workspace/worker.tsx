@@ -19,9 +19,6 @@ import { MetaInfoWorker, WidgetWorker, WorkerSiderWrapper } from "./workerItem";
 import { useSearchParams } from "next/navigation";
 import { isAllAlphabetic } from "@/lib/utils";
 import {
-  colorValueMappings,
-  commonColorsValue,
-  gradientColorsValue,
   translateValueToColor,
   translateValueToFontStyle,
   translateValueToFontWeight,
@@ -50,6 +47,7 @@ export default function Worker({ session }: { session: Session | null }) {
     meta_font_size: story?.meta_font_size ?? "0",
     meta_font_style: story?.meta_font_style ?? "0",
     meta_font_weight: story?.meta_font_weight ?? "0",
+    meta_layout: story?.meta_layout ?? "0",
   });
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const [showCreateLoading, setShowCreateLoading] = useState<boolean>(false);
@@ -62,11 +60,6 @@ export default function Worker({ session }: { session: Session | null }) {
   useEffect(() => {
     setMetaInfo({
       id: story?.id,
-      meta_bg_color: story?.meta_bg_color ?? "0",
-      meta_text_color: story?.meta_text_color ?? "0",
-      meta_font_size: story?.meta_font_size ?? "0",
-      meta_font_style: story?.meta_font_style ?? "0",
-      meta_font_weight: story?.meta_font_weight ?? "0",
       nickname: story?.nickname || input_nickname,
       describtion: story?.describtion || "",
       public: story?.public || true,
@@ -75,6 +68,12 @@ export default function Worker({ session }: { session: Session | null }) {
       avatar:
         session?.user?.image ||
         "https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/gcloud/avatars/21.png",
+      meta_bg_color: story?.meta_bg_color ?? "0",
+      meta_text_color: story?.meta_text_color ?? "0",
+      meta_font_size: story?.meta_font_size ?? "0",
+      meta_font_style: story?.meta_font_style ?? "0",
+      meta_font_weight: story?.meta_font_weight ?? "0",
+      meta_layout: story?.meta_layout ?? "0",
     });
   }, [story, session?.user]);
 
