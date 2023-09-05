@@ -1,5 +1,7 @@
 export interface UserStory {
-  id: string;
+  id?: string;
+  avatar?: string;
+
   email: string;
   nickname: string;
   tags: string[];
@@ -13,7 +15,7 @@ export interface UserStory {
   meta_font_weight: string;
   meta_layout: string;
 
-  expires: string;
-  createdAt: string;
-  updatedAt: string;
+  expires?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

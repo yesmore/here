@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Session } from "next-auth";
-import { CreateStoryProps } from "@/lib/db/story";
 import Image from "next/image";
 import "@/styles/toggle.css";
 import toast from "react-hot-toast";
@@ -25,6 +24,7 @@ import {
   translateValueToFontWeight,
   translateValueToSize,
 } from "./enum";
+import { UserStory } from "@/lib/types/story";
 
 export default function Worker({ session }: { session: Session | null }) {
   const searchParams = useSearchParams();
@@ -33,7 +33,7 @@ export default function Worker({ session }: { session: Session | null }) {
     session?.user?.email || "3224266014@qq.com",
   );
 
-  const [metaInfo, setMetaInfo] = useState<CreateStoryProps>({
+  const [metaInfo, setMetaInfo] = useState<UserStory>({
     id: story?.id,
     email: session?.user?.email ?? "",
     avatar:
@@ -125,7 +125,7 @@ export default function Worker({ session }: { session: Session | null }) {
     setShowOnPC(false);
   };
 
-  const getWrapperClassName = (metaInfo: CreateStoryProps) => {
+  const getWrapperClassName = (metaInfo: UserStory) => {
     const pcClass = showOnPC ? "" : "max-w-md rounded-md shadow-xl ";
 
     const bgClass =
@@ -135,14 +135,14 @@ export default function Worker({ session }: { session: Session | null }) {
 
     return `worker-wrapper mx-auto ${pcClass} ${bgClass}`;
   };
-  const getWrapperPureStyle = (metaInfo: CreateStoryProps) => ({
+  const getWrapperPureStyle = (metaInfo: UserStory) => ({
     backgroundColor: ` ${
       Number(metaInfo.meta_bg_color) >= 100
         ? translateValueToColor(metaInfo.meta_bg_color)
         : "none"
     }`,
   });
-  const getPreviewAreaClassName = (metaInfo: CreateStoryProps) => {
+  const getPreviewAreaClassName = (metaInfo: UserStory | UserStory) => {
     const layoutClass =
       layoutValueMappings[metaInfo.meta_layout] === "center"
         ? "flex-col items-center justify-center"
@@ -152,7 +152,7 @@ export default function Worker({ session }: { session: Session | null }) {
 
     return `head-info flex justify-start transition-all ${layoutClass} ${loadingClass}`;
   };
-  const getPreviewAreaStyle = (metaInfo: CreateStoryProps) => ({
+  const getPreviewAreaStyle = (metaInfo: UserStory) => ({
     color: translateValueToColor(metaInfo.meta_text_color),
     fontSize: `${translateValueToSize(metaInfo.meta_font_size)}px`,
     fontStyle: translateValueToFontStyle(metaInfo.meta_font_style),
@@ -267,7 +267,7 @@ export default function Worker({ session }: { session: Session | null }) {
           >
             <div className={getPreviewAreaClassName(metaInfo)}>
               <Image
-                src={metaInfo.avatar}
+                src={metaInfo?.avatar ?? ""}
                 alt="avatar"
                 width="50"
                 height="50"

@@ -1,21 +1,5 @@
+import { UserStory } from "../types/story";
 import prisma from "./prisma";
-
-export interface CreateStoryProps {
-  id?: string;
-  email: string;
-  avatar: string;
-  nickname: string;
-  tags: string[];
-  describtion: string;
-  public: boolean;
-  view: number;
-  meta_text_color: string;
-  meta_bg_color: string;
-  meta_font_style: string;
-  meta_font_size: string;
-  meta_font_weight: string;
-  meta_layout: string;
-}
 
 export const getPublicStories = async (
   pageNum: number,
@@ -30,7 +14,7 @@ export const getPublicStories = async (
   }
 };
 
-export const addStory = async (props: CreateStoryProps) => {
+export const addStory = async (props: UserStory) => {
   const findStodyByNickname = await getStoryByNickname(props.nickname);
   const findStoryByEmail = await getStoryByEmail(props.email);
   console.log("[findStory]", findStodyByNickname, findStoryByEmail);
@@ -115,10 +99,7 @@ export const getStoryByNickname = async (nickname: string) => {
   if (res) {
     const currentTime = new Date().getTime();
     const lastUpdatedTime = res.updatedAt.getTime();
-    console.log("时间", currentTime, lastUpdatedTime);
     if (currentTime - lastUpdatedTime >= 60000) {
-      console.log("更新", currentTime, lastUpdatedTime);
-
       await prisma.story.update({
         where: { id: res.id },
         data: {

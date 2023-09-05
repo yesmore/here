@@ -1,11 +1,11 @@
 import { Session } from "next-auth";
-import { CreateStoryProps } from "@/lib/db/story";
 import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { LoadingDots } from "@/components/shared/icons";
 import { ExternalLink } from "lucide-react";
 import { colorValueMappings, sizeValueMappings } from "./enum";
+import { UserStory } from "@/lib/types/story";
 
 export const WorkerSiderWrapper = ({
   children,
@@ -42,9 +42,9 @@ export const MetaInfoWorker = ({
 }: {
   className?: string;
   session: Session | null;
-  metaInfo: CreateStoryProps;
+  metaInfo: UserStory;
   showCreateLoading: boolean;
-  setMetaInfo: Dispatch<SetStateAction<CreateStoryProps>>;
+  setMetaInfo: Dispatch<SetStateAction<UserStory>>;
   onCreateStory: () => void;
 }) => {
   const selectedBorder = (isShow: Boolean) => {
@@ -59,7 +59,7 @@ export const MetaInfoWorker = ({
       <div className="basic">
         <div className="flex items-center justify-between">
           <Image
-            src={metaInfo.avatar}
+            src={metaInfo.avatar ?? ""}
             alt="avatar"
             width="50"
             height="50"
