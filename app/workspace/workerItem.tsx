@@ -49,7 +49,7 @@ export const MetaInfoWorker = ({
 }) => {
   const selectedBorder = (isShow: Boolean) => {
     return isShow
-      ? "duration-200 [border-width:3px] border-gray-100 inset-[2px]"
+      ? "duration-200 [border-width:3px] border-gray-300 inset-[2px]"
       : "";
   };
   const selectedBackground = (isShow: Boolean) => {
@@ -68,17 +68,17 @@ export const MetaInfoWorker = ({
             className="rounded-full border border-gray-300 "
           />
           <button
-            className="nice-border h-8 w-36 bg-white"
+            className="nice-border flex h-8 w-36 items-center justify-center bg-white"
             onClick={onCreateStory}
           >
             {showCreateLoading ? (
               <LoadingDots color="#070707" />
             ) : (
               <>
-                <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text align-top text-sm font-semibold text-transparent">
-                  {metaInfo.nickname ? "Update " : "Create "}
+                <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-sm font-semibold text-transparent">
+                  {metaInfo.nickname ? "Update" : "Create"}
                 </span>
-                🎉
+                &nbsp;🎉
               </>
             )}
           </button>
@@ -179,25 +179,27 @@ export const MetaInfoWorker = ({
           <p className="mb-1 font-mono text-sm font-semibold text-slate-400">
             Text
           </p>
-          <div className="flex items-center gap-[10px]">
-            {Object.keys(colorValueMappings).map(
-              (key: string) =>
-                Number(key) >= 100 && (
-                  <div
-                    className={
-                      " h-5 w-5 cursor-pointer rounded-full shadow transition-all hover:shadow-md" +
-                      ` ${selectedBorder(key === metaInfo.meta_text_color)}`
-                    }
-                    style={{
-                      backgroundColor: `${colorValueMappings[key]}`,
-                    }}
-                    key={key}
-                    onClick={() => {
-                      setMetaInfo({ ...metaInfo, meta_text_color: key });
-                    }}
-                  ></div>
-                ),
-            )}
+          <div className="flex flex-wrap items-center gap-[10px]">
+            {Object.keys(colorValueMappings)
+              .slice(10, 19)
+              .map(
+                (key: string) =>
+                  Number(key) >= 100 && (
+                    <div
+                      className={
+                        " h-5 w-5 cursor-pointer rounded-full shadow transition-all hover:shadow-md" +
+                        ` ${selectedBorder(key === metaInfo.meta_text_color)}`
+                      }
+                      style={{
+                        backgroundColor: `${colorValueMappings[key]}`,
+                      }}
+                      key={key}
+                      onClick={() => {
+                        setMetaInfo({ ...metaInfo, meta_text_color: key });
+                      }}
+                    ></div>
+                  ),
+              )}
           </div>
         </div>
         <div className="font-setting mb-3">

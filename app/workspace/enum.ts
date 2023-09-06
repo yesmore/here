@@ -4,7 +4,6 @@ interface KeyValueMappings {
 
 export const colorValueMappings: KeyValueMappings = {
   "0": "bg-gradient-to-br from-cyan-50 via-yellow-50 to-yellow-100",
-  "1": "bg-gradient-to-br from-yellow-50 via-yellow-50 to-cyan-100",
   "2": "bg-gradient-to-br from-pink-50 via-cyan-50 to-yellow-100",
   "3": "bg-gradient-to-br from-slate-600 via-slate-400 to-slate-500",
   "4": "bg-gradient-to-br from-purple-400 via-pink-300 to-pink-200",
@@ -17,6 +16,13 @@ export const colorValueMappings: KeyValueMappings = {
   "106": "#d37a73",
   "107": "#a3c4d7",
   "108": "#d7c9a3",
+  "109": "#a3c4d7",
+  "110": "#d7c9a3",
+  "111": "#ffffff",
+  "112": "#d37a73",
+  "113": "#a3c4d7",
+  "114": "#d7c9a3",
+  "115": "#07c9a3",
 };
 export const sizeValueMappings: KeyValueMappings = {
   "0": "12",
@@ -36,8 +42,8 @@ export const layoutValueMappings: KeyValueMappings = {
   "1": "center",
 };
 export const roundedValueMappings: KeyValueMappings = {
-  "0": "10",
-  "1": "20",
+  "0": "rect",
+  "1": "rounded",
 };
 
 // Color (text\background)

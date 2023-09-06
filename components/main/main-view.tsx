@@ -1,6 +1,7 @@
 import { UserStory } from "@/lib/types/story";
 import {
   layoutValueMappings,
+  roundedValueMappings,
   translateValueToColor,
   translateValueToFontStyle,
   translateValueToFontWeight,
@@ -18,6 +19,7 @@ export default function MainView({
   editable: boolean;
 }) {
   const isCenterLayout = layoutValueMappings[metaInfo.meta_layout] === "center";
+  const isRounded = roundedValueMappings[metaInfo.meta_rounded] === "rounded";
   const getWrapperClassName = (metaInfo: UserStory) => {
     const bgClass =
       Number(metaInfo.meta_bg_color) < 100
@@ -63,8 +65,9 @@ export default function MainView({
         <div className={getPreviewAreaClassName(metaInfo)}>
           <Image
             className={
-              "h-12 w-12 rounded-full border border-gray-300 md:h-20 md:w-20" +
-              `${!isCenterLayout ? " mt-2" : ""}`
+              "h-12 w-12 border border-gray-300 md:h-20 md:w-20" +
+              `${!isCenterLayout ? " mt-2" : ""} ` +
+              `${isRounded ? "rounded-full" : "rounded-md"}`
             }
             src={metaInfo?.avatar || "/u2.png"}
             alt="avatar"
