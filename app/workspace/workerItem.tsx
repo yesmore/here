@@ -39,6 +39,7 @@ export const MetaInfoWorker = ({
   showCreateLoading,
   setMetaInfo,
   onCreateStory,
+  canUpdateMetainfo,
 }: {
   className?: string;
   session: Session | null;
@@ -46,6 +47,7 @@ export const MetaInfoWorker = ({
   showCreateLoading: boolean;
   setMetaInfo: Dispatch<SetStateAction<UserStory>>;
   onCreateStory: () => void;
+  canUpdateMetainfo: boolean;
 }) => {
   const selectedBorder = (isShow: Boolean) => {
     return isShow
@@ -68,8 +70,16 @@ export const MetaInfoWorker = ({
             className="rounded-full border border-gray-300 "
           />
           <button
-            className="nice-border flex h-8 w-36 items-center justify-center bg-white"
+            className={
+              "flex h-8 w-36 items-center justify-center transition-all" +
+              ` ${
+                !canUpdateMetainfo
+                  ? "rounded-md bg-slate-300"
+                  : "nice-border bg-white"
+              }`
+            }
             onClick={onCreateStory}
+            disabled={!canUpdateMetainfo}
           >
             {showCreateLoading ? (
               <LoadingDots color="#070707" />
@@ -78,7 +88,7 @@ export const MetaInfoWorker = ({
                 <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-sm font-semibold text-transparent">
                   {metaInfo.nickname ? "Update" : "Create"}
                 </span>
-                &nbsp;🎉
+                🎉
               </>
             )}
           </button>

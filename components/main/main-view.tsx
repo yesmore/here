@@ -66,7 +66,7 @@ export default function MainView({
           <Image
             className={
               "h-12 w-12 border border-gray-300 md:h-20 md:w-20" +
-              `${!isCenterLayout ? " mt-2" : ""} ` +
+              `${!isCenterLayout ? " mt-1" : ""} ` +
               `${isRounded ? "rounded-full" : "rounded-md"}`
             }
             src={metaInfo?.avatar || "/u2.png"}

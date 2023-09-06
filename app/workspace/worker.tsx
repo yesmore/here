@@ -59,26 +59,50 @@ export default function Worker({ session }: { session: Session | null }) {
   const [showBottomWidget, setShowBottomWidget] = useState<boolean>(false);
   const [showBottomMetaInfo, setShowBottomMetaInfo] = useState<boolean>(false);
   const [showOnPC, setShowOnPC] = useState<boolean>(true);
+  const [canUpdateMetainfo, setCanUpdateMetainfo] = useState<boolean>(false);
 
   useEffect(() => {
-    setMetaInfo({
-      id: story?.id,
-      email: session?.user?.email ?? "",
-      avatar: session?.user?.image ?? DEFAULT_WOKER_AVATAR,
-      nickname: story?.nickname ?? input_nickname,
-      describtion: story?.describtion ?? "",
-      public: story?.public ?? true,
-      view: story?.view ?? 0,
-      tags: story?.tags ?? [],
-      meta_bg_color: story?.meta_bg_color ?? "0",
-      meta_text_color: story?.meta_text_color ?? "0",
-      meta_font_size: story?.meta_font_size ?? "0",
-      meta_font_style: story?.meta_font_style ?? "0",
-      meta_font_weight: story?.meta_font_weight ?? "0",
-      meta_layout: story?.meta_layout ?? "0",
-      meta_rounded: story?.meta_rounded ?? "0",
-    });
+    if (!metaInfo.id) {
+      setMetaInfo({
+        id: story?.id,
+        email: session?.user?.email ?? "",
+        avatar: session?.user?.image ?? DEFAULT_WOKER_AVATAR,
+        nickname: story?.nickname ?? input_nickname,
+        describtion: story?.describtion ?? "",
+        public: story?.public ?? true,
+        view: story?.view ?? 0,
+        tags: story?.tags ?? [],
+        meta_bg_color: story?.meta_bg_color ?? "0",
+        meta_text_color: story?.meta_text_color ?? "0",
+        meta_font_size: story?.meta_font_size ?? "0",
+        meta_font_style: story?.meta_font_style ?? "0",
+        meta_font_weight: story?.meta_font_weight ?? "0",
+        meta_layout: story?.meta_layout ?? "0",
+        meta_rounded: story?.meta_rounded ?? "0",
+      });
+    }
   }, [story, session?.user]);
+
+  useEffect(() => {
+    if (
+      metaInfo.id &&
+      (metaInfo.nickname !== story?.nickname ||
+        metaInfo.describtion !== story?.describtion ||
+        metaInfo.public !== story?.public ||
+        metaInfo.tags !== story?.tags ||
+        metaInfo.meta_bg_color !== story?.meta_bg_color ||
+        metaInfo.meta_text_color !== story?.meta_text_color ||
+        metaInfo.meta_font_size !== story?.meta_font_size ||
+        metaInfo.meta_font_style !== story?.meta_font_style ||
+        metaInfo.meta_font_weight !== story?.meta_font_weight ||
+        metaInfo.meta_layout !== story?.meta_layout ||
+        metaInfo.meta_rounded !== story?.meta_rounded)
+    ) {
+      setCanUpdateMetainfo(true);
+    } else {
+      setCanUpdateMetainfo(false);
+    }
+  }, [metaInfo]);
 
   const handleCreateStory = async () => {
     // setShowCreateLoading(true);
@@ -255,6 +279,7 @@ export default function Worker({ session }: { session: Session | null }) {
               showCreateLoading={showCreateLoading}
               setMetaInfo={setMetaInfo}
               onCreateStory={handleCreateStory}
+              canUpdateMetainfo={canUpdateMetainfo}
             />
           </WorkerSiderWrapper>
         )}
@@ -293,6 +318,7 @@ export default function Worker({ session }: { session: Session | null }) {
             showCreateLoading={showCreateLoading}
             setMetaInfo={setMetaInfo}
             onCreateStory={handleCreateStory}
+            canUpdateMetainfo={canUpdateMetainfo}
           />
         </Modal>
       </div>
