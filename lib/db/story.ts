@@ -102,16 +102,17 @@ export const getStoryByNickname = async (nickname: string) => {
   });
 
   if (res) {
-    const currentTime = new Date().getTime();
-    const lastUpdatedTime = res.updatedAt.getTime();
-    if (currentTime - lastUpdatedTime >= 60000) {
-      await prisma.story.update({
-        where: { id: res.id },
-        data: {
-          view: res.view + 1,
-        },
-      });
-    }
+    // const currentTime = new Date().getTime();
+    // const lastUpdatedTime = res.updatedAt.getTime();
+    // if (currentTime - lastUpdatedTime >= 60000) {
+
+    // }
+    await prisma.story.update({
+      where: { id: res.id },
+      data: {
+        view: res.view + 1,
+      },
+    });
     return res;
   }
   return null;
