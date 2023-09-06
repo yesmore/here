@@ -8,7 +8,7 @@ import HomeInput from "../components/home/home-input";
 import "@/styles/globals.css";
 import "@/styles/home.css";
 import "@/styles/input.css";
-import { Suspense } from "react";
+import { ReactNode, Suspense } from "react";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import SocialCard from "@/components/home/home-social-card";
@@ -61,20 +61,20 @@ function About() {
           <CardItem
             bgColor="bg-cyan-400"
             rotate="rotate-12 origin-top-left"
-            icon="🤩"
+            icon={<Github />}
           />
-          <CardItem rotate="rotate-45 " icon="🍭" />
+
+          <CardItem bgColor="bg-orange-400" rotate="rotate-45" icon="🎉" />
           <CardItem
-            bgColor="bg-orange-400"
             rotate="rotate-12 origin-top-left"
-            icon="🎉"
+            icon={<Twitter className="h-4 w-4 text-blue-400" />}
           />
           <CardItem bgColor="bg-pink-400" rotate="-rotate-12" icon="🎭" />
         </div>
         <div className="pb-8 pt-2 text-2xl font-semibold">
           Choose the{" "}
           <span className="items-end justify-center bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent ">
-            link{" "}
+            links{" "}
           </span>
           that best represents you.
         </div>
@@ -93,7 +93,7 @@ function CardItem({
 }: {
   bgColor?: string;
   rotate?: string;
-  icon: string;
+  icon: ReactNode;
 }) {
   return (
     <>

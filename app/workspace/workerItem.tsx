@@ -48,7 +48,9 @@ export const MetaInfoWorker = ({
   onCreateStory: () => void;
 }) => {
   const selectedBorder = (isShow: Boolean) => {
-    return isShow ? "border-slate-200" : "";
+    return isShow
+      ? "duration-200 [border-width:3px] border-gray-100 inset-[2px]"
+      : "";
   };
   const selectedBackground = (isShow: Boolean) => {
     return isShow ? "bg-yellow-50" : "";
@@ -66,13 +68,18 @@ export const MetaInfoWorker = ({
             className="rounded-full border border-gray-300 "
           />
           <button
-            className="nice-border h-8 w-36 bg-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-sm font-semibold text-transparent"
+            className="nice-border h-8 w-36 bg-white"
             onClick={onCreateStory}
           >
             {showCreateLoading ? (
               <LoadingDots color="#070707" />
             ) : (
-              <> {metaInfo.nickname ? "Update" : "Create"} </>
+              <>
+                <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text align-top text-sm font-semibold text-transparent">
+                  {metaInfo.nickname ? "Update " : "Create "}
+                </span>
+                🎉
+              </>
             )}
           </button>
         </div>
@@ -97,7 +104,7 @@ export const MetaInfoWorker = ({
           <div className="flex gap-3">
             <div
               className={
-                "w-full cursor-pointer rounded-full border border-slate-200 px-2 py-1 text-center text-sm hover:shadow" +
+                "w-full cursor-pointer rounded-full bg-gray-50 px-2 py-1 text-center text-sm shadow hover:shadow" +
                 ` ${selectedBackground(metaInfo.meta_layout === "1")}`
               }
               onClick={() =>
@@ -111,18 +118,17 @@ export const MetaInfoWorker = ({
             </div>
             <div
               className={
-                "w-full cursor-pointer rounded-full border border-slate-200 px-2 py-1 text-center text-sm hover:shadow" +
-                ` ${selectedBackground(metaInfo.meta_font_weight === "1")}`
+                "w-full cursor-pointer rounded-full bg-gray-50 px-2 py-1 text-center text-sm shadow hover:shadow" +
+                ` ${selectedBackground(metaInfo.meta_rounded === "1")}`
               }
               onClick={() =>
                 setMetaInfo({
                   ...metaInfo,
-                  meta_font_weight:
-                    metaInfo.meta_font_weight === "0" ? "1" : "0",
+                  meta_rounded: metaInfo.meta_rounded === "0" ? "1" : "0",
                 })
               }
             >
-              Bold
+              Rounded
             </div>
           </div>
         </div>
@@ -130,38 +136,56 @@ export const MetaInfoWorker = ({
           <p className="mb-1 font-mono text-sm font-semibold text-slate-400">
             Background
           </p>
-          <div className="flex h-24 flex-wrap items-center gap-3 overflow-x-auto">
-            {Object.keys(colorValueMappings).map((key: string) => (
-              <div
-                className={
-                  " h-10 w-10 cursor-pointer rounded border border-slate-100 transition-all hover:shadow-md" +
-                  ` ${selectedBorder(key === metaInfo.meta_bg_color)}` +
-                  ` ${Number(key) < 100 ? colorValueMappings[key] : ""}`
-                }
-                style={{
-                  backgroundColor: `${
-                    Number(key) >= 100 ? colorValueMappings[key] : ""
-                  }`,
-                }}
-                key={key}
-                onClick={() => {
-                  setMetaInfo({ ...metaInfo, meta_bg_color: key });
-                }}
-              ></div>
-            ))}
+          <div className="flex flex-wrap items-center gap-[10px]">
+            {Object.keys(colorValueMappings).map(
+              (key: string) =>
+                Number(key) >= 100 && (
+                  <div
+                    className={
+                      "h-6 w-6 cursor-pointer rounded-full shadow transition-all hover:shadow-md" +
+                      ` ${selectedBorder(key === metaInfo.meta_bg_color)}`
+                    }
+                    style={{
+                      backgroundColor: `${colorValueMappings[key]}`,
+                    }}
+                    key={key}
+                    onClick={() => {
+                      setMetaInfo({ ...metaInfo, meta_bg_color: key });
+                    }}
+                  ></div>
+                ),
+            )}
+          </div>
+          <div className="mt-3 flex flex-wrap items-center gap-[10px]">
+            {Object.keys(colorValueMappings).map(
+              (key: string) =>
+                Number(key) < 100 && (
+                  <div
+                    className={
+                      " h-6 w-6 cursor-pointer rounded-md shadow transition-all hover:shadow-md" +
+                      ` ${selectedBorder(key === metaInfo.meta_bg_color)}` +
+                      ` ${colorValueMappings[key]}`
+                    }
+                    key={key}
+                    onClick={() => {
+                      setMetaInfo({ ...metaInfo, meta_bg_color: key });
+                    }}
+                  ></div>
+                ),
+            )}
           </div>
         </div>
         <div className="text-color mb-3">
           <p className="mb-1 font-mono text-sm font-semibold text-slate-400">
             Text
           </p>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-[10px]">
             {Object.keys(colorValueMappings).map(
               (key: string) =>
                 Number(key) >= 100 && (
                   <div
                     className={
-                      " h-5 w-5 cursor-pointer rounded-full border transition-all hover:shadow-md" +
+                      " h-5 w-5 cursor-pointer rounded-full shadow transition-all hover:shadow-md" +
                       ` ${selectedBorder(key === metaInfo.meta_text_color)}`
                     }
                     style={{
@@ -180,7 +204,7 @@ export const MetaInfoWorker = ({
           <p className="mb-1 font-mono text-sm font-semibold text-slate-400">
             Font
           </p>
-          <div className="grid grid-cols-3 items-center rounded-full border border-slate-200 px-2 py-1 text-center transition-all">
+          <div className="grid grid-cols-3 items-center rounded-full bg-gray-50 px-2 py-1 text-center shadow transition-all">
             {Object.keys(sizeValueMappings).map((key) => (
               <div
                 key={key}
@@ -203,7 +227,7 @@ export const MetaInfoWorker = ({
           <div className="mt-2 flex gap-3">
             <div
               className={
-                "w-full cursor-pointer rounded-full border border-slate-200 px-2 py-1 text-center text-sm hover:shadow" +
+                "w-full cursor-pointer rounded-full bg-gray-50 px-2 py-1 text-center text-sm shadow hover:shadow" +
                 ` ${selectedBackground(metaInfo.meta_font_style === "1")}`
               }
               onClick={() =>
@@ -217,7 +241,7 @@ export const MetaInfoWorker = ({
             </div>
             <div
               className={
-                "w-full cursor-pointer rounded-full border border-slate-200 px-2 py-1 text-center text-sm hover:shadow" +
+                "w-full cursor-pointer rounded-full bg-gray-50 px-2 py-1 text-center text-sm shadow hover:shadow" +
                 ` ${selectedBackground(metaInfo.meta_font_weight === "1")}`
               }
               onClick={() =>

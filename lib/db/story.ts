@@ -40,6 +40,7 @@ export const addStory = async (props: UserStory) => {
         meta_font_style: props.meta_font_style,
         meta_font_weight: props.meta_font_weight,
         meta_layout: props.meta_layout,
+        meta_rounded: props.meta_rounded,
       },
     });
     return "Updated";
@@ -63,6 +64,8 @@ export const addStory = async (props: UserStory) => {
         meta_text_color: props.meta_text_color,
         meta_font_size: props.meta_font_size,
         meta_font_style: props.meta_font_style,
+        meta_layout: props.meta_layout,
+        meta_rounded: props.meta_rounded,
         expires: new Date(
           new Date().getFullYear() + 1,
           new Date().getMonth(),

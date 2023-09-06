@@ -35,6 +35,10 @@ export const layoutValueMappings: KeyValueMappings = {
   "0": "start",
   "1": "center",
 };
+export const roundedValueMappings: KeyValueMappings = {
+  "0": "10",
+  "1": "20",
+};
 
 // Color (text\background)
 export function translateValueToColor(value: string): string {
@@ -91,6 +95,18 @@ export function translateValueToLayout(value: string): string {
 export function translateLayout(layout: string): string {
   for (const value in layoutValueMappings) {
     if (layoutValueMappings[value] === layout) {
+      return value;
+    }
+  }
+  return "";
+}
+// Rounded
+export function translateValueToRounded(value: string): string {
+  return roundedValueMappings[value] || "";
+}
+export function translateRounded(rounded: string): string {
+  for (const value in roundedValueMappings) {
+    if (roundedValueMappings[value] === rounded) {
       return value;
     }
   }

@@ -52,6 +52,7 @@ export async function POST(
       meta_font_size: metaInfo.meta_font_size,
       meta_font_weight: metaInfo.meta_font_weight,
       meta_layout: metaInfo.meta_layout,
+      meta_rounded: metaInfo.meta_rounded,
     });
     return NextResponse.json(res);
   } catch (error) {

@@ -77,6 +77,7 @@ model Story {
   meta_font_size   String   @default("1")
   meta_font_weight String   @default("1")
   meta_layout      String   @default("0")
+  meta_rounded     String   @default("0")
   expires          DateTime
   createdAt        DateTime
   updatedAt        DateTime @updatedAt

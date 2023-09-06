@@ -50,6 +50,7 @@ export default function Worker({ session }: { session: Session | null }) {
     meta_font_style: story?.meta_font_style ?? "0",
     meta_font_weight: story?.meta_font_weight ?? "0",
     meta_layout: story?.meta_layout ?? "0",
+    meta_rounded: story?.meta_rounded ?? "0",
   });
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const [showCreateLoading, setShowCreateLoading] = useState<boolean>(false);
@@ -75,6 +76,7 @@ export default function Worker({ session }: { session: Session | null }) {
       meta_font_style: story?.meta_font_style ?? "0",
       meta_font_weight: story?.meta_font_weight ?? "0",
       meta_layout: story?.meta_layout ?? "0",
+      meta_rounded: story?.meta_rounded ?? "0",
     });
   }, [story, session?.user]);
 

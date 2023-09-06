@@ -63,7 +63,7 @@ export default function MainView({
         <div className={getPreviewAreaClassName(metaInfo)}>
           <Image
             className={
-              "h-12 w-12 rounded-full border border-gray-300 shadow-md md:h-20 md:w-20" +
+              "h-12 w-12 rounded-full border border-gray-300 md:h-20 md:w-20" +
               `${!isCenterLayout ? " mt-2" : ""}`
             }
             src={metaInfo?.avatar || "/u2.png"}
